@@ -1,4 +1,5 @@
 import React from "react";
+import axios from "axios";
 
 import FormInput from "./FormInput";
 
@@ -30,21 +31,41 @@ class Signup extends React.Component {
     if (password !== confirmPassword) {
       alert("Password don't match");
       return;
-    } else {
-      this.setState({
-        firstName: "",
-        lastName: "",
-        email: "",
-        password: "",
-        confirmPassword: "",
-        termsConditions: false,
-      });
     }
+
+    const user = {
+      firstName,
+      lastName,
+      email,
+      password,
+      confirmPassword,
+      termsConditions,
+    };
+
+    axios.post("http://localhost:3000", { user }).then((res) => {
+      console.log(res);
+      console.log(res.data);
+    });
+
+    this.setState({
+      firstName: "",
+      lastName: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
+      termsConditions: false,
+    });
   };
 
   handleChange = (event) => {
     const { name, value } = event.target;
     this.setState({ [name]: value });
+  };
+
+  handleCheckbox = () => {
+    this.setState((prevState) => ({
+      termsConditions: !prevState.termsConditions,
+    }));
   };
 
   render() {
@@ -60,7 +81,7 @@ class Signup extends React.Component {
     return (
       <div className="">
         <h2>Title</h2>
-        <form onSubmit={this.handleSubmit} method="POST">
+        <form onSubmit={this.handleSubmit} method="post">
           <FormInput
             type="text"
             name="firstName"
@@ -102,7 +123,23 @@ class Signup extends React.Component {
             handleChange={this.handleChange}
           />
 
-          <button type="submit" value="submit form">
+          <div className="flex items-center">
+            <input
+              type="checkbox"
+              name="termsConditions"
+              className=""
+              onClick={this.handleCheckbox}
+            />
+            <label>
+              Saya setuju dengan Persyaratan Penggunaan & Kebijakan Privasi.
+            </label>
+          </div>
+
+          <button
+            type="submit"
+            value="submit form"
+            className="flex items-center justify-center bg-gray-800 text-gray-100 p-5 w-32"
+          >
             Sign Up
           </button>
         </form>
