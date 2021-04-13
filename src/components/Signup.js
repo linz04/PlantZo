@@ -42,7 +42,7 @@ class Signup extends React.Component {
       termsConditions,
     };
 
-    axios.post("http://localhost:3000", { user }).then((res) => {
+    axios.post("api/signup", { user }).then((res) => {
       console.log(res);
       console.log(res.data);
     });
