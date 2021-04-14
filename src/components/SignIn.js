@@ -17,6 +17,16 @@ class SignIn extends React.Component {
   handleSubmit = (event) => {
     event.preventDefault();
 
+    const user = {
+      email,
+      password,
+    };
+
+    axios.post("api/login", { user }).then((res) => {
+      console.log(res);
+      console.log(res.data);
+    });
+
     this.setState({
       email: "",
       password: "",
