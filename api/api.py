@@ -25,17 +25,9 @@ def signup():
     last_name = data['lastName']
     password = data['password']
     cur = mysql.connection.cursor()
-    print("INSERT INTO users (first_name, last_name, email, password) VALUES ('" + 
-    str(first_name) + "', '" + 
-    str(last_name) + "', '" + 
-    str(email) + "', '" + 
-    str(password) + "')")
+    print("INSERT INTO users (first_name, last_name, email, password) VALUES (%s, %s, %s, %s)", (first_name, last_name, email, password))
 
-    cur.execute("INSERT INTO users (first_name, last_name, email, password) VALUES ('" + 
-        str(first_name) + "', '" + 
-        str(last_name) + "', '" + 
-        str(email) + "', '" + 
-        str(password) + "')")
+    cur.execute("INSERT INTO users (first_name, last_name, email, password) VALUES (%s, %s, %s, %s)", (first_name, last_name, email, password))
 
     mysql.connection.commit()
     cur.close()
