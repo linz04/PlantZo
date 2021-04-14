@@ -12,9 +12,11 @@ app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'linz'
 app.config['MYSQL_PASSWORD'] = 'Password'
 app.config['MYSQL_DB'] = 'plantzo'
+app.config['JWT_SECRET_KEY'] = 'secret'
 
 mysql = MySQL(app)
 bcrypt = Bcrypt(app)
+jwt = JWTManager(app)
 
 @app.route('/time')
 def get_current_time():
@@ -56,12 +58,13 @@ def login():
     password = data['password']
     result = ""
     
-    cur.execute("SELECT * FROM users where email =%s", (email,))
+    cur.execute("SELECT * FROM users where email = %s", (email,))
     rv = cur.fetchone()
     
-    if bcrypt.check_password_hash(rv['password'], password):
-        access_token = create_access_token(identity = {'first_name': rv['first_name'],'last_name': rv['last_name'],'email': rv['email']})
+    if bcrypt.check_password_hash(rv[3], password):
+        access_token = create_access_token(identity = {'first_name': rv[0],'last_name': rv[1],'email': rv[2]})
         result = access_token
+        print("Success Login! , Token", result)
     else:
         result = jsonify({"error":"Invalid username and password"})
     
