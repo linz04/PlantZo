@@ -1,11 +1,11 @@
 import React from "react";
 
 const Nav = () => (
-  <div className="flex justify-between items-center h-10 bg-green-800">
-    <div className="ml-4">Logo</div>
+  <div className="flex justify-between items-center h-24 bg-green-800">
+    <div className="ml-8">Logo</div>
 
     <div className="flex justify-center items-center rounded-full">
-      <input className="-mr-12 p-1 rounded-full border-none focus:outline-none" />
+      <input className="-mr-12 p-4 rounded-full border-none focus:outline-none" />
 
       <span>Kaca</span>
     </div>

@@ -1,5 +1,12 @@
 import React from "react";
+import { withRouter } from "react-router";
 
-const ItemPage = () => <div className="">ITEM_PAGE</div>;
+const ItemPage = ({ match }) => {
+  return (
+    <div>
+      <div>Testing param Url : {match.params.itemId}</div>
+    </div>
+  );
+};
 
-export default ItemPage;
+export default withRouter(ItemPage);

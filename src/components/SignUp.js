@@ -82,7 +82,7 @@ class SignUp extends React.Component {
 
     return (
       <div className="flex flex-col justify-center items-center text-center">
-        <div className="flex flex-col justify-center items-center bg-gray-600 text-center h-full relative w-1/2 lg:w-1/4">
+        <div className="flex flex-col justify-center items-center bg-gray-600 text-center h-1/2 relative w-1/2 lg:w-1/4">
           <div className="p-10 w-full">
             <h2 className="uppercase text-3xl font-medium mb-10">daftar</h2>
             <form

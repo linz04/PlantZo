@@ -1,22 +1,15 @@
 import React from "react";
 
-import Nav from "../components/Nav";
-
 import HeaderShop from "../components/HeaderShop";
-
+import LabelLink from "../components/LabelLink";
 import CardItem from "../components/CardItem";
-
 import CollectionItem from "../components/CollectionItem";
 
 const ShopPage = () => (
   <div className="bg-gray-200 flex flex-col">
-    <Nav />
-
     <HeaderShop />
 
-    <div className="bg-gray-100 p-2 m-2 text-xl uppercase">
-      paling banyak dibeli
-    </div>
+    <LabelLink>paling banyak dibeli</LabelLink>
 
     <CollectionItem>
       <CardItem />
@@ -27,9 +20,7 @@ const ShopPage = () => (
       <CardItem />
     </CollectionItem>
 
-    <div className="bg-gray-100 p-2 m-2 text-xl uppercase">
-      paling banyak dicari
-    </div>
+    <LabelLink>paling banyak dicari</LabelLink>
 
     <CollectionItem>
       <CardItem />
@@ -40,7 +31,7 @@ const ShopPage = () => (
       <CardItem />
     </CollectionItem>
 
-    <div className="flex justify-evenly bg-gray-100 p-1 m-2 text-xl uppercase">
+    <div className="flex justify-evenly bg-gray-100 p-3 m-2 mt-6 text-3xl uppercase">
       Filter
     </div>
 
@@ -58,10 +49,6 @@ const ShopPage = () => (
       <CardItem />
       <CardItem />
     </CollectionItem>
-
-    <div className="flex justify-center items-center bg-green-300 p-1 mt-4">
-      Footer
-    </div>
   </div>
 );
 
