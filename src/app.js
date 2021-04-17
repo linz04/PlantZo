@@ -13,6 +13,7 @@ import CheckoutPage from "./pages/CheckoutPage";
 import UserPage from "./pages/UserPage";
 import ItemPage from "./pages/ItemPage";
 import NavHome from "./components/NavHome";
+import PageContainer from "./components/PageContainer";
 import Nav from "./components/Nav";
 import Footer from "./components/Footer";
 
@@ -27,7 +28,7 @@ const App = () => {
   };
 
   return (
-    <div>
+    <PageContainer>
       {location.pathname === "/" ? <NavHome /> : <Nav />}
       <Switch>
         <Route exact path="/" component={HomePage} />
@@ -53,7 +54,7 @@ const App = () => {
         />
       </Switch>
       <Footer />
-    </div>
+    </PageContainer>
   );
 };
 
