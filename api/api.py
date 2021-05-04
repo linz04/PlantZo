@@ -28,38 +28,10 @@ app.config['JWT_SECRET_KEY'] = 'secret'
 mysql = MySQL(app)
 bcrypt = Bcrypt(app)
 jwt = JWTManager(app)
-init = True
-
-def exec_sql_file(sql_file):
-    global init
-    if(init):
-        print('Masuk')
-        cursor = mydb.cursor()
-        print("\n[INFO] Executing SQL script file: '%s'" % (sql_file))
-        statement = ""
-
-        for line in open(sql_file):
-            if re.match(r'--', line):  # ignore sql comment lines
-                continue
-            if not re.search(r';$', line):  # keep appending lines that don't end in ';'
-                statement = statement + line
-            else:
-                statement = statement + line
-                #print ("\n[DEBUG] Executing SQL statement:\n%s" % (statement)) Remove #if want to debug
-                try:
-                    cursor.execute(statement)
-                except (OperationalError, ProgrammingError) as e:
-                    print ("\n[WARN] MySQLError during execute statement \n\tArgs: '%s'" % (str(e.args)))
-
-                statement = ""
-
-    init = False
 
 @app.route('/time')
 def get_current_time():
     return {'time': time.time()}
-
-
 
 @app.route('/api/signup', methods=['POST'])
 def signup():
@@ -121,5 +93,4 @@ def shop(pid):
     return jsonify(res)
 
 if __name__ == '__main__':
-    exec_sql_file('plantzo.sql')
     app.run(debug=True)
