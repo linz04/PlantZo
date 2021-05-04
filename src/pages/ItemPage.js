@@ -1,15 +1,15 @@
 import React from "react";
 import { withRouter } from "react-router";
 
-import LabelLink from "../components/LabelLink";
+import LabelContainer from "../components/LabelContainer";
 
 const ItemPage = ({ match }) => {
   return (
     <div className="h-screen">
-      <LabelLink>
+      <LabelContainer>
         <span className="mb-2 mr-2">&larr;</span>
         <span>Deskripsi produk</span>
-      </LabelLink>
+      </LabelContainer>
       <div className="h-2/3 mx-2 my-4 p-12 bg-gray-100">
         <div className="h-full flex space-x-14">
           <div className="w-1/4">
@@ -30,7 +30,7 @@ const ItemPage = ({ match }) => {
           </div>
         </div>
       </div>
-      <LabelLink>Testing param Url : {match.params.itemId}</LabelLink>
+      <LabelContainer>Testing param Url : {match.params.itemId}</LabelContainer>
     </div>
   );
 };

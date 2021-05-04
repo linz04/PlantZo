@@ -17,15 +17,9 @@ import PageContainer from "./components/PageContainer";
 import Nav from "./components/Nav";
 import Footer from "./components/Footer";
 
-const App = () => {
+const App = ({ user = {} }) => {
   const location = useLocation();
-  console.log(location);
-  console.log(location.pathname);
-
-  const currentUser = {
-    id: 1,
-    name: "Adjie",
-  };
+  const { userName = "Anonymous" } = user;
 
   return (
     <PageContainer>
@@ -35,22 +29,22 @@ const App = () => {
         <Route
           exact
           path="/shop"
-          render={() => (!currentUser ? <Redirect to="/" /> : <ShopPage />)}
+          render={() => (!user ? <Redirect to="/" /> : <ShopPage />)}
         />
         <Route
           exact
           path="/shop/:itemId"
-          render={() => (!currentUser ? <Redirect to="/" /> : <ItemPage />)}
+          render={() => (!user ? <Redirect to="/" /> : <ItemPage />)}
         />
         <Route
           exact
           path="/checkout"
-          render={() => (!currentUser ? <Redirect to="/" /> : <CheckoutPage />)}
+          render={() => (!user ? <Redirect to="/" /> : <CheckoutPage />)}
         />
         <Route
           exact
           path="/user"
-          render={() => (!currentUser ? <Redirect to="/" /> : <UserPage />)}
+          render={() => (!user ? <Redirect to="/" /> : <UserPage />)}
         />
       </Switch>
       <Footer />

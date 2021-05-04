@@ -1,7 +1,7 @@
 import React from "react";
 
 import HeaderShop from "../components/HeaderShop";
-import LabelLink from "../components/LabelLink";
+import LabelContainer from "../components/LabelContainer";
 import CardItem from "../components/CardItem";
 import CollectionItem from "../components/CollectionItem";
 
@@ -9,7 +9,9 @@ const ShopPage = () => (
   <div className="bg-gray-200 flex flex-col">
     <HeaderShop />
 
-    <LabelLink>paling banyak dibeli</LabelLink>
+    <LabelContainer>
+      <span className="uppercase">paling banyak dibeli</span>
+    </LabelContainer>
 
     <CollectionItem>
       <CardItem />
@@ -20,7 +22,9 @@ const ShopPage = () => (
       <CardItem />
     </CollectionItem>
 
-    <LabelLink>paling banyak dicari</LabelLink>
+    <LabelContainer>
+      <span className="uppercase">paling banyak dicari</span>
+    </LabelContainer>
 
     <CollectionItem>
       <CardItem />
