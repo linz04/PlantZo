@@ -1,6 +1,7 @@
 import time
+import json
 
-from flask import Flask, render_template, request, jsonify, redirect, url_for
+from flask import Flask, render_template, request, jsonify, redirect, url_for, jsonify
 from flask_mysqldb import MySQL
 from flask_bcrypt import Bcrypt
 from flask_jwt_extended import JWTManager
@@ -70,19 +71,17 @@ def login():
     
     return result
 
-@app.route('/shop/<int:pid>', methods=['GET'])
+@app.route('/shop/<int:pid>')
 def shop(pid):
     cur = mysql.connection.cursor()
     cur.execute("SELECT * FROM product where pid = %s", (pid,))
-    rv = cur.fetchone()
-    code = rv[1]
-    name = rv[2]
-    img = rv[3]
-    category = rv[4]
-    price = rv[5]
-    disc = rv[6]
-    print(rv)
-    return rv
+    row_headers= [x[0] for x in cur.description]
+    rv = cur.fetchall()
+    json_data = []
+    for result in rv:
+        json_data.append(dict(zip(row_headers,result)))
+    res = json.loads(json.dumps(json_data))[0]
+    return res
 
 if __name__ == '__main__':
     app.run(debug=True)
