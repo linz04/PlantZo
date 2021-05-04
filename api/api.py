@@ -70,5 +70,19 @@ def login():
     
     return result
 
+@app.route('/shop/<int:pid>', methods=['GET'])
+def shop(pid):
+    cur = mysql.connection.cursor()
+    cur.execute("SELECT * FROM product where pid = %s", (pid,))
+    rv = cur.fetchone()
+    code = rv[1]
+    name = rv[2]
+    img = rv[3]
+    category = rv[4]
+    price = rv[5]
+    disc = rv[6]
+    print(rv)
+    return rv
+
 if __name__ == '__main__':
     app.run(debug=True)
