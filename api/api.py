@@ -1,5 +1,7 @@
 import time
 import json
+import re
+import mysql.connector
 
 from flask import Flask, render_template, request, jsonify, redirect, url_for, jsonify
 from flask_mysqldb import MySQL
@@ -8,20 +10,55 @@ from flask_jwt_extended import JWTManager
 from flask_jwt_extended import (create_access_token)
 app = Flask(__name__)
 
+mydb = mysql.connector.connect(
+  host="localhost",
+  user="root",
+  password="PlantZo@123",
+  auth_plugin='mysql_native_password',
+  database="plantzo"
+)
 
 app.config['MYSQL_HOST'] = 'localhost'
-app.config['MYSQL_USER'] = 'linz'
-app.config['MYSQL_PASSWORD'] = 'Password'
+app.config['MYSQL_USER'] = 'root'
+app.config['MYSQL_PASSWORD'] = 'PlantZo@123'
 app.config['MYSQL_DB'] = 'plantzo'
 app.config['JWT_SECRET_KEY'] = 'secret'
+
 
 mysql = MySQL(app)
 bcrypt = Bcrypt(app)
 jwt = JWTManager(app)
+init = True
+
+def exec_sql_file(sql_file):
+    global init
+    if(init):
+        print('Masuk')
+        cursor = mydb.cursor()
+        print("\n[INFO] Executing SQL script file: '%s'" % (sql_file))
+        statement = ""
+
+        for line in open(sql_file):
+            if re.match(r'--', line):  # ignore sql comment lines
+                continue
+            if not re.search(r';$', line):  # keep appending lines that don't end in ';'
+                statement = statement + line
+            else:
+                statement = statement + line
+                #print ("\n[DEBUG] Executing SQL statement:\n%s" % (statement)) Remove #if want to debug
+                try:
+                    cursor.execute(statement)
+                except (OperationalError, ProgrammingError) as e:
+                    print ("\n[WARN] MySQLError during execute statement \n\tArgs: '%s'" % (str(e.args)))
+
+                statement = ""
+
+    init = False
 
 @app.route('/time')
 def get_current_time():
     return {'time': time.time()}
+
 
 
 @app.route('/api/signup', methods=['POST'])
@@ -81,7 +118,8 @@ def shop(pid):
     for result in rv:
         json_data.append(dict(zip(row_headers,result)))
     res = json.loads(json.dumps(json_data))[0]
-    return res
+    return jsonify(res)
 
 if __name__ == '__main__':
+    exec_sql_file('plantzo.sql')
     app.run(debug=True)

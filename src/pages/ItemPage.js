@@ -1,10 +1,21 @@
-import React from "react";
+import React, { useState, useEffect } from 'react';
 import { withRouter } from "react-router";
+import axios from 'axios';
 
 import LabelContainer from "../components/LabelContainer";
 
+
 const ItemPage = ({ match }) => {
+  useEffect(() => {
+    fetch("/shop/1")
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+      });
+  }, []);
+  
   return (
+    
     <div className="h-screen">
       <LabelContainer>
         <span className="mb-2 mr-2">&larr;</span>
@@ -36,3 +47,4 @@ const ItemPage = ({ match }) => {
 };
 
 export default withRouter(ItemPage);
+
