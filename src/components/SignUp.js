@@ -4,6 +4,7 @@ import axios from "axios";
 import FormInput from "./FormInput";
 
 import { signInWithGoogle } from "../lib/firebase/firebase.utils";
+import { withRouter } from "react-router";
 
 class SignUp extends React.Component {
   constructor(props) {
@@ -57,6 +58,8 @@ class SignUp extends React.Component {
       confirmPassword: "",
       termsConditions: false,
     });
+
+    this.props.history.push("/shop");
   };
 
   handleChange = (event) => {
@@ -65,9 +68,13 @@ class SignUp extends React.Component {
   };
 
   handleCheckbox = () => {
-    this.setState((prevState) => ({
-      termsConditions: !prevState.termsConditions,
-    }));
+    this.setState((prevState) => {
+      return { termsConditions: !prevState.termsConditions };
+    });
+  };
+
+  handleGoogleSignIn = () => {
+    this.props.history.push("/shop");
   };
 
   render() {
@@ -109,7 +116,7 @@ class SignUp extends React.Component {
                 />
               </div>
               <FormInput
-                type="text"
+                type="email"
                 name="email"
                 placeholder="Email/username"
                 value={email}
@@ -137,9 +144,9 @@ class SignUp extends React.Component {
                 <input
                   type="checkbox"
                   name="termsConditions"
-                  value={termsConditions}
+                  checked={termsConditions}
                   required
-                  onClick={this.handleCheckbox}
+                  onChange={this.handleCheckbox}
                 />
                 <label className="ml-2 block text-sm">
                   Saya setuju dengan
@@ -159,7 +166,10 @@ class SignUp extends React.Component {
 
             <div className="my-10">Atau</div>
             <button
-              onClick={signInWithGoogle}
+              onClick={() => {
+                signInWithGoogle();
+                window.setTimeout(this.handleGoogleSignIn, 7000);
+              }}
               className="flex justify-center items-center text-center bg-gray-300 text-gray-500 w-full p-4"
             >
               <span>Masuk dengan google</span>
@@ -171,4 +181,4 @@ class SignUp extends React.Component {
   }
 }
 
-export default SignUp;
+export default withRouter(SignUp);

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   Switch,
   Route,
@@ -17,9 +17,25 @@ import PageContainer from "./components/PageContainer";
 import Nav from "./components/Nav";
 import Footer from "./components/Footer";
 
-const App = ({ user = {} }) => {
+import { auth } from "./lib/firebase/firebase.utils";
+
+const App = () => {
+  const [currentUser, setCurrentUser] = useState(null);
   const location = useLocation();
-  const { userName = "Anonymous" } = user;
+
+  let unsubscribeFromAuth = null;
+
+  useEffect(() => {
+    unsubscribeFromAuth = auth.onAuthStateChanged((user) =>
+      setCurrentUser(user)
+    );
+
+    return () => {
+      unsubscribeFromAuth();
+    };
+  }, []);
+
+  console.log(currentUser);
 
   return (
     <PageContainer>
@@ -29,22 +45,22 @@ const App = ({ user = {} }) => {
         <Route
           exact
           path="/shop"
-          render={() => (!user ? <Redirect to="/" /> : <ShopPage />)}
+          render={() => (!currentUser ? <Redirect to="/" /> : <ShopPage />)}
         />
         <Route
           exact
           path="/shop/:itemId"
-          render={() => (!user ? <Redirect to="/" /> : <ItemPage />)}
+          render={() => (!currentUser ? <Redirect to="/" /> : <ItemPage />)}
         />
         <Route
           exact
           path="/checkout"
-          render={() => (!user ? <Redirect to="/" /> : <CheckoutPage />)}
+          render={() => (!currentUser ? <Redirect to="/" /> : <CheckoutPage />)}
         />
         <Route
           exact
           path="/user"
-          render={() => (!user ? <Redirect to="/" /> : <UserPage />)}
+          render={() => (!currentUser ? <Redirect to="/" /> : <UserPage />)}
         />
       </Switch>
       <Footer />

@@ -2,6 +2,8 @@ import React from "react";
 
 import LabelContainer from "../components/LabelContainer";
 
+import { auth } from "../lib/firebase/firebase.utils";
+
 const UserPage = ({ user = {}, items = {} }) => {
   const {
     name = "Nama lengkap user",
@@ -158,6 +160,14 @@ const UserPage = ({ user = {}, items = {} }) => {
       </LabelContainer>
       <LabelContainer>
         <span className="text-xl ml-20">Bahasa</span>
+      </LabelContainer>
+      <LabelContainer>
+        <span
+          className="flex justify-center items-center text-xl ml-20"
+          onClick={() => auth.signOut()}
+        >
+          SIGN OUT
+        </span>
       </LabelContainer>
     </div>
   );

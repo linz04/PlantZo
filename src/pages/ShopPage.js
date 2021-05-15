@@ -1,59 +1,74 @@
 import React from "react";
+import { withRouter } from "react-router";
 
 import HeaderShop from "../components/HeaderShop";
 import LabelContainer from "../components/LabelContainer";
 import CardItem from "../components/CardItem";
 import CollectionItem from "../components/CollectionItem";
 
-const ShopPage = () => (
-  <div className="bg-gray-200 flex flex-col">
-    <HeaderShop />
+import SHOP_DATA from "./ShopData";
 
-    <LabelContainer>
-      <span className="uppercase">paling banyak dibeli</span>
-    </LabelContainer>
+class ShopPage extends React.Component {
+  constructor(props) {
+    super(props);
 
-    <CollectionItem>
-      <CardItem />
-      <CardItem />
-      <CardItem />
-      <CardItem />
-      <CardItem />
-      <CardItem />
-    </CollectionItem>
+    this.state = {
+      items: SHOP_DATA,
+    };
+  }
 
-    <LabelContainer>
-      <span className="uppercase">paling banyak dicari</span>
-    </LabelContainer>
+  render() {
+    const { history, match } = this.props;
+    const { items } = this.state;
 
-    <CollectionItem>
-      <CardItem />
-      <CardItem />
-      <CardItem />
-      <CardItem />
-      <CardItem />
-      <CardItem />
-    </CollectionItem>
+    return (
+      <div className="bg-gray-200 flex flex-col">
+        <HeaderShop />
 
-    <div className="flex justify-evenly bg-gray-100 p-3 m-2 mt-6 text-3xl uppercase">
-      Filter
-    </div>
+        <LabelContainer
+          onClick={() => history.push(`${match.url}/filter/most-purchased`)}
+        >
+          <span className="uppercase">paling banyak dibeli</span>
+        </LabelContainer>
 
-    <CollectionItem>
-      <CardItem />
-      <CardItem />
-      <CardItem />
-      <CardItem />
-      <CardItem />
-      <CardItem />
-      <CardItem />
-      <CardItem />
-      <CardItem />
-      <CardItem />
-      <CardItem />
-      <CardItem />
-    </CollectionItem>
-  </div>
-);
+        <CollectionItem>
+          {items
+            .sort((item1, item2) => item2.id - item1.id)
+            .filter((item, idx) => idx < 6)
+            .map((item) => (
+              <CardItem key={item.id} item={item} />
+            ))}
+        </CollectionItem>
 
-export default ShopPage;
+        <LabelContainer
+          onClick={() => history.push(`${match.url}/filter/most-wanted`)}
+        >
+          <span className="uppercase">paling banyak dicari</span>
+        </LabelContainer>
+
+        <CollectionItem>
+          {items
+            .sort((item1, item2) => item1.id - item2.id)
+            .filter((item, idx) => idx < 6)
+            .map((item) => (
+              <CardItem key={item.id} item={item} />
+            ))}
+        </CollectionItem>
+
+        <div className="flex justify-evenly bg-gray-100 p-3 m-2 mt-6 text-3xl uppercase">
+          Filter
+        </div>
+
+        <CollectionItem>
+          {items
+            .filter((item, idx) => idx < 12)
+            .map((item) => (
+              <CardItem key={item.id} item={item} />
+            ))}
+        </CollectionItem>
+      </div>
+    );
+  }
+}
+
+export default withRouter(ShopPage);

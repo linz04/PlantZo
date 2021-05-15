@@ -1,9 +1,10 @@
 import React from "react";
 
 import FormInput from "./FormInput";
-import axios from "axios"
+import axios from "axios";
 
 import { signInWithGoogle } from "../lib/firebase/firebase.utils";
+import { withRouter } from "react-router";
 
 class SignIn extends React.Component {
   constructor(props) {
@@ -39,6 +40,10 @@ class SignIn extends React.Component {
   handleChange = (event) => {
     const { name, value } = event.target;
     this.setState({ [name]: value });
+  };
+
+  handleGoogleSignIn = () => {
+    this.props.history.push("/shop");
   };
 
   render() {
@@ -86,7 +91,10 @@ class SignIn extends React.Component {
 
             <div className="my-10">Atau</div>
             <button
-              onClick={signInWithGoogle}
+              onClick={() => {
+                signInWithGoogle();
+                window.setTimeout(this.handleGoogleSignIn, 7000);
+              }}
               className="flex justify-center items-center text-center bg-gray-300 text-gray-500 w-full p-4"
             >
               <span>Masuk dengan google</span>
@@ -103,4 +111,4 @@ class SignIn extends React.Component {
   }
 }
 
-export default SignIn;
+export default withRouter(SignIn);
