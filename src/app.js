@@ -30,8 +30,9 @@ const App = () => {
   let unsubscribeFromAuth = null;
 
   useEffect(() => {
-    unsubscribeFromAuth = auth.onAuthStateChanged((user) =>
-      dispatch(setCurrentUser(user))
+    unsubscribeFromAuth = auth.onAuthStateChanged(
+      (user) => console.log("USER_TO_FIREBASE_OFF")
+      // dispatch(setCurrentUser(user))
     );
 
     return () => {

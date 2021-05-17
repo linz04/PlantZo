@@ -20,7 +20,7 @@ const HomePage = () => {
   };
 
   return (
-    currentUser || (
+    !currentUser && (
       <div className="flex flex-col items-center justify-center p-44 h-full space-y-2">
         <h1 className="text-2xl">Testing Popup</h1>
 
