@@ -23,7 +23,7 @@ const SignUp = ({ history }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    const { firstName, lastName, email, password, confirmPassword } = user;
+    const { password, confirmPassword } = user;
 
     if (password !== confirmPassword) {
       alert("Password don't match");
