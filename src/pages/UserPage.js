@@ -1,10 +1,14 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 
 import LabelContainer from "../components/LabelContainer";
 
 import { auth } from "../lib/firebase/firebase.utils";
+import { setCurrentUser } from "../redux/user/user.actions";
 
 const UserPage = ({ user = {}, items = {} }) => {
+  const dispatch = useDispatch();
+
   const {
     name = "Nama lengkap user",
     userName = "Username akun",
@@ -52,7 +56,7 @@ const UserPage = ({ user = {}, items = {} }) => {
                   <img
                     className="w-full h-full"
                     src={profileImage}
-                    alt="Profile Image"
+                    alt="Profile"
                   />
                 </div>
                 <div className="ml-10 mt-16 text-gray-100">
@@ -164,7 +168,10 @@ const UserPage = ({ user = {}, items = {} }) => {
       <LabelContainer>
         <span
           className="flex justify-center items-center text-xl ml-20"
-          onClick={() => auth.signOut()}
+          onClick={() => {
+            dispatch(setCurrentUser(null));
+            auth.signOut();
+          }}
         >
           SIGN OUT
         </span>

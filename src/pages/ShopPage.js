@@ -20,7 +20,6 @@ class ShopPage extends React.Component {
   render() {
     const { history, match } = this.props;
     const { items } = this.state;
-
     return (
       <div className="bg-gray-200 flex flex-col">
         <HeaderShop />

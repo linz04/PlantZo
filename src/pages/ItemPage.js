@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { withRouter } from "react-router";
-import axios from "axios";
 
 import LabelContainer from "../components/LabelContainer";
 
-const ItemPage = ({ match }) => {
+const ItemPage = () => {
   useEffect(() => {
     fetch("/shop/1")
       .then((res) => res.json())

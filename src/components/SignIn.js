@@ -1,116 +1,102 @@
-import React from "react";
+import React, { useState } from "react";
+import axios from "axios";
+import { useDispatch } from "react-redux";
 
 import FormInput from "./FormInput";
-import axios from "axios";
-
 import { signInWithGoogle } from "../lib/firebase/firebase.utils";
 import { withRouter } from "react-router";
+import { setCurrentUser } from "../redux/user/user.actions";
 
-class SignIn extends React.Component {
-  constructor(props) {
-    super(props);
+const SignIn = ({ history }) => {
+  const [user, setUser] = useState({ email: "", password: "" });
 
-    this.state = {
-      email: "",
-      password: "",
-    };
-  }
+  const dispatch = useDispatch();
 
-  handleSubmit = (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
 
-    const { email, password } = this.state;
-
-    const user = {
-      email,
-      password,
-    };
+    dispatch(setCurrentUser(user));
 
     axios.post("api/login", { user }).then((res) => {
       console.log(res);
       console.log(res.data);
     });
 
-    this.setState({
-      email: "",
-      password: "",
-    });
+    setUser({ ...user, email: "", password: "" });
 
-    this.props.history.push("/shop");
+    history.push("/shop");
   };
 
-  handleChange = (event) => {
+  const handleChange = (event) => {
     const { name, value } = event.target;
-    this.setState({ [name]: value });
+    setUser({ ...user, [name]: value });
   };
 
-  handleGoogleSignIn = () => {
-    this.props.history.push("/shop");
+  const handleGoogleSignIn = () => {
+    history.push("/shop");
   };
 
-  render() {
-    const { email, password } = this.state;
+  const { email, password } = user;
 
-    return (
-      <div className="flex flex-col justify-center items-center text-center">
-        <div className="flex flex-col justify-center items-center bg-gray-600 text-center h-full relative w-1/2 lg:w-1/4    ">
-          <div className="p-10 w-full space-y-4">
-            <h2 className="uppercase text-3xl font-medium mb-10">masuk</h2>
-            <form
-              onSubmit={this.handleSubmit}
-              method="post"
-              className="flex-col justify-center items-center space-y-4"
-            >
-              <FormInput
-                type="text"
-                name="email"
-                placeholder="Email/username"
-                value={email}
-                required
-                handleChange={this.handleChange}
-              />
-              <FormInput
-                type="password"
-                name="password"
-                placeholder="Kata sandi"
-                value={password}
-                required
-                handleChange={this.handleChange}
-              />
+  return (
+    <div className="flex flex-col justify-center items-center text-center">
+      <div className="flex flex-col justify-center items-center bg-gray-600 text-center h-full relative w-1/2 lg:w-1/4    ">
+        <div className="p-10 w-full space-y-4">
+          <h2 className="uppercase text-3xl font-medium mb-10">masuk</h2>
+          <form
+            onSubmit={handleSubmit}
+            method="post"
+            className="flex-col justify-center items-center space-y-4"
+          >
+            <FormInput
+              type="email"
+              name="email"
+              placeholder="Email/username"
+              value={email}
+              required
+              handleChange={handleChange}
+            />
+            <FormInput
+              type="password"
+              name="password"
+              placeholder="Kata sandi"
+              value={password}
+              required
+              handleChange={handleChange}
+            />
 
-              <div className="flex justify-end underline text-gray-300">
-                Lupa kata sandi?
-              </div>
-
-              <button
-                type="submit"
-                value="submit form"
-                className="flex items-center justify-center bg-gray-300 text-gray-500 p-5 w-full rounded-full"
-              >
-                Masuk
-              </button>
-            </form>
-
-            <div className="my-10">Atau</div>
-            <button
-              onClick={() => {
-                signInWithGoogle();
-                setTimeout(this.handleGoogleSignIn, 7000);
-              }}
-              className="flex justify-center items-center text-center bg-gray-300 text-gray-500 w-full p-4"
-            >
-              <span>Masuk dengan google</span>
-            </button>
-
-            <div className="flex justify-center items-center text-gray-300">
-              <span>Belum punya akun? </span>
-              <span className="underline">Daftar</span>
+            <div className="flex justify-end underline text-gray-300">
+              Lupa kata sandi?
             </div>
+
+            <button
+              type="submit"
+              value="submit form"
+              className="flex items-center justify-center bg-gray-300 text-gray-500 p-5 w-full rounded-full"
+            >
+              Masuk
+            </button>
+          </form>
+
+          <div className="my-10">Atau</div>
+          <button
+            onClick={() => {
+              signInWithGoogle();
+              setTimeout(handleGoogleSignIn, 7000);
+            }}
+            className="flex justify-center items-center text-center bg-gray-300 text-gray-500 w-full p-4"
+          >
+            <span>Masuk dengan google</span>
+          </button>
+
+          <div className="flex justify-center items-center text-gray-300">
+            <span>Belum punya akun? </span>
+            <span className="underline">Daftar</span>
           </div>
         </div>
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 export default withRouter(SignIn);

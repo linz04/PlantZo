@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import {
   Switch,
   Route,
@@ -6,6 +6,7 @@ import {
   withRouter,
   useLocation,
 } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 
 import HomePage from "./pages/HomePage";
 import ShopPage from "./pages/ShopPage";
@@ -18,16 +19,19 @@ import Nav from "./components/Nav";
 import Footer from "./components/Footer";
 
 import { auth } from "./lib/firebase/firebase.utils";
+import { setCurrentUser } from "./redux/user/user.actions";
 
 const App = () => {
-  const [currentUser, setCurrentUser] = useState(null);
+  const currentUser = useSelector((state) => state.user.currentUser);
+  const dispatch = useDispatch();
+
   const location = useLocation();
 
   let unsubscribeFromAuth = null;
 
   useEffect(() => {
     unsubscribeFromAuth = auth.onAuthStateChanged((user) =>
-      setCurrentUser(user)
+      dispatch(setCurrentUser(user))
     );
 
     return () => {
