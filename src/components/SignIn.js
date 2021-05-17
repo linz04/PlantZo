@@ -35,6 +35,8 @@ class SignIn extends React.Component {
       email: "",
       password: "",
     });
+
+    this.props.history.push("/shop");
   };
 
   handleChange = (event) => {
