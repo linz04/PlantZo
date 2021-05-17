@@ -1,7 +1,6 @@
 import firebase from "firebase/app";
 import "firebase/firestore";
 import "firebase/auth";
-import { withRouter } from "react-router";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDNv8jsETm_X3l8OBxhfOJulaBkUbJVeMo",
@@ -23,11 +22,8 @@ const provider = new firebase.auth.GoogleAuthProvider();
 
 provider.setCustomParameters({ prompt: "select_account" });
 
-export const signInWithGoogle = ({ history }) => {
+export const signInWithGoogle = () => {
   auth.signInWithPopup(provider);
-  history.push("/shop");
 };
-
-const signInWithGoogleWithRouter = withRouter(signInWithGoogle);
 
 export default firebase;

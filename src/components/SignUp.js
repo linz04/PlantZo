@@ -168,7 +168,7 @@ class SignUp extends React.Component {
             <button
               onClick={() => {
                 signInWithGoogle();
-                window.setTimeout(this.handleGoogleSignIn, 7000);
+                setTimeout(this.handleGoogleSignIn, 7000);
               }}
               className="flex justify-center items-center text-center bg-gray-300 text-gray-500 w-full p-4"
             >
