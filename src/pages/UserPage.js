@@ -1,12 +1,13 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-
+import { useSelector } from "react-redux";
 import LabelContainer from "../components/LabelContainer";
 
 import { auth } from "../lib/firebase/firebase.utils";
 import { setCurrentUser } from "../redux/user/user.actions";
-
+import { selectCartItemsCount } from "../redux/cart/cart.selectors";
 const UserPage = ({ user = {}, items = {} }) => {
+  const itemsCount = useSelector((state) => selectCartItemsCount(state));
   const dispatch = useDispatch();
 
   const {
@@ -77,7 +78,7 @@ const UserPage = ({ user = {}, items = {} }) => {
           <div className="flex justify-center">
             <div className="relative flex flex-col justify-center items-center w-52 h-52 bg-green-300 rounded-full m-10 break-words">
               <span className="flex justify-center items-center rounded-full bg-red-600 w-16 h-16 absolute top-0 right-0">
-                {unpaidAmount}
+                {itemsCount}
               </span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
