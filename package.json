@@ -21,7 +21,7 @@
     "build:css": "postcss src/styles/tailwind.css -o src/styles/app.css",
     "watch:css": "postcss src/styles/tailwind.css -o src/styles/app.css --watch",
     "react-scripts:start": "sleep 5 && react-scripts start",
-    "start-api": "cd api && venv/bin/flask run --no-debugger",
+    "start-api": "cd api && flask run",
     "init-db" : "cd api && python3 initdb.py",
     "start": "run-p watch:css react-scripts:start",
     "build": "run-s build:css react-scripts:build",
