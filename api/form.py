@@ -48,7 +48,7 @@ def login():
 			resp = make_response(redirect('http://localhost:3000/shop', code=301))
 			resp.set_cookie('auth', result)
 			print(result)
-			return resp
+			return result
 		else:
 			result = jsonify({"error":"Invalid username and password"})
 			return result
