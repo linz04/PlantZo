@@ -5,11 +5,12 @@ import Popup from "../components/Popup";
 import SignUp from "../components/SignUp";
 
 import SignIn from "../components/SignIn";
+import { selectCurrentUser } from "../redux/user/user.selectors";
 
 const HomePage = () => {
   const [signUpPopupVisible, setSignUpPopupVisible] = useState(false);
   const [signInPopupVisible, setSignInPopupVisible] = useState(false);
-  const currentUser = useSelector((state) => state.user.currentUser);
+  const currentUser = useSelector((state) => selectCurrentUser(state));
 
   const handleClickSignup = () => {
     setSignUpPopupVisible(!signUpPopupVisible);
@@ -20,7 +21,7 @@ const HomePage = () => {
   };
 
   return (
-    !currentUser && (
+    currentUser || (
       <div className="flex flex-col items-center justify-center p-44 h-full space-y-2">
         <h1 className="text-2xl">Testing Popup</h1>
 

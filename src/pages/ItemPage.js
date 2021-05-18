@@ -6,7 +6,7 @@ import LabelContainer from "../components/LabelContainer";
 
 import { addItem, clearItem } from "../redux/cart/cart.actions";
 
-const ItemPage = () => {
+const ItemPage = ({ history }) => {
   const [item, setItem] = useState(null);
 
   useEffect(() => {
@@ -22,7 +22,7 @@ const ItemPage = () => {
 
   return (
     <div className="">
-      <LabelContainer>
+      <LabelContainer onClick={() => history.push("/shop")}>
         <span className="mb-2 mr-2">&larr;</span>
         <span>Deskripsi produk</span>
       </LabelContainer>

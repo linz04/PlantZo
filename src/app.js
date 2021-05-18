@@ -6,24 +6,24 @@ import {
   withRouter,
   useLocation,
 } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
 import HomePage from "./pages/HomePage";
 import ShopPage from "./pages/ShopPage";
 import CheckoutPage from "./pages/CheckoutPage";
 import UserPage from "./pages/UserPage";
 import ItemPage from "./pages/ItemPage";
+import TestPage from "./pages/TestPage";
 import NavHome from "./components/NavHome";
 import PageContainer from "./components/PageContainer";
 import Nav from "./components/Nav";
 import Footer from "./components/Footer";
 
 import { auth } from "./lib/firebase/firebase.utils";
-import { setCurrentUser } from "./redux/user/user.actions";
+import { selectCurrentUser } from "./redux/user/user.selectors";
 
 const App = () => {
-  const currentUser = useSelector((state) => state.user.currentUser);
-  const dispatch = useDispatch();
+  const currentUser = useSelector((state) => selectCurrentUser(state));
 
   const location = useLocation();
 
@@ -67,6 +67,7 @@ const App = () => {
           path="/user"
           render={() => (!currentUser ? <Redirect to="/" /> : <UserPage />)}
         />
+        <Route exact path="/test" component={TestPage} />
       </Switch>
       <Footer />
     </PageContainer>

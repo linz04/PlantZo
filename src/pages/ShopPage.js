@@ -32,10 +32,10 @@ class ShopPage extends React.Component {
 
         <CollectionItem>
           {items
-            .sort((item1, item2) => item2.id - item1.id)
+            .sort((item1, item2) => item2.pid - item1.pid)
             .filter((item, idx) => idx < 6)
             .map((item) => (
-              <CardItem key={item.id} item={item} />
+              <CardItem key={item.pid} item={item} />
             ))}
         </CollectionItem>
 
@@ -47,10 +47,10 @@ class ShopPage extends React.Component {
 
         <CollectionItem>
           {items
-            .sort((item1, item2) => item1.id - item2.id)
+            .sort((item1, item2) => item1.pid - item2.pid)
             .filter((item, idx) => idx < 6)
             .map((item) => (
-              <CardItem key={item.id} item={item} />
+              <CardItem key={item.pid} item={item} />
             ))}
         </CollectionItem>
 
@@ -62,7 +62,7 @@ class ShopPage extends React.Component {
           {items
             .filter((item, idx) => idx < 12)
             .map((item) => (
-              <CardItem key={item.id} item={item} />
+              <CardItem key={item.pid} item={item} />
             ))}
         </CollectionItem>
       </div>

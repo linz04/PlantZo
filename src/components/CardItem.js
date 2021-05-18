@@ -5,7 +5,7 @@ const CardItem = ({ item = {}, history, match }) => {
   const {
     name = "Tanaman",
     imageUrl = "/",
-    id = 1,
+    pid = 1,
     price = 1,
     start = 3,
     sold = 24,
@@ -22,7 +22,7 @@ const CardItem = ({ item = {}, history, match }) => {
   return (
     <div
       className="flex flex-col items-center w-72 h-full bg-gray-100 m-2 cursor-pointer"
-      onClick={() => history.push(`${match.url}/${id}`)}
+      onClick={() => history.push(`shop/${pid}`)}
     >
       <div className="m-2">
         <img src={imageUrl} alt="Item" />

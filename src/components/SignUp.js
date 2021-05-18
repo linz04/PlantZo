@@ -18,6 +18,15 @@ const SignUp = ({ history }) => {
     termsConditions: false,
   });
 
+  const {
+    firstName,
+    lastName,
+    email,
+    password,
+    confirmPassword,
+    termsConditions,
+  } = user;
+
   const dispatch = useDispatch();
 
   const handleSubmit = (event) => {
@@ -33,8 +42,9 @@ const SignUp = ({ history }) => {
     dispatch(setCurrentUser(user));
 
     axios.post("api/signup", { user }).then((res) => {
-      console.log(res);
-      console.log(res.data);
+      if ("User Already Exist!" === res.data) {
+        console.log("USER_EXIST");
+      }
     });
 
     setUser({
@@ -62,15 +72,6 @@ const SignUp = ({ history }) => {
   const handleGoogleSignIn = () => {
     history.push("/shop");
   };
-
-  const {
-    firstName,
-    lastName,
-    email,
-    password,
-    confirmPassword,
-    termsConditions,
-  } = user;
 
   return (
     <div className="flex flex-col justify-center items-center text-center">
