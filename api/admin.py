@@ -10,7 +10,7 @@ def admin():
 	print(token,app.config.get('JWT_SECRET_KEY'))
 	payload = jwt.decode(token, app.config.get('JWT_SECRET_KEY'), algorithms=['HS256'])
 	auth = payload['sub']
-	if auth.get('email') == 'linuzcoba@gmail.com':
+	if auth.get('email') == 'admin@plantzo.id':
 		return redirect('/admin/page')
 	else:
 		return 'Anda bukan admin'
