@@ -45,9 +45,10 @@ def login():
 		if bcrypt.check_password_hash(rv[3], password):
 			access_token = create_access_token(identity = {'first_name': rv[0],'last_name': rv[1],'email': rv[2]})
 			result = access_token
-			resp = make_response(redirect('admin'))
+			resp = make_response(redirect('http://localhost:3000/shop', code=301))
 			resp.set_cookie('auth', result)
-			return result
+			print(result)
+			return resp
 		else:
 			result = jsonify({"error":"Invalid username and password"})
 			return result

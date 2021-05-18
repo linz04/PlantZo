@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <form action="/admin/add" method="post">
+                        <div class="form-group">
+                            <input class="form-control" type="text" name="code" placeholder="Code" required>
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" type="text" name="name" placeholder="Name" required>
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" type="text" name="image" placeholder="Image"  required>
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" type="text" name="category" placeholder="Category"  required>
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" type="number" name="price" placeholder="Price"  required>
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" type="number" name="discount" placeholder="Discount" required>
+                        </div>
+                        <button class="btn btn-primary" type="submit">
+                            Add
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <table class="table table-bordered table-hover">
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Code</th>
+                    <th>Name</th>
+                    <th>Image</th>
+                    <th>Category</th>
+                    <th>Price</th>
+                    <th>Disc</th>
+                    <th>Operations</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for data in data %}
+                <tr>
+                    <td>{{ data.pid }}</td>
+                    <td>{{ data.code }}</td>
+                    <td>{{ data.name }}</td>
+                    <td>{{ data.image }}</td>
+                    <td>{{ data.category }}</td>
+                    <td>{{ data.price }}</td>
+                    <td>{{ data.discount }}</td>
+                    <td>
+                        <a class="btn btn-danger"
+                           href="/admin/delete/{{ data.pid }}">
+                            Delete
+                        </a>
+                        <a class="btn btn-info"
+                           href="/admin/update/{{ data.pid }}">
+                            Edit
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+                </tbody>
+
+            </table>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}
