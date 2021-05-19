@@ -24,26 +24,50 @@ const CheckoutPage = ({ history }) => {
 
       <LabelContainer>ITEM</LabelContainer>
 
-      <LabelContainer>PENGIRIMAN</LabelContainer>
+      <LabelContainer>
+        <div className="flex flex-auto flex-col justify-between space-y-2">
+          <div>
+            <div>Logo</div>
+            <div>Pilih Pengiriman</div>
+          </div>
+          <div className="bg-gray-400">
+            <div>
+              <input type="radio" name="deliveryType" value="J&T">
+                J&T Express
+              </input>
+            </div>
+            <div>
+              <input type="radio" name="deliveryType" value="JNE">
+                JNE Regular (Cashless)
+              </input>
+            </div>
+            <div>
+              <input type="radio" name="deliveryType" value="ID">
+                ID Express
+              </input>
+            </div>
+          </div>
+        </div>
+      </LabelContainer>
 
       <LabelContainer>
         <div className="flex flex-col flex-auto space-y-4 justify-between">
           <div className="flex flex-auto  space-x-2">
             <div className="w-1/6">Logo</div>
-            <div className="w-2/3">Pembayaran</div>
+            <div className="w-2/3">Pilih Pembayaran</div>
           </div>
           <div className="grid grid-cols-4 gap-4">
             <div className="flex justify-center items-center bg-blue-600 h-64">
-              1
+              DANA
             </div>
             <div className="flex justify-center items-center bg-blue-600 h-64">
-              2
+              OVO
             </div>
             <div className="flex justify-center items-center bg-blue-600 h-64">
-              3
+              GOPAY
             </div>
             <div className="flex justify-center items-center bg-blue-600 h-64">
-              4
+              COD
             </div>
           </div>
         </div>

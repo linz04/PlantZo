@@ -19,7 +19,7 @@ const SignIn = ({ history }) => {
 
     dispatch(setCurrentUser(user));
 
-    axios.post("api/signup", { user }).then((res) => {
+    axios.post("api/login", { user }).then((res) => {
       console.log(res);
       console.log(res.data);
     });
