@@ -3,7 +3,11 @@ import { userActionTypes } from "./user.types";
 const { SET_CURRENT_USER } = userActionTypes;
 
 const INITIAL_STATE = {
-  currentUser: null,
+  currentUser: {
+    id: "",
+    email: "",
+    displayName: "",
+  },
 };
 
 const userReducer = (state = INITIAL_STATE, action) => {

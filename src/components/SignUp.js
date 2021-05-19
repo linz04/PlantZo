@@ -39,7 +39,13 @@ const SignUp = ({ history }) => {
       return;
     }
 
-    dispatch(setCurrentUser(user));
+    dispatch(
+      setCurrentUser({
+        ...user,
+        email,
+        displayName: `${firstName} ${lastName}`,
+      })
+    );
 
     axios.post("api/signup", { user }).then((res) => {
       if ("User Already Exist!" === res.data) {

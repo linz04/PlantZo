@@ -1,6 +1,21 @@
 import { cartActionTypes } from "./cart.types";
-import { addItemToCart } from "./cart.utils";
-const { ADD_ITEM, CLEAR_ITEM_FROM_CART } = cartActionTypes;
+import {
+  addItemToCart,
+  checkedAllItems,
+  checkedItem,
+  decreaseItemQuantity,
+  deleteItemFromCart,
+  increaseItemQuantity,
+} from "./cart.utils";
+
+const {
+  ADD_ITEM,
+  DELETE_ITEM,
+  CHECKED_ITEM,
+  CHECKED_ALL_ITEM,
+  INCREASE_ITEM_QUANTITY,
+  DECREASE_ITEM_QUANTITY,
+} = cartActionTypes;
 
 const INITIAL_STATE = {
   cartItems: [],
@@ -13,12 +28,30 @@ const cartReducer = (state = INITIAL_STATE, action) => {
         ...state,
         cartItems: addItemToCart(state.cartItems, action.payload),
       };
-    case CLEAR_ITEM_FROM_CART:
+    case DELETE_ITEM:
       return {
         ...state,
-        cartItems: state.cartItems.filter(
-          (cartItem) => cartItem.pid !== action.payload.pid
-        ),
+        cartItems: deleteItemFromCart(state.cartItems, action.payload),
+      };
+    case CHECKED_ITEM:
+      return {
+        ...state,
+        cartItems: checkedItem(state.cartItems, action.payload),
+      };
+    case CHECKED_ALL_ITEM:
+      return {
+        ...state,
+        cartItems: checkedAllItems(state.cartItems),
+      };
+    case INCREASE_ITEM_QUANTITY:
+      return {
+        ...state,
+        cartItems: increaseItemQuantity(state.cartItems, action.payload),
+      };
+    case DECREASE_ITEM_QUANTITY:
+      return {
+        ...state,
+        cartItems: decreaseItemQuantity(state.cartItems, action.payload),
       };
     default:
       return state;

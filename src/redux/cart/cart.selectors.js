@@ -26,3 +26,8 @@ export const selectCartItemsTotal = createSelector(
       0
     )
 );
+
+export const selectCartItemsChecked = createSelector(
+  [selectCartItems],
+  (cartItems) => cartItems.filter((cartItem) => cartItem.checked === true)
+);

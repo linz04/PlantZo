@@ -10,7 +10,7 @@ import { useSelector } from "react-redux";
 
 import HomePage from "./pages/HomePage";
 import ShopPage from "./pages/ShopPage";
-import CheckoutPage from "./pages/CheckoutPage";
+import CartPage from "./pages/CartPage";
 import UserPage from "./pages/UserPage";
 import ItemPage from "./pages/ItemPage";
 import TestPage from "./pages/TestPage";
@@ -59,8 +59,8 @@ const App = () => {
         />
         <Route
           exact
-          path="/checkout"
-          render={() => (!currentUser ? <Redirect to="/" /> : <CheckoutPage />)}
+          path="/cart"
+          render={() => (!currentUser ? <Redirect to="/" /> : <CartPage />)}
         />
         <Route
           exact

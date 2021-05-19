@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 
 import LabelContainer from "../components/LabelContainer";
 
-import { addItem, clearItem } from "../redux/cart/cart.actions";
+import { addItem } from "../redux/cart/cart.actions";
 
 const ItemPage = ({ history }) => {
   const [item, setItem] = useState(null);
@@ -58,7 +58,6 @@ const ItemPage = ({ history }) => {
             </div>
           </div>
           <button onClick={() => dispatch(addItem(item))}>+</button>
-          <button onClick={() => dispatch(clearItem(item))}>X</button>
           <div className="mt-20 h-full">
             <h3 className="text-4xl">Deskripsi Product</h3>
             <div className="text-3xl text-gray-500 mt-4">

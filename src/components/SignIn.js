@@ -19,7 +19,7 @@ const SignIn = ({ history }) => {
 
     dispatch(setCurrentUser(user));
 
-    axios.post("api/login", { user }).then((res) => {
+    axios.post("api/signup", { user }).then((res) => {
       console.log(res);
       console.log(res.data);
     });
@@ -33,6 +33,8 @@ const SignIn = ({ history }) => {
     const { name, value } = event.target;
     setUser({ ...user, [name]: value });
   };
+
+  console.log(user);
 
   const handleGoogleSignIn = () => {
     history.push("/shop");
