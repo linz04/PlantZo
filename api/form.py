@@ -23,10 +23,8 @@ def signup():
 	print("success")
 
 	result = {
-		'first_name' : first_name,
-		'last_name' : last_name,
+		'display_name' : first_name + last_name,
 		'email' : email,
-		'password' : password,
 	}
 	return jsonify({'result' : result})
 
