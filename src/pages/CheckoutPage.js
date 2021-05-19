@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { withRouter } from "react-router";
 
@@ -6,12 +6,21 @@ import LabelContainer from "../components/LabelContainer";
 
 import {
   selectCartItemsChecked,
-  selectCartItemsCount,
+  selectCartItemsTotal,
 } from "../redux/cart/cart.selectors";
 
 const CheckoutPage = ({ history }) => {
+  const [deliveryType, setDeliveryType] = useState("");
+
   const cartItems = useSelector((state) => selectCartItemsChecked(state));
-  const cartItemsCount = useSelector((state) => selectCartItemsCount(state));
+  const cartItemsTotal = useSelector((state) => selectCartItemsTotal(state));
+
+  console.log(cartItemsTotal);
+
+  const handleCheckRadio = (e) => {
+    const { value } = e.target;
+    setDeliveryType(value);
+  };
 
   return (
     <div className="flex flex-1 flex-col justify-between">
@@ -32,19 +41,29 @@ const CheckoutPage = ({ history }) => {
           </div>
           <div className="bg-gray-400">
             <div>
-              <input type="radio" name="deliveryType" value="J&T">
-                J&T Express
-              </input>
-            </div>
-            <div>
-              <input type="radio" name="deliveryType" value="JNE">
-                JNE Regular (Cashless)
-              </input>
-            </div>
-            <div>
-              <input type="radio" name="deliveryType" value="ID">
-                ID Express
-              </input>
+              <input
+                type="radio"
+                name="delivery_type"
+                value="J&T"
+                // checked={this.state.address === result.ADDRESS}
+                onChange={handleCheckRadio}
+              />
+
+              <input
+                type="radio"
+                name="delivery_type"
+                value="JNE"
+                // checked={this.state.address === result.ADDRESS}
+                onChange={handleCheckRadio}
+              />
+
+              <input
+                type="radio"
+                name="delivery_type"
+                value="ID"
+                // checked={this.state.address === result.ADDRESS}
+                onChange={handleCheckRadio}
+              />
             </div>
           </div>
         </div>
@@ -79,7 +98,7 @@ const CheckoutPage = ({ history }) => {
             <div className="w-1/6">Logo</div>
             <div className="w-2/3">Total pesanan</div>
           </div>
-          <div className="flex justify-end w-1/4">{`Rp ${cartItemsCount}.000`}</div>
+          <div className="flex justify-end w-1/4">{`Rp ${cartItemsTotal}.000`}</div>
         </div>
       </LabelContainer>
 
@@ -87,13 +106,13 @@ const CheckoutPage = ({ history }) => {
         <div className="flex flex-auto justify-end items-center space-x-4">
           <button
             className="w-1/4 px-6 py-4 bg-green-700 text-white"
-            onClick={() => history.push("/unPaid")}
+            onClick={() => history.push("/unpaid")}
           >
             Bayar Nanti
           </button>
           <button
             className="w-1/4 px-6 py-4 bg-green-700 text-white"
-            onClick={() => history.push("/inPaid")}
+            onClick={() => history.push("/inpaid")}
           >
             Bayar Sekarang
           </button>

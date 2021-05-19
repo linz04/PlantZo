@@ -48,6 +48,7 @@ const SignUp = ({ history }) => {
     );
 
     axios.post("api/signup", { user }).then((res) => {
+      console.log(res.data);
       if ("User Already Exist!" === res.data) {
         console.log("USER_EXIST");
       }
