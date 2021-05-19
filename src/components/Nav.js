@@ -57,7 +57,7 @@ const Nav = ({ history }) => {
 
         <div
           className="w-14 mx-4 flex justify-center items-center"
-          onClick={() => history.push("/checkout")}
+          onClick={() => history.push("/cart")}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
