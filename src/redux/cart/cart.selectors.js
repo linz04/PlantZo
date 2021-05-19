@@ -20,11 +20,13 @@ export const selectCartItemsCount = createSelector(
 export const selectCartItemsTotal = createSelector(
   [selectCartItems],
   (cartItems) =>
-    cartItems.reduce(
-      (accumulatedQuantity, cartItem) =>
-        accumulatedQuantity + cartItem.quantity * cartItem.price,
-      0
-    )
+    cartItems
+      .filter((cartItem) => cartItem.checked === true)
+      .reduce(
+        (accumulatedQuantity, cartItem) =>
+          accumulatedQuantity + cartItem.quantity * cartItem.price,
+        0
+      )
 );
 
 export const selectCartItemsChecked = createSelector(
