@@ -14,6 +14,10 @@ import CartPage from "./pages/CartPage";
 import UserPage from "./pages/UserPage";
 import ItemPage from "./pages/ItemPage";
 import TestPage from "./pages/TestPage";
+import CheckoutPage from "./pages/CheckoutPage";
+import UnPaidPage from "./pages/UnPaidPage";
+import InPaidPage from "./pages/InPaidPage";
+
 import NavHome from "./components/NavHome";
 import PageContainer from "./components/PageContainer";
 import Nav from "./components/Nav";
@@ -61,6 +65,21 @@ const App = () => {
           exact
           path="/cart"
           render={() => (!currentUser ? <Redirect to="/" /> : <CartPage />)}
+        />
+        <Route
+          exact
+          path="/checkout"
+          render={() => (!currentUser ? <Redirect to="/" /> : <CheckoutPage />)}
+        />
+        <Route
+          exact
+          path="/unpaid"
+          render={() => (!currentUser ? <Redirect to="/" /> : <UnPaidPage />)}
+        />
+        <Route
+          exact
+          path="/inpaid"
+          render={() => (!currentUser ? <Redirect to="/" /> : <InPaidPage />)}
         />
         <Route
           exact
