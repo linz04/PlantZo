@@ -83,6 +83,8 @@ def add():
 def delete(pid):
 	cur = mysql.connection.cursor()
 	cur.execute("DELETE FROM product where pid = %s", (pid,))
+	mysql.connection.commit()
+	cur.close()
 	return '''
 	<h1>Success</h1>
 	<a href="/admin/page"> Home </a>

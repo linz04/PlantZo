@@ -45,7 +45,7 @@ def login():
 		if bcrypt.check_password_hash(rv[3], password):
 			access_token = create_access_token(identity = {'first_name': rv[0],'last_name': rv[1],'email': rv[2]})
 			result = access_token
-			resp = make_response(redirect('http://127.0.0.1:3000/shop', code=301))
+			resp = make_response('http://127.0.0.1:3000/')
 			resp.set_cookie('auth', result)
 			print(result)
 			return resp

@@ -23,14 +23,14 @@ DROP TABLE IF EXISTS `product`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `product` (
   `pid` int NOT NULL AUTO_INCREMENT,
+  `image` varchar(255) NOT NULL,
   `code` varchar(255) NOT NULL,
   `name` varchar(70) DEFAULT NULL,
-  `image` varchar(255) NOT NULL,
   `category` varchar(70) DEFAULT NULL,
   `price` int DEFAULT NULL,
   `discount` int DEFAULT NULL,
   PRIMARY KEY (`pid`)
-) ENGINE=MyISAM AUTO_INCREMENT=250 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -40,6 +40,7 @@ CREATE TABLE `product` (
 LOCK TABLES `product` WRITE;
 /*!40000 ALTER TABLE `product` DISABLE KEYS */;
 INSERT INTO `product` VALUES (1,'PLANT01','Aloe Vera','1.jpg','Kategori',100,10);
+
 /*!40000 ALTER TABLE `product` ENABLE KEYS */;
 UNLOCK TABLES;
 
