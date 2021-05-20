@@ -2,6 +2,7 @@ from flask import jsonify, request, redirect, url_for, make_response, render_tem
 from app import app, bcrypt, jwt
 from db import mysql
 from flask_jwt_extended import (create_access_token)
+import hashlib
 
 @app.route('/api/signup', methods=['POST'])
 def signup():
@@ -17,13 +18,15 @@ def signup():
 		return "User Already Exist!"
 
 	cur.execute("INSERT INTO users (first_name, last_name, email, password) VALUES (%s, %s, %s, %s)", (first_name, last_name, email, password))
+	cur.execute("SET @uid = LAST_INSERT_ID()")
+	cur.execute("INSERT INTO cart (uid) VALUES (@uid)")
 
 	mysql.connection.commit()
 	cur.close()
 	print("success")
 
 	result = {
-		'display_name' : first_name + last_name,
+		'display_name' : first_name + " " + last_name,
 		'email' : email,
 	}
 	return jsonify({'result' : result})
