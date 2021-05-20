@@ -37,7 +37,14 @@ export const checkedItem = (cartItems, cartItemToChecked) => {
 };
 
 export const checkedAllItems = (cartItems) => {
-  cartItems.map((cartItem) => (cartItem.checked = false));
+  const checkedAll = cartItems.filter((cartItem) => cartItem.checked === true);
+
+  if (cartItems.length === checkedAll.length) {
+    return cartItems.map((cartItem) => ({
+      ...cartItem,
+      checked: false,
+    }));
+  }
 
   return cartItems.map((cartItem) => ({
     ...cartItem,

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { withRouter } from "react-router";
 
@@ -9,15 +9,27 @@ import { checkedAllItems, checkedItem } from "../redux/cart/cart.actions";
 import {
   selectCartItems,
   selectCartItemsTotal,
+  selectCartItemsChecked,
 } from "../redux/cart/cart.selectors";
 
 const CartPage = ({ history }) => {
   const [isCheckedAll, setIsCheckedAll] = useState(false);
 
   const cartItems = useSelector((state) => selectCartItems(state));
+  const cartItemsChecked = useSelector((state) =>
+    selectCartItemsChecked(state)
+  );
   const cartItemsTotal = useSelector((state) => selectCartItemsTotal(state));
 
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (cartItems.length === cartItemsChecked.length) {
+      setIsCheckedAll(true);
+    } else {
+      setIsCheckedAll(false);
+    }
+  }, [cartItemsChecked]);
 
   const handleCheckedAll = () => {
     setIsCheckedAll(!isCheckedAll);
@@ -36,13 +48,17 @@ const CartPage = ({ history }) => {
           console.log(item);
           return (
             <LabelContainer key={item.pid}>
-              <div onClick={() => dispatch(checkedItem(item))}>
+              <div
+                onClick={() => {
+                  dispatch(checkedItem(item));
+                }}
+              >
                 <input
                   className="w-8 h-8 mr-4"
                   type="checkbox"
                   name="itemToCheckout"
                   checked={item.checked}
-                  onChange={() => console.log("CHECKED")}
+                  onChange={() => {}}
                   required
                 />
               </div>
@@ -67,7 +83,9 @@ const CartPage = ({ history }) => {
           <div className="w-2/6">{`Total Harga : Rp ${cartItemsTotal}.000`}</div>
           <button
             className="border-2 border-gray-800 w-1/6 px-6 py-2 bg-green-700"
-            onClick={() => history.push("/checkout")}
+            onClick={() => {
+              if (cartItemsChecked.length) history.push("/checkout");
+            }}
           >
             Checkout
           </button>
