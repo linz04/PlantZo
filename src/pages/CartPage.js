@@ -24,6 +24,10 @@ const CartPage = ({ history }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    setIsCheckedAll(false);
+  }, []);
+
+  useEffect(() => {
     if (cartItems.length === cartItemsChecked.length) {
       setIsCheckedAll(true);
     } else {

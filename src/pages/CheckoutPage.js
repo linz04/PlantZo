@@ -37,7 +37,7 @@ const CheckoutPage = ({ history }) => {
     <div className="flex flex-1 flex-col justify-between">
       <LabelContainer onClick={() => history.push("/cart")}>
         <span className="mb-2 mr-2">&larr;</span>
-        <span>CheckoutPage</span>
+        <span>Check Out</span>
       </LabelContainer>
 
       <LabelContainer>ALAMAT</LabelContainer>
@@ -160,7 +160,7 @@ const CheckoutPage = ({ history }) => {
         <div className="flex flex-auto justify-end items-center space-x-4">
           <button
             className="w-1/4 px-6 py-4 bg-green-700 text-white"
-            onClick={() => history.push("/unpaid")}
+            onClick={() => history.push("/state")}
           >
             Bayar Nanti
           </button>
