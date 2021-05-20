@@ -5,7 +5,7 @@ import { withRouter } from "react-router";
 import CartItem from "../components/CartItem";
 import LabelContainer from "../components/LabelContainer";
 
-import { checkedAllItems } from "../redux/cart/cart.actions";
+import { checkedAllItems, checkedItem } from "../redux/cart/cart.actions";
 import {
   selectCartItems,
   selectCartItemsTotal,
@@ -18,14 +18,6 @@ const CartPage = ({ history }) => {
   const cartItemsTotal = useSelector((state) => selectCartItemsTotal(state));
 
   const dispatch = useDispatch();
-
-  const handleCheckbox = (event) => {
-    const { id, item } = event.target;
-    console.log(Object.values(id));
-    console.log(item);
-    console.log(event.target);
-    // checkedItem(cartItems, pid);
-  };
 
   const handleCheckedAll = () => {
     setIsCheckedAll(!isCheckedAll);
@@ -44,16 +36,16 @@ const CartPage = ({ history }) => {
           console.log(item);
           return (
             <LabelContainer key={item.pid}>
-              <input
-                className="w-8 h-8 mr-4"
-                type="checkbox"
-                id={item}
-                item={item}
-                name="itemToCheckout"
-                checked={item.checked}
-                required
-                onChange={handleCheckbox}
-              />
+              <div onClick={() => dispatch(checkedItem(item))}>
+                <input
+                  className="w-8 h-8 mr-4"
+                  type="checkbox"
+                  name="itemToCheckout"
+                  checked={item.checked}
+                  onChange={() => console.log("CHECKED")}
+                  required
+                />
+              </div>
               <CartItem item={item} />
             </LabelContainer>
           );
