@@ -22,7 +22,7 @@ const ItemPage = ({ history, location }) => {
   const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
-    e.prefentDefault();
+    e.preventDefault();
 
     const data = { pid: 33 };
 
