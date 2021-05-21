@@ -1,12 +1,16 @@
 import React from "react";
+import { withRouter } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
+
 import LabelContainer from "../components/LabelContainer";
 
 import { auth } from "../lib/firebase/firebase.utils";
 import { setCurrentUser } from "../redux/user/user.actions";
 import { selectCartItemsCount } from "../redux/cart/cart.selectors";
-const UserPage = ({ user = {}, items = {} }) => {
+
+const UserPage = ({ user = {}, items = {}, history, match }) => {
+  console.log(match);
   const itemsCount = useSelector((state) => selectCartItemsCount(state));
   const dispatch = useDispatch();
 
@@ -70,7 +74,9 @@ const UserPage = ({ user = {}, items = {} }) => {
         </div>
       </LabelContainer>
       <LabelContainer>Tentang anda</LabelContainer>
-      <LabelContainer>Lengkapi profil anda!!</LabelContainer>
+      <LabelContainer onClick={() => history.push(`${match.path}/profile`)}>
+        Lengkapi profil anda!!
+      </LabelContainer>
       <LabelContainer>
         <div className="w-full h-full">
           <div>Pesanan saya</div>
@@ -161,7 +167,12 @@ const UserPage = ({ user = {}, items = {} }) => {
       </LabelContainer>
       <LabelContainer>Pengaturan</LabelContainer>
       <LabelContainer>
-        <span className="text-xl ml-20">Profil</span>
+        <span
+          className="text-xl ml-20"
+          onClick={() => history.push("/settings/profile")}
+        >
+          Profil
+        </span>
       </LabelContainer>
       <LabelContainer>
         <span className="text-xl ml-20">Bahasa</span>
@@ -181,4 +192,4 @@ const UserPage = ({ user = {}, items = {} }) => {
   );
 };
 
-export default UserPage;
+export default withRouter(UserPage);

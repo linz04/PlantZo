@@ -16,6 +16,7 @@ import ItemPage from "./pages/ItemPage";
 import TestPage from "./pages/TestPage";
 import CheckoutPage from "./pages/CheckoutPage";
 import PaymentStatePage from "./pages/PaymentStatePage";
+import SettingsPage from "./pages/SettingsPage";
 
 import NavHome from "./components/NavHome";
 import PageContainer from "./components/PageContainer";
@@ -80,6 +81,10 @@ const App = () => {
           render={() =>
             !currentUser ? <Redirect to="/" /> : <PaymentStatePage />
           }
+        />
+        <Route
+          path="/settings/"
+          render={() => (!currentUser ? <Redirect to="/" /> : <SettingsPage />)}
         />
         <Route exact path="/test" component={TestPage} />
       </Switch>

@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { withRouter } from "react-router";
 import { useDispatch } from "react-redux";
+import axios from "axios";
 
 import LabelContainer from "../components/LabelContainer";
 
 import { addItem } from "../redux/cart/cart.actions";
 
-const ItemPage = ({ history }) => {
+const ItemPage = ({ history, location }) => {
   const [item, setItem] = useState(null);
 
   useEffect(() => {
@@ -19,6 +20,17 @@ const ItemPage = ({ history }) => {
   }, []);
 
   const dispatch = useDispatch();
+
+  const handleSubmit = (e) => {
+    e.prefentDefault();
+
+    const data = { pid: 33 };
+
+    axios.post(`${location.pathname}`, { data }).then((res) => {
+      console.log(res);
+      console.log(res.data);
+    });
+  };
 
   return (
     <div className="">
@@ -61,7 +73,15 @@ const ItemPage = ({ history }) => {
               </div>
             </div>
           </div>
-          <button onClick={() => dispatch(addItem(item))}>+</button>
+          <form
+            onSubmit={handleSubmit}
+            method="post"
+            className="flex-col justify-center items-center space-y-4"
+          >
+            <button type="submit" onClick={() => dispatch(addItem(item))}>
+              +
+            </button>
+          </form>
           <div className="mt-20 h-full">
             <h3 className="text-4xl">Deskripsi Product</h3>
             <div className="text-3xl text-gray-500 mt-4">
