@@ -6,15 +6,7 @@ import jwt
 
 @app.route('/admin')
 def admin():
-	token = request.cookies.get('auth')
-	print(token,app.config.get('JWT_SECRET_KEY'))
-	payload = jwt.decode(token, app.config.get('JWT_SECRET_KEY'), algorithms=['HS256'])
-	auth = payload['sub']
-	if auth.get('email') == 'admin@plantzo.id':
-		return redirect('/admin/page')
-	else:
-		return 'Anda bukan admin'
-
+	return redirect('/admin/page')
 
 @app.route('/admin/page', methods=['GET'])
 def page():
@@ -61,23 +53,21 @@ def update(pid):
 @app.route('/admin/add', methods=['POST'])
 def add():
 	if request.method == 'POST':
-		code = request.form['code']
+		pid = request.form['pid']
 		name = request.form['name']
 		image = request.form['image']
-		category = request.form['category']
+		rating = request.form['rating']
 		price = request.form['price']
-		discount = request.form['discount']
+		description = request.form['description']
+		quantity = request.form['quantity']
 		cur = mysql.connection.cursor()
 
-		cur.execute("INSERT INTO product (code, name, image, category, price, discount) VALUES (%s, %s, %s, %s, %s, %s)", (code, name, image, category, price, discount))
+		cur.execute("INSERT INTO product (pid, name, image, price, rating, description, quantity) VALUES (%s, %s, %s, %s, %s, %s, %s)", (pid, name, image, price, rating, description, quantity))
 
 		mysql.connection.commit()
 		cur.close()
 		print("success")
-		return '''
-		<h1>Success</h1>
-		<a href="/admin/page"> Home </a>
-		'''
+		return redirect('/admin/page')
 
 @app.route('/admin/delete/<int:pid>')
 def delete(pid):
