@@ -24,7 +24,7 @@ const ItemPage = ({ history, location }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const data = { pid: 33 };
+    const data = { pid: 1 };
 
     axios.post(`${location.pathname}`, { data }).then((res) => {
       console.log(res);

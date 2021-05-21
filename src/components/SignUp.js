@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import axios from "axios";
 import { useDispatch } from "react-redux";
 import { withRouter } from "react-router";
+import axios from "axios";
+import jwt from "jwt-decode";
 
 import FormInput from "./FormInput";
 
@@ -49,9 +50,6 @@ const SignUp = ({ history }) => {
 
     axios.post("api/signup", { user }).then((res) => {
       console.log(res.data);
-      if ("User Already Exist!" === res.data) {
-        console.log("USER_EXIST");
-      }
     });
 
     setUser({
