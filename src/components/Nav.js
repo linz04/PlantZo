@@ -1,10 +1,15 @@
-import React from "react";
-
+import React, { useState } from "react";
 import { withRouter } from "react-router-dom";
 
-const Nav = ({ history }) => {
+import SharePopup from "./SharePopup";
+
+const Nav = ({ history, match, location }) => {
+  const [popupVisibility, setPopupVisibility] = useState(false);
+
+  console.log(location.pathname === "/shop");
+
   const handleClickPopupShare = () => {
-    console.log("POPOOP");
+    setPopupVisibility(!popupVisibility);
   };
 
   return (
@@ -41,7 +46,9 @@ const Nav = ({ history }) => {
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="h-16 w-16 text-gray-300"
+            className={`${
+              location.pathname === "/shop" ? "text-gray-900" : "text-gray-300"
+            } h-16 w-16`}
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -61,7 +68,9 @@ const Nav = ({ history }) => {
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="h-16 w-16 text-gray-300"
+            className={`${
+              location.pathname === "/cart" ? "text-gray-900" : "text-gray-300"
+            } h-16 w-16`}
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -81,7 +90,9 @@ const Nav = ({ history }) => {
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="h-16 w-16 text-gray-300"
+            className={`${
+              location.pathname === "/user" ? "text-gray-900" : "text-gray-300"
+            } h-16 w-16`}
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -96,12 +107,12 @@ const Nav = ({ history }) => {
         </div>
 
         <div
-          className="w-14 mx-4 flex justify-center items-center"
+          className="w-14 mx-4 flex flex-col justify-between items-center relative"
           onClick={handleClickPopupShare}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="h-16 w-16 text-gray-300"
+            className="text-gray-300 h-16 w-16"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -113,6 +124,9 @@ const Nav = ({ history }) => {
               d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"
             />
           </svg>
+          <div className="absolute top-20">
+            {popupVisibility ? <SharePopup /> : null}
+          </div>
         </div>
       </div>
     </div>
