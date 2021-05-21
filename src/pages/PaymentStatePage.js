@@ -10,8 +10,6 @@ import UnPaidPage from "./UnPaidPage";
 import LabelContainer from "../components/LabelContainer";
 
 const PaymentStatePage = ({ history, match, location }) => {
-  console.log(match.path, match.url);
-
   return (
     <div className="flex flex-1 flex-col">
       <LabelContainer onClick={() => history.push("/checkout")}>

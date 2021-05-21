@@ -1,4 +1,5 @@
 import React from "react";
+import LabelContainer from "./LabelContainer";
 
 const UnPaidItem = ({ item }) => {
   const {
@@ -10,17 +11,19 @@ const UnPaidItem = ({ item }) => {
   } = item;
 
   return (
-    <div className="flex justify-between h-56 m-4 pt-4">
-      <div className="w-1/5 pl-10">
-        <img src={imageUrl} alt="Item" className="h-full" />
-      </div>
+    <LabelContainer>
+      <div className="flex justify-between h-56 m-4 pt-4">
+        <div className="w-1/5 pl-10">
+          <img src={imageUrl} alt="Item" className="h-full" />
+        </div>
 
-      <div className="flex flex-col justify-center space-y-4 w-2/5 text-xl">
-        <div className="text-3xl">{name}</div>
-        <div className="text-gray-500">{description}</div>
+        <div className="flex flex-col justify-center space-y-4 w-2/5 text-xl">
+          <div className="text-3xl">{name}</div>
+          <div className="text-gray-500">{description}</div>
+        </div>
+        <div></div>
       </div>
-      <div></div>
-    </div>
+    </LabelContainer>
   );
 };
 
