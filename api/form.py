@@ -40,14 +40,18 @@ def login():
 		
 		cur.execute("SELECT * FROM users where email = %s", (email,))
 		rv = cur.fetchone()
-		
-		if bcrypt.check_password_hash(rv[4], password):
-			access_token = create_access_token(identity = {'uid': rv[0],'email': rv[1],'first_name': rv[2],'last_name': rv[3]})
-			result = access_token
-			resp = make_response('http://127.0.0.1:3000/')
-			resp.set_cookie('auth', result)
-			print(result)
-			return resp
-		else:
+		try:
+			if bcrypt.check_password_hash(rv[4], password):
+				access_token = create_access_token(identity = {'uid': rv[0],'email': rv[1],'first_name': rv[2],'last_name': rv[3]})
+				result = access_token
+				resp = make_response('http://127.0.0.1:3000/')
+				resp.set_cookie('auth', result)
+				print(result)
+				return resp
+			else:
+				print(result)
+				result = jsonify({"error":"Invalid username and password"})
+				return result
+		except:
 			result = jsonify({"error":"Invalid username and password"})
 			return result
