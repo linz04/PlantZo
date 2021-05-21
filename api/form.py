@@ -18,8 +18,6 @@ def signup():
 		return "User Already Exist!"
 
 	cur.execute("INSERT INTO users (first_name, last_name, email, password) VALUES (%s, %s, %s, %s)", (first_name, last_name, email, password))
-	cur.execute("SET @uid = LAST_INSERT_ID()")
-	cur.execute("INSERT INTO cart (uid) VALUES (@uid)")
 
 	mysql.connection.commit()
 	cur.close()
@@ -43,8 +41,8 @@ def login():
 		cur.execute("SELECT * FROM users where email = %s", (email,))
 		rv = cur.fetchone()
 		
-		if bcrypt.check_password_hash(rv[3], password):
-			access_token = create_access_token(identity = {'first_name': rv[0],'last_name': rv[1],'email': rv[2]})
+		if bcrypt.check_password_hash(rv[4], password):
+			access_token = create_access_token(identity = {'uid': rv[0],'email': rv[1],'first_name': rv[2],'last_name': rv[3]})
 			result = access_token
 			resp = make_response('http://127.0.0.1:3000/')
 			resp.set_cookie('auth', result)
