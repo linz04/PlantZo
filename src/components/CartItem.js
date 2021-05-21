@@ -19,8 +19,8 @@ const CartItem = ({ item = {} }) => {
 
   return (
     <div className="flex justify-between h-56 w-full">
-      <div className="bg-black w-2/6">
-        <img src={imageUrl} alt="Item" className="h-full w-full" />
+      <div className="w-2/6">
+        <img src={imageUrl} alt="Item" className="h-full w-2/3" />
       </div>
       <div className="flex flex-col justify-center items-center w-2/6 space-y-6">
         <div>{name}</div>

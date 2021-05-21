@@ -15,10 +15,12 @@ const {
   CHECKED_ALL_ITEM,
   INCREASE_ITEM_QUANTITY,
   DECREASE_ITEM_QUANTITY,
+  SET_DELIVERY_TYPE,
 } = cartActionTypes;
 
 const INITIAL_STATE = {
   cartItems: [],
+  deliveryType: [],
 };
 
 const cartReducer = (state = INITIAL_STATE, action) => {
@@ -52,6 +54,11 @@ const cartReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         cartItems: decreaseItemQuantity(state.cartItems, action.payload),
+      };
+    case SET_DELIVERY_TYPE:
+      return {
+        ...state,
+        deliveryType: action.payload,
       };
     default:
       return state;

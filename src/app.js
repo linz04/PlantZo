@@ -15,8 +15,6 @@ import UserPage from "./pages/UserPage";
 import ItemPage from "./pages/ItemPage";
 import TestPage from "./pages/TestPage";
 import CheckoutPage from "./pages/CheckoutPage";
-import UnPaidPage from "./pages/UnPaidPage";
-import InPaidPage from "./pages/InPaidPage";
 import PaymentStatePage from "./pages/PaymentStatePage";
 
 import NavHome from "./components/NavHome";
@@ -26,9 +24,11 @@ import Footer from "./components/Footer";
 
 import { auth } from "./lib/firebase/firebase.utils";
 import { selectCurrentUser } from "./redux/user/user.selectors";
+import { selectCartItemsChecked } from "./redux/cart/cart.selectors";
 
 const App = () => {
   const currentUser = useSelector((state) => selectCurrentUser(state));
+  const checkoutItems = useSelector((state) => selectCartItemsChecked(state));
 
   const location = useLocation();
 
@@ -44,8 +44,6 @@ const App = () => {
       unsubscribeFromAuth();
     };
   }, []);
-
-  console.log(currentUser);
 
   return (
     <PageContainer>
@@ -74,21 +72,11 @@ const App = () => {
         />
         <Route
           exact
-          path="/unpaid"
-          render={() => (!currentUser ? <Redirect to="/" /> : <UnPaidPage />)}
-        />
-        <Route
-          exact
-          path="/inpaid"
-          render={() => (!currentUser ? <Redirect to="/" /> : <InPaidPage />)}
-        />
-        <Route
-          exact
           path="/user"
           render={() => (!currentUser ? <Redirect to="/" /> : <UserPage />)}
         />
         <Route
-          path="/state"
+          path="/state/"
           render={() =>
             !currentUser ? <Redirect to="/" /> : <PaymentStatePage />
           }

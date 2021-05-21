@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { withRouter } from "react-router";
 
 import LabelContainer from "../components/LabelContainer";
@@ -8,11 +8,16 @@ import CheckoutItem from "../components/CheckoutItem";
 import {
   selectCartItemsChecked,
   selectCartItemsTotal,
+  selectDeliveryType,
 } from "../redux/cart/cart.selectors";
+import { setDeliveryType } from "../redux/cart/cart.actions";
 
 const CheckoutPage = ({ history }) => {
   const [paymentType, setPaymentType] = useState("");
-  const [deliveryType, setDeliveryType] = useState([]);
+  const deliveryType = useSelector((state) => selectDeliveryType(state));
+
+  const dispatch = useDispatch();
+
   const convert = {
     type: 0,
     price: 1,
@@ -25,7 +30,7 @@ const CheckoutPage = ({ history }) => {
 
   const handleCheckRadio = (e) => {
     const { value } = e.target;
-    setDeliveryType(value.split(","));
+    dispatch(setDeliveryType(value.split(",")));
   };
 
   const handlePaymentMethod = (e) => {
@@ -46,7 +51,7 @@ const CheckoutPage = ({ history }) => {
         <div className="flex flex-auto flex-col justify-between space-y-2">
           <div className="flex space-x-4">
             <div>Logo</div>
-            <div>Pilih Pengiriman</div>
+            <div>Daftar Items</div>
           </div>
           {cartItems.map((cartItem) => (
             <CheckoutItem key={cartItem.pid} item={cartItem} />
@@ -160,13 +165,13 @@ const CheckoutPage = ({ history }) => {
         <div className="flex flex-auto justify-end items-center space-x-4">
           <button
             className="w-1/4 px-6 py-4 bg-green-700 text-white"
-            onClick={() => history.push("/state")}
+            onClick={() => history.push("/state/unpaid")}
           >
             Bayar Nanti
           </button>
           <button
             className="w-1/4 px-6 py-4 bg-green-700 text-white"
-            onClick={() => history.push("/inpaid")}
+            onClick={() => history.push("/state/inpaid")}
           >
             Bayar Sekarang
           </button>

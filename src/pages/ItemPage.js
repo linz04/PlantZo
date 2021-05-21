@@ -48,13 +48,17 @@ const ItemPage = ({ history }) => {
       </LabelContainer>
       <LabelContainer>
         <div className="flex flex-col justify-between h-full">
-          <div className="w-96">
+          <div className="w-full">
             <h3 className="text-4xl">Spesifikasi Product</h3>
-            <div className="grid grid-cols-2 gap-4 text-3xl text-gray-500 mt-4">
-              <div>Stok</div>
-              <div>10</div>
-              <div>Dikirim dari</div>
-              <div>Kota Bogor</div>
+            <div className="grid grid-cols-5 gap-2 text-3xl text-gray-500 w-full mt-4">
+              <div className="space-y-2">
+                <div>Stok</div>
+                <div>Dikirim dari</div>
+              </div>
+              <div className="space-y-2">
+                <div>10</div>
+                <div>IPB University</div>
+              </div>
             </div>
           </div>
           <button onClick={() => dispatch(addItem(item))}>+</button>
