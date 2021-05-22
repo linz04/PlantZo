@@ -1,16 +1,12 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+
 import Popup from "../components/Popup";
-
 import SignUp from "../components/SignUp";
-
 import SignIn from "../components/SignIn";
-import { selectCurrentUser } from "../redux/user/user.selectors";
 
 const HomePage = () => {
   const [signUpPopupVisible, setSignUpPopupVisible] = useState(false);
   const [signInPopupVisible, setSignInPopupVisible] = useState(false);
-  const currentUser = useSelector((state) => selectCurrentUser(state));
 
   const handleClickSignup = () => {
     setSignUpPopupVisible(!signUpPopupVisible);

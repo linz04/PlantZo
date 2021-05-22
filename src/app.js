@@ -26,13 +26,10 @@ import Footer from "./components/Footer";
 
 import { auth } from "./lib/firebase/firebase.utils";
 import { selectCurrentUser } from "./redux/user/user.selectors";
-import { selectCartItemsChecked } from "./redux/cart/cart.selectors";
 
 const App = () => {
   const currentUser = useSelector((state) => selectCurrentUser(state));
   console.log(currentUser);
-  // if(currentUser.username )
-  const checkoutItems = useSelector((state) => selectCartItemsChecked(state));
 
   const location = useLocation();
 

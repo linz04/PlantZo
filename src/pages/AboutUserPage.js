@@ -34,6 +34,7 @@ const AboutUserPage = ({ history }) => {
           <div className="mt-4">
             <img
               src={backgroundProfileImage}
+              alt="Latar profil"
               className="h-full w-full bg-cover"
             />
           </div>
@@ -44,7 +45,11 @@ const AboutUserPage = ({ history }) => {
           <div>Foto profil Anda</div>
           <div className="flex justify-center">
             <div className="flex justify-center items-center w-52 h-52 bg-white rounded-full overflow-hidden mt-4 border-2 border-black">
-              <img src={profileImage} className="h-full w-full bg-cover" />
+              <img
+                src={profileImage}
+                alt="Foto profil"
+                className="h-full w-full bg-cover"
+              />
             </div>
           </div>
         </div>

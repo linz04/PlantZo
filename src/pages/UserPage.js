@@ -19,7 +19,6 @@ const UserPage = ({ items = {}, history, match }) => {
     currentUser;
 
   const {
-    unpaidAmount = 0,
     quantityInPack = 1,
     amountInDelivery = 2,
     numberOfProductRatings = 3,

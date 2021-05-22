@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { withRouter } from "react-router";
 
-import axios from "axios";
-
 import LabelContainer from "../components/LabelContainer";
 import CheckoutItem from "../components/CheckoutItem";
 
@@ -17,14 +15,14 @@ import { setDeliveryType } from "../redux/cart/cart.actions";
 const CheckoutPage = ({ history }) => {
   const [paymentType, setPaymentType] = useState("");
   const deliveryType = useSelector((state) => selectDeliveryType(state));
-
+  console.log(paymentType);
   const dispatch = useDispatch();
 
   const convert = {
     type: 0,
     price: 1,
   };
-  const { type, price } = convert;
+  const { price } = convert;
 
   const cartItems = useSelector((state) => selectCartItemsChecked(state));
   const cartItemsTotal = useSelector((state) => selectCartItemsTotal(state));

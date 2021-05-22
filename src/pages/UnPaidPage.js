@@ -18,7 +18,7 @@ const UnPaidPage = ({ history }) => {
     type: 0,
     price: 1,
   };
-  const { type, price } = convert;
+  const { price } = convert;
 
   console.log(deliveryType);
 

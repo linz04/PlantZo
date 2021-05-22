@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { withRouter } from "react-router";
-import axios from "axios";
 
 import CartItem from "../components/CartItem";
 import LabelContainer from "../components/LabelContainer";
@@ -37,7 +36,7 @@ const CartPage = ({ history }) => {
     } else {
       setIsCheckedAll(false);
     }
-  }, [cartItemsChecked]);
+  }, [cartItemsChecked, cartItems.length]);
 
   const handleCheckedAll = () => {
     setIsCheckedAll(!isCheckedAll);

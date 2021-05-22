@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { withRouter } from "react-router";
 import axios from "axios";
-import jwt from "jwt-decode";
 
 import FormInput from "./FormInput";
 
