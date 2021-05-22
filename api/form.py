@@ -46,12 +46,12 @@ def login():
 				result = access_token
 				resp = make_response('http://127.0.0.1:3000/')
 				resp.set_cookie('auth', result)
-				print(result)
-				return resp
 			else:
-				print(result)
 				result = jsonify({"error":"Invalid username and password"})
-				return result
+
+			print(result)
+			return result
+
 		except:
 			result = jsonify({"error":"Invalid username and password"})
 			return result
