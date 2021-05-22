@@ -29,6 +29,8 @@ import { selectCartItemsChecked } from "./redux/cart/cart.selectors";
 
 const App = () => {
   const currentUser = useSelector((state) => selectCurrentUser(state));
+  console.log(currentUser);
+
   const checkoutItems = useSelector((state) => selectCartItemsChecked(state));
 
   const location = useLocation();

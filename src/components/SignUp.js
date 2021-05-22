@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import axios from "axios";
 import { useDispatch } from "react-redux";
 import { withRouter } from "react-router";
+import axios from "axios";
+import jwt from "jwt-decode";
 
 import FormInput from "./FormInput";
 
@@ -39,32 +40,32 @@ const SignUp = ({ history }) => {
       return;
     }
 
-    dispatch(
-      setCurrentUser({
-        ...user,
-        email,
-        displayName: `${firstName} ${lastName}`,
-      })
-    );
-
     axios.post("api/signup", { user }).then((res) => {
-      console.log(res.data);
-      if ("User Already Exist!" === res.data) {
-        console.log("USER_EXIST");
+      setUser({
+        ...user,
+        firstName: "",
+        lastName: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
+        termsConditions: false,
+      });
+
+      if (res.data === "User Already Exist!") {
+        alert(res.data);
+      } else {
+        const { display_name, email } = res.data.result;
+        dispatch(
+          setCurrentUser({
+            displayName: display_name,
+            email,
+            password,
+          })
+        );
+
+        history.push("/shop");
       }
     });
-
-    setUser({
-      ...user,
-      firstName: "",
-      lastName: "",
-      email: "",
-      password: "",
-      confirmPassword: "",
-      termsConditions: false,
-    });
-
-    history.push("/shop");
   };
 
   const handleChange = (event) => {

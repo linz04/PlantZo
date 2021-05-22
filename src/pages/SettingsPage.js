@@ -1,11 +1,13 @@
 import React from "react";
+import { Route, withRouter } from "react-router";
+import ProfilePage from "./ProfilePage";
 
-const SettingsPage = () => {
+const SettingsPage = ({ history, match }) => {
   return (
     <div className="flex flex-1 flex-col">
-      <h1>SETTINGS_PAGE</h1>
+      <Route path={`${match.url}/profile`} component={ProfilePage} />
     </div>
   );
 };
 
-export default SettingsPage;
+export default withRouter(SettingsPage);

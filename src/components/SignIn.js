@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { withRouter } from "react-router";
 import { useDispatch } from "react-redux";
 import axios from "axios";
+import jwt from "jwt-decode";
 
 import FormInput from "./FormInput";
 
@@ -20,21 +21,19 @@ const SignIn = ({ history }) => {
     dispatch(setCurrentUser(user));
 
     axios.post("api/login", { user }).then((res) => {
-      console.log(res);
       console.log(res.data);
+      // setUser({ ...user, email: "", password: "" });
+
+      if (res.data.error === "Invalid username and password") {
+        history.push("/");
+      } else history.push("/shop");
     });
-
-    setUser({ ...user, email: "", password: "" });
-
-    history.push("/shop");
   };
 
   const handleChange = (event) => {
     const { name, value } = event.target;
     setUser({ ...user, [name]: value });
   };
-
-  console.log(user);
 
   const handleGoogleSignIn = () => {
     history.push("/shop");
