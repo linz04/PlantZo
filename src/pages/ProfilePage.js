@@ -17,7 +17,7 @@ const ProfilePage = ({ history }) => {
     oldPassword: "",
     newPassword: "",
     confirmPassword: "",
-    place: "",
+    address: "",
     selectedProfileImage: null,
     selectedBackgroundProfileImage: null,
   });
@@ -28,7 +28,7 @@ const ProfilePage = ({ history }) => {
     oldPassword,
     newPassword,
     confirmPassword,
-    place,
+    address,
     selectedProfileImage,
     selectedBackgroundProfileImage,
   } = formProfile;
@@ -76,7 +76,7 @@ const ProfilePage = ({ history }) => {
       oldPassword: "",
       newPassword: "",
       confirmPassword: "",
-      place: "",
+      address: "",
       selectedProfileImage: null,
       selectedBackgroundProfileImage: null,
     });
@@ -116,7 +116,6 @@ const ProfilePage = ({ history }) => {
               required
               clean
               disabled
-              handleChange={handleChange}
             />
             <UserFormInput
               type="text"
@@ -197,9 +196,9 @@ const ProfilePage = ({ history }) => {
             <div className="mb-4">ALAMAT</div>
             <UserFormInput
               type="text"
-              name="place"
+              name="address"
               label="Alamat lengkap"
-              value={place}
+              value={address}
               required
               large
               handleChange={handleChange}

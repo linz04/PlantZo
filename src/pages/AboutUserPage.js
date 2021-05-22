@@ -1,8 +1,14 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { withRouter } from "react-router";
 import LabelContainer from "../components/LabelContainer";
+import UserFormInput from "../components/UserFormInput";
+import { selectCurrentUser } from "../redux/user/user.selectors";
 
 const AboutUserPage = ({ history }) => {
+  const currentUser = useSelector((state) => selectCurrentUser(state));
+  const { email, profileImage, backgroundProfileImage, address } = currentUser;
+
   return (
     <div className="flex flex-col flex-1">
       <LabelContainer onClick={() => history.push("/user")}>
@@ -27,7 +33,7 @@ const AboutUserPage = ({ history }) => {
           <div>Foto sampul Anda</div>
           <div className="mt-4">
             <img
-              src="https://awsimages.detik.net.id/community/media/visual/2018/01/17/4c003a60-7b3f-452b-a719-9d84fb489e79_169.jpeg?w=700&q=90"
+              src={backgroundProfileImage}
               className="h-full w-full bg-cover"
             />
           </div>
@@ -38,16 +44,30 @@ const AboutUserPage = ({ history }) => {
           <div>Foto profil Anda</div>
           <div className="flex justify-center">
             <div className="flex justify-center items-center w-52 h-52 bg-white rounded-full overflow-hidden mt-4 border-2 border-black">
-              <img
-                src="https://i.pinimg.com/236x/54/aa/23/54aa23c43d642664d0d8d55e060caad5--indian-meme-meme-faces.jpg"
-                className="h-full w-full bg-cover"
-              />
+              <img src={profileImage} className="h-full w-full bg-cover" />
             </div>
           </div>
         </div>
       </LabelContainer>
-      <LabelContainer></LabelContainer>
-      <LabelContainer></LabelContainer>
+      <LabelContainer>
+        <div className="flex flex-1 justify-between items-center">
+          <div>Username Anda</div>
+          <div className="text-2xl">{email}</div>
+        </div>
+      </LabelContainer>
+      <LabelContainer>
+        <div className="flex flex-col flex-1 space-y-2">
+          <div className="mb-4">Alamat Anda</div>
+          <UserFormInput
+            type="text"
+            name="address"
+            value={address}
+            required
+            large
+            disabled
+          />
+        </div>
+      </LabelContainer>
     </div>
   );
 };
