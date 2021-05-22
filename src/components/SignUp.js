@@ -40,29 +40,32 @@ const SignUp = ({ history }) => {
       return;
     }
 
-    dispatch(
-      setCurrentUser({
-        ...user,
-        email,
-        displayName: `${firstName} ${lastName}`,
-      })
-    );
-
     axios.post("api/signup", { user }).then((res) => {
-      console.log(res.data);
-    });
+      setUser({
+        ...user,
+        firstName: "",
+        lastName: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
+        termsConditions: false,
+      });
 
-    setUser({
-      ...user,
-      firstName: "",
-      lastName: "",
-      email: "",
-      password: "",
-      confirmPassword: "",
-      termsConditions: false,
-    });
+      if (res.data === "User Already Exist!") {
+        alert(res.data);
+      } else {
+        const { display_name, email } = res.data.result;
+        dispatch(
+          setCurrentUser({
+            displayName: display_name,
+            email,
+            password,
+          })
+        );
 
-    history.push("/shop");
+        history.push("/shop");
+      }
+    });
   };
 
   const handleChange = (event) => {
