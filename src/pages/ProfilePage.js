@@ -8,12 +8,13 @@ import UserFormInput from "../components/UserFormInput";
 import { selectCurrentUser } from "../redux/user/user.selectors";
 
 const ProfilePage = ({ history }) => {
-  const user = useSelector((state) => selectCurrentUser(state));
+  const currentUser = useSelector((state) => selectCurrentUser(state));
+  const { displayName } = currentUser;
 
   const [formProfile, setFormProfile] = useState({
-    username: "",
-    newUsername: "",
-    password: "",
+    firstName: "",
+    lastName: "",
+    oldPassword: "",
     newPassword: "",
     confirmPassword: "",
     place: "",
@@ -22,9 +23,9 @@ const ProfilePage = ({ history }) => {
   });
 
   const {
-    username,
-    newUsername,
-    password,
+    firstName,
+    lastName,
+    oldPassword,
     newPassword,
     confirmPassword,
     place,
@@ -39,17 +40,23 @@ const ProfilePage = ({ history }) => {
 
   const handleImageSelected = (e) => {
     const { name, files } = e.target;
-    console.log(files[0].name);
     setFormProfile({ ...formProfile, [name]: files[0] });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    if (newPassword !== confirmPassword) {
+      setFormProfile({ ...formProfile, newPassword: "", confirmPassword: "" });
+      return alert("Password baru dan Konfirmasi password tidak Match :(");
+    }
+
     const fd = new FormData();
 
-    fd.append("username", newUsername);
-    fd.append("password", newPassword);
+    fd.append("firstName", firstName);
+    fd.append("lastName", lastName);
+    fd.append("oldPassword", oldPassword);
+    fd.append("newPassword", newPassword);
     fd.append("profile_image", selectedProfileImage, selectedProfileImage.name);
     fd.append(
       "background_image",
@@ -64,9 +71,9 @@ const ProfilePage = ({ history }) => {
 
     setFormProfile({
       ...formProfile,
-      username: "",
-      newUsername: "",
-      password: "",
+      firstName: "",
+      lastName: "",
+      oldPassword: "",
       newPassword: "",
       confirmPassword: "",
       place: "",
@@ -74,13 +81,27 @@ const ProfilePage = ({ history }) => {
       selectedBackgroundProfileImage: null,
     });
 
+    alert("Data berhasil diubah");
     history.push("/user");
   };
 
   return (
     <div className="flex flex-1 flex-col">
       <LabelContainer onClick={() => history.push("/user")}>
-        <span className="mb-2 mr-2">&larr;</span>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="h-6 w-6 mr-2"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M10 19l-7-7m0 0l7-7m-7 7h18"
+          />
+        </svg>
         <span>Pengaturan &gt; Profil</span>
       </LabelContainer>
       <form type="post" onSubmit={handleSubmit}>
@@ -91,15 +112,25 @@ const ProfilePage = ({ history }) => {
               type="text"
               name="username"
               label="Username sekarang"
-              value={username}
+              value={displayName}
+              required
+              clean
+              disabled
+              handleChange={handleChange}
+            />
+            <UserFormInput
+              type="text"
+              name="firstName"
+              label="First name"
+              value={firstName}
               required
               handleChange={handleChange}
             />
             <UserFormInput
               type="text"
-              name="newUsername"
-              label="Username baru"
-              value={newUsername}
+              name="lastName"
+              label="Last name"
+              value={lastName}
               required
               handleChange={handleChange}
             />
@@ -108,6 +139,22 @@ const ProfilePage = ({ history }) => {
         <LabelContainer>
           <div className="flex flex-col flex-1 space-y-2">
             <div className="mb-4">FOTO PROFILE</div>
+            <div className="flex justify-center">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-80 w-80"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
+            </div>
             <UserFormInput
               type="file"
               name="selectedProfileImage"
@@ -120,6 +167,22 @@ const ProfilePage = ({ history }) => {
         <LabelContainer>
           <div className="flex flex-col flex-1 space-y-2">
             <div className="mb-4">FOTO SAMPUL</div>
+            <div className="flex justify-center">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-80 w-80"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
+                />
+              </svg>
+            </div>
             <UserFormInput
               type="file"
               name="selectedBackgroundProfileImage"
@@ -148,9 +211,9 @@ const ProfilePage = ({ history }) => {
             <div className="mb-4">UBAH KATA SANDI</div>
             <UserFormInput
               type="password"
-              name="password"
+              name="oldPassword"
               label="Password lama"
-              value={password}
+              value={oldPassword}
               required
               handleChange={handleChange}
             />
@@ -175,10 +238,14 @@ const ProfilePage = ({ history }) => {
         <LabelContainer>
           <div className="flex flex-1 justify-end space-x-6">
             <div>
-              <button>BUANG PERUBAHAN</button>
+              <button className="bg-green-300 px-4 py-6">
+                BUANG PERUBAHAN
+              </button>
             </div>
             <div>
-              <button type="submit">KONFIRMASI PERUBAHAN</button>
+              <button type="submit" className="bg-yellow-300 px-4 py-6">
+                KONFIRMASI PERUBAHAN
+              </button>
             </div>
           </div>
         </LabelContainer>

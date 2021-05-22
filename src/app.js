@@ -12,11 +12,12 @@ import HomePage from "./pages/HomePage";
 import ShopPage from "./pages/ShopPage";
 import CartPage from "./pages/CartPage";
 import UserPage from "./pages/UserPage";
+import AboutUserPage from "./pages/AboutUserPage";
 import ItemPage from "./pages/ItemPage";
-import TestPage from "./pages/TestPage";
 import CheckoutPage from "./pages/CheckoutPage";
 import PaymentStatePage from "./pages/PaymentStatePage";
 import SettingsPage from "./pages/SettingsPage";
+import TestPage from "./pages/TestPage";
 
 import NavHome from "./components/NavHome";
 import PageContainer from "./components/PageContainer";
@@ -30,7 +31,7 @@ import { selectCartItemsChecked } from "./redux/cart/cart.selectors";
 const App = () => {
   const currentUser = useSelector((state) => selectCurrentUser(state));
   console.log(currentUser);
-
+  // if(currentUser.username )
   const checkoutItems = useSelector((state) => selectCartItemsChecked(state));
 
   const location = useLocation();
@@ -77,6 +78,14 @@ const App = () => {
           exact
           path="/user"
           render={() => (!currentUser ? <Redirect to="/" /> : <UserPage />)}
+        />
+
+        <Route
+          exact
+          path="/user/about"
+          render={() =>
+            !currentUser ? <Redirect to="/" /> : <AboutUserPage />
+          }
         />
         <Route
           path="/state/"

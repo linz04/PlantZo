@@ -29,7 +29,10 @@ const CartPage = ({ history }) => {
   }, []);
 
   useEffect(() => {
-    if (cartItems.length === cartItemsChecked.length) {
+    if (
+      cartItems.length === cartItemsChecked.length &&
+      cartItems.length !== 0
+    ) {
       setIsCheckedAll(true);
     } else {
       setIsCheckedAll(false);

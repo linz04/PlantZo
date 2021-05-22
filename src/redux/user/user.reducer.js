@@ -4,7 +4,7 @@ const { SET_CURRENT_USER } = userActionTypes;
 
 const INITIAL_STATE = {
   currentUser: {
-    username: "",
+    displayName: "",
     email: "",
   },
 };

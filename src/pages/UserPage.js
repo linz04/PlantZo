@@ -7,25 +7,28 @@ import LabelContainer from "../components/LabelContainer";
 
 import { auth } from "../lib/firebase/firebase.utils";
 import { setCurrentUser } from "../redux/user/user.actions";
+import { selectCurrentUser } from "../redux/user/user.selectors";
 import { selectCartItemsCount } from "../redux/cart/cart.selectors";
 
-const UserPage = ({ user = {}, items = {}, history, match }) => {
-  console.log(match);
+const UserPage = ({ items = {}, history, match }) => {
+  const currentUser = useSelector((state) => selectCurrentUser(state));
   const itemsCount = useSelector((state) => selectCartItemsCount(state));
   const dispatch = useDispatch();
 
   const {
-    name = "Nama lengkap user",
-    userName = "Username akun",
+    displayName = "Display Name",
+    email = "RPL_A@plantzo.com",
     profileImage = "https://i.pinimg.com/236x/54/aa/23/54aa23c43d642664d0d8d55e060caad5--indian-meme-meme-faces.jpg",
-    backgroundImageProfile = "https://www.goodnewsfromindonesia.id/uploads/post/large-goodnewsfromindonesia-gnfi-pulaupadar-sunset-d182ba0ae6b5e30358d90b72fc467d0a.jpg",
-  } = user;
+    backgroundImageProfile = "https://awsimages.detik.net.id/community/media/visual/2018/01/17/4c003a60-7b3f-452b-a719-9d84fb489e79_169.jpeg?w=700&q=90",
+  } = currentUser;
+
   const {
     unpaidAmount = 0,
     quantityInPack = 1,
     amountInDelivery = 2,
     numberOfProductRatings = 3,
   } = items;
+
   return (
     <div className="mb-10">
       <LabelContainer>
@@ -50,7 +53,7 @@ const UserPage = ({ user = {}, items = {}, history, match }) => {
       <LabelContainer>
         <div className="w-full h-96">
           <div
-            className="h-full w-full bg-cover  bg-no-repeat bg-center"
+            className="h-full w-full bg-cover bg-no-repeat bg-center"
             style={{
               backgroundImage: `url(${backgroundImageProfile})`,
             }}
@@ -64,17 +67,21 @@ const UserPage = ({ user = {}, items = {}, history, match }) => {
                     alt="Profile"
                   />
                 </div>
-                <div className="ml-10 mt-16 text-gray-100">
-                  <div className="text-4xl font-bold">{name}</div>
-                  <div className="text-3xl font-medium mt-2">{userName}</div>
+                <div className="ml-10 mt-16 text-gray-800">
+                  <div className="text-7xl font-bold">{displayName}</div>
+                  <div className="text-4xl font-medium mt-2">{email}</div>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </LabelContainer>
-      <LabelContainer>Tentang anda</LabelContainer>
-      <LabelContainer onClick={() => history.push(`${match.path}/profile`)}>
+      <LabelContainer>
+        <span onClick={() => history.push(`${match.path}/about`)}>
+          Tentang anda
+        </span>
+      </LabelContainer>
+      <LabelContainer onClick={() => history.push("/settings/profile")}>
         Lengkapi profil anda!!
       </LabelContainer>
       <LabelContainer>
