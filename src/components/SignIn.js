@@ -18,15 +18,22 @@ const SignIn = ({ history }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    dispatch(setCurrentUser(user));
-
     axios.post("api/login", { user }).then((res) => {
-      console.log(res.data);
-      // setUser({ ...user, email: "", password: "" });
+      setUser({ ...user, email: "", password: "" });
 
       if (res.data.error === "Invalid username and password") {
-        history.push("/");
-      } else history.push("/shop");
+        alert(res.data.error);
+      } else {
+        const encodeData = jwt(res.data);
+        const { email, first_name, last_name } = encodeData.sub;
+        dispatch(
+          setCurrentUser({
+            displayName: `${first_name} ${last_name}`,
+            email,
+          })
+        );
+        history.push("/shop");
+      }
     });
   };
 

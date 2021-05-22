@@ -59,7 +59,6 @@ const SignUp = ({ history }) => {
           setCurrentUser({
             displayName: display_name,
             email,
-            password,
           })
         );
 

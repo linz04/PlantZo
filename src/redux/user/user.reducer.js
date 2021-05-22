@@ -6,7 +6,6 @@ const INITIAL_STATE = {
   currentUser: {
     username: "",
     email: "",
-    password: "",
   },
 };
 
