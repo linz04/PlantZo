@@ -72,7 +72,9 @@ def add():
 @app.route('/admin/delete/<int:pid>')
 def delete(pid):
 	cur = mysql.connection.cursor()
+	cur.execute("SET FOREIGN_KEY_CHECKS = 0")
 	cur.execute("DELETE FROM product where pid = %s", (pid,))
+	cur.execute("SET FOREIGN_KEY_CHECKS = 1")
 	mysql.connection.commit()
 	cur.close()
 	return '''
