@@ -15,8 +15,14 @@ const UserPage = ({ items = {}, history, match }) => {
   const itemsCount = useSelector((state) => selectCartItemsCount(state));
   const dispatch = useDispatch();
 
-  const { displayName, email, profileImage, backgroundImageProfile } =
-    currentUser;
+  const {
+    displayName = "Display Name",
+    email = "RPL_A@plantzo.com",
+    profileImage = "https://i.pinimg.com/236x/54/aa/23/54aa23c43d642664d0d8d55e060caad5--indian-meme-meme-faces.jpg",
+    backgroundProfileImage = "https://awsimages.detik.net.id/community/media/visual/2018/01/17/4c003a60-7b3f-452b-a719-9d84fb489e79_169.jpeg?w=700&q=90",
+  } = currentUser;
+
+  console.log(displayName);
 
   const {
     quantityInPack = 1,
@@ -50,8 +56,9 @@ const UserPage = ({ items = {}, history, match }) => {
           <div
             className="h-full w-full bg-cover bg-no-repeat bg-center"
             style={{
-              backgroundImage: `url(${backgroundImageProfile})`,
+              backgroundImage: `url(${backgroundProfileImage})`,
             }}
+            alt="Latar profil"
           >
             <div className="flex">
               <div className="flex mt-32 ml-20">
