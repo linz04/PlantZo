@@ -52,7 +52,6 @@ const CartPage = ({ history }) => {
         </LabelContainer>
 
         {cartItems.map((item) => {
-          console.log(item);
           return (
             <LabelContainer key={item.pid}>
               <div

@@ -6,12 +6,15 @@ export const addItemToCart = (cartItems, cartItemToAdd) => {
   if (existingCartItem) {
     return cartItems.map((cartItem) =>
       cartItem.pid === cartItemToAdd.pid
-        ? { ...cartItem, quantity: cartItem.quantity + 1 }
+        ? { ...cartItem, quantityDesired: cartItem.quantityDesired + 1 }
         : cartItem
     );
   }
 
-  return [...cartItems, { ...cartItemToAdd, quantity: 1, checked: false }];
+  return [
+    ...cartItems,
+    { ...cartItemToAdd, quantityDesired: 1, checked: false },
+  ];
 };
 
 export const deleteItemFromCart = (cartItems, cartItemToClear) => {
@@ -58,12 +61,12 @@ export const increaseItemQuantity = (cartItems, cartItemToAdd) => {
   if (existingCartItem) {
     return cartItems.map((cartItem) =>
       cartItem.pid === cartItemToAdd.pid
-        ? { ...cartItem, quantity: cartItem.quantity + 1 }
+        ? { ...cartItem, quantityDesired: cartItem.quantityDesired + 1 }
         : cartItem
     );
   }
 
-  return [...cartItems, { ...cartItemToAdd, quantity: 1 }];
+  return [...cartItems, { ...cartItemToAdd, quantityDesired: 1 }];
 };
 
 export const decreaseItemQuantity = (cartItems, cartItemToDecrease) => {
@@ -71,13 +74,47 @@ export const decreaseItemQuantity = (cartItems, cartItemToDecrease) => {
     (cartItem) => cartItem.pid === cartItemToDecrease.pid
   );
 
-  if (existingCartItem.quantity === 1) {
+  if (existingCartItem.quantityDesired === 1) {
     return deleteItemFromCart(cartItems, cartItemToDecrease);
   }
 
   return cartItems.map((cartItem) =>
     cartItem.pid === cartItemToDecrease.pid
-      ? { ...cartItem, quantity: cartItem.quantity - 1 }
+      ? { ...cartItem, quantityDesired: cartItem.quantityDesired - 1 }
       : cartItem
   );
+};
+
+export const addQuantityDefined = (cartItems, cartItemToAdd) => {
+  const { item, quantity } = cartItemToAdd;
+  const existingCartItem = cartItems.find(
+    (cartItem) => cartItem.pid === item.pid
+  );
+
+  if (existingCartItem) {
+    return cartItems.map((cartItem) =>
+      cartItem.pid === item.pid
+        ? { ...cartItem, quantityDesired: quantity }
+        : cartItem
+    );
+  }
+
+  return [...cartItems, { ...item, quantityDesired: 1, checked: false }];
+};
+
+export const addQuantityDefinedAndChecked = (cartItems, cartItemToAdd) => {
+  const { item, quantity } = cartItemToAdd;
+  const existingCartItem = cartItems.find(
+    (cartItem) => cartItem.pid === item.pid
+  );
+
+  if (existingCartItem) {
+    return cartItems.map((cartItem) =>
+      cartItem.pid === item.pid
+        ? { ...cartItem, quantityDesired: quantity, checked: true }
+        : cartItem
+    );
+  }
+
+  return [...cartItems, { ...item, quantityDesired: 1, checked: false }];
 };

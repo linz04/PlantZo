@@ -7,6 +7,8 @@ const {
   CHECKED_ALL_ITEM,
   INCREASE_ITEM_QUANTITY,
   DECREASE_ITEM_QUANTITY,
+  ADD_QUANTITY_DEFINED,
+  ADD_QUANTITY_DEFINED_AND_CHECKED,
   SET_DELIVERY_TYPE,
 } = cartActionTypes;
 
@@ -37,6 +39,16 @@ export const increaseItemQuantity = (item) => ({
 export const decreaseItemQuantity = (item) => ({
   type: DECREASE_ITEM_QUANTITY,
   payload: item,
+});
+
+export const addQuantityDefined = (item, quantity) => ({
+  type: ADD_QUANTITY_DEFINED,
+  payload: { item, quantity },
+});
+
+export const addQuantityDefinedAndChecked = (item, quantity) => ({
+  type: ADD_QUANTITY_DEFINED_AND_CHECKED,
+  payload: { item, quantity },
 });
 
 export const setDeliveryType = (payment) => ({

@@ -10,7 +10,7 @@ const INITIAL_STATE = {
 const shopReducer = (state = INITIAL_STATE, action) => {
   switch (action) {
     case SET_SHOP_ITEMS:
-      return state;
+      return { ...state, items: [...action.payload] };
     default:
       return state;
   }

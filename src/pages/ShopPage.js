@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
+import axios from "axios";
 import { withRouter } from "react-router";
 import { useSelector } from "react-redux";
 
@@ -11,6 +12,10 @@ import { selectShopItems } from "../redux/shop/shop.selectors";
 
 const ShopPage = ({ history, match }) => {
   const items = useSelector((state) => selectShopItems(state));
+
+  useEffect(() => {
+    axios.get("/shop").then((res) => console.log(res));
+  }, []);
 
   return (
     <div className="bg-gray-200 flex flex-col">
