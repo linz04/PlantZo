@@ -22,19 +22,45 @@ const CartItem = ({ item }) => {
         <div className="font-gray-800 text-4xl">{`Rp ${price}.000`}</div>
         <div className="flex space-x-4 border-2 border-gray-500">
           <div
-            className="w-8 text-center cursor-pointer"
+            className="flex justify-center items-center w-12 text-center cursor-pointer"
             onClick={() => {
               dispatch(decreaseItemQuantity(item));
             }}
           >
-            -
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-8 w-8"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M20 12H4"
+              />
+            </svg>
           </div>
           <span>{quantityDesired}</span>
           <div
-            className="w-8 text-center cursor-pointer"
+            className="flex justify-center items-center w-12 text-center cursor-pointer"
             onClick={() => dispatch(increaseItemQuantity(item))}
           >
-            +
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-8 w-8"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+              />
+            </svg>
           </div>
         </div>
       </div>
