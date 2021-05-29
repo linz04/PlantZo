@@ -81,7 +81,7 @@ const SignUp = ({ history }) => {
 
   return (
     <div className="flex flex-col justify-center items-center text-center">
-      <div className="flex flex-col justify-center items-center bg-gray-600 text-center h-1/2 relative w-1/2 lg:w-1/4">
+      <div className="flex flex-col justify-center items-center bg-gray-800 text-center h-1/2 relative w-1/2 lg:w-1/4">
         <div className="p-10 w-full">
           <h2 className="uppercase text-3xl font-medium mb-10">daftar</h2>
           <form
@@ -150,7 +150,7 @@ const SignUp = ({ history }) => {
             <button
               type="submit"
               value="submit form"
-              className="flex items-center justify-center bg-gray-300 text-gray-500 p-5 w-full rounded-full"
+              className="flex items-center justify-center bg-gray-100 text-gray-400 p-5 w-full rounded-full"
             >
               Daftar
             </button>
@@ -162,7 +162,7 @@ const SignUp = ({ history }) => {
               signInWithGoogle();
               setTimeout(handleGoogleSignIn, 7000);
             }}
-            className="flex justify-center items-center text-center bg-gray-300 text-gray-500 w-full p-4"
+            className="flex justify-center items-center text-center bg-gray-100 text-gray-400 w-full p-4"
           >
             <span>Masuk dengan google</span>
           </button>

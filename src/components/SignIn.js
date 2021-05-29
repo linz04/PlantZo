@@ -50,7 +50,7 @@ const SignIn = ({ history }) => {
 
   return (
     <div className="flex flex-col justify-center items-center text-center">
-      <div className="flex flex-col justify-center items-center bg-gray-600 text-center h-full relative w-1/2 lg:w-1/4    ">
+      <div className="flex flex-col justify-center items-center bg-gray-800 text-center h-full relative w-1/2 lg:w-1/4    ">
         <div className="p-10 w-full space-y-4">
           <h2 className="uppercase text-3xl font-medium mb-10">masuk</h2>
           <form
@@ -75,14 +75,14 @@ const SignIn = ({ history }) => {
               handleChange={handleChange}
             />
 
-            <div className="flex justify-end underline text-gray-300">
+            <div className="flex justify-end underline text-gray-200">
               Lupa kata sandi?
             </div>
 
             <button
               type="submit"
               value="submit form"
-              className="flex items-center justify-center bg-gray-300 text-gray-500 p-5 w-full rounded-full"
+              className="flex items-center justify-center bg-gray-200 text-gray-800 p-5 w-full rounded-full"
             >
               Masuk
             </button>
@@ -94,12 +94,12 @@ const SignIn = ({ history }) => {
               signInWithGoogle();
               setTimeout(handleGoogleSignIn, 7000);
             }}
-            className="flex justify-center items-center text-center bg-gray-300 text-gray-500 w-full p-4"
+            className="flex justify-center items-center text-center bg-gray-200 text-gray-800 w-full p-4"
           >
             <span>Masuk dengan google</span>
           </button>
 
-          <div className="flex justify-center items-center text-gray-300">
+          <div className="flex justify-center items-center text-gray-200">
             <span>Belum punya akun? </span>
             <span className="underline">Daftar</span>
           </div>

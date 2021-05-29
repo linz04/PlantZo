@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import axios from "axios";
 import { withRouter } from "react-router";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import HeaderShop from "../components/HeaderShop";
 import LabelContainer from "../components/LabelContainer";
@@ -9,12 +9,19 @@ import CardItem from "../components/CardItem";
 import CollectionItem from "../components/CollectionItem";
 
 import { selectShopItems } from "../redux/shop/shop.selectors";
+import {
+  setDefaultQuantityDesired,
+  setDefaultChecked,
+} from "../redux/shop/shop.actions";
 
 const ShopPage = ({ history, match }) => {
   const items = useSelector((state) => selectShopItems(state));
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    axios.get("/shop").then((res) => console.log(res));
+    axios.get("/shop").then((res) => console.log(res.data));
+    dispatch(setDefaultQuantityDesired());
+    dispatch(setDefaultChecked());
   }, []);
 
   return (

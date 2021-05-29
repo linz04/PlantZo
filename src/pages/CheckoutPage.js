@@ -54,8 +54,25 @@ const CheckoutPage = ({ history }) => {
   return (
     <div className="flex flex-1 flex-col justify-between">
       <LabelContainer onClick={() => history.push("/cart")}>
-        <span className="mb-2 mr-2">&larr;</span>
-        <span>Check Out</span>
+        <span className="flex items-center justify-center space-x-4 cursor-pointer">
+          <span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-10 w-10"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M10 19l-7-7m0 0l7-7m-7 7h18"
+              />
+            </svg>
+          </span>
+          <span className="text-4xl font-light">Check Out</span>
+        </span>
       </LabelContainer>
 
       <LabelContainer>ALAMAT</LabelContainer>
@@ -82,7 +99,7 @@ const CheckoutPage = ({ history }) => {
               <div>Logo</div>
               <div>Pilih Pengiriman</div>
             </div>
-            <div className="bg-gray-300 h-36 p-2">
+            <div className="bg-gray-400 h-36 p-2">
               <div className="flex flex-col justify-between h-full space-y-2">
                 <div>
                   <input
@@ -92,7 +109,7 @@ const CheckoutPage = ({ history }) => {
                     value={["JNE", 8]}
                     onChange={handleCheckRadio}
                   />
-                  <span className="ml-4 text-center text-2xl text-gray-700">
+                  <span className="ml-4 text-center text-2xl text-gray-800">
                     J&T Express
                   </span>
                 </div>
@@ -104,7 +121,7 @@ const CheckoutPage = ({ history }) => {
                     value={["J&T", 10]}
                     onChange={handleCheckRadio}
                   />
-                  <span className="ml-4 text-center text-2xl text-gray-700">
+                  <span className="ml-4 text-center text-2xl text-gray-800">
                     JNE Regular (Cashless)
                   </span>
                 </div>
@@ -116,7 +133,7 @@ const CheckoutPage = ({ history }) => {
                     value={["ID", 12]}
                     onChange={handleCheckRadio}
                   />
-                  <span className="ml-4 text-center text-2xl text-gray-700">
+                  <span className="ml-4 text-center text-2xl text-gray-800">
                     ID Express
                   </span>
                 </div>

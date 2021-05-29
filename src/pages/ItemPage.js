@@ -5,12 +5,11 @@ import axios from "axios";
 
 import LabelContainer from "../components/LabelContainer";
 
-import { addItem } from "../redux/cart/cart.actions";
 import {
+  deleteItem,
   increaseItemQuantity,
   decreaseItemQuantity,
-  addQuantityDefined,
-  addQuantityDefinedAndChecked,
+  checkedItem,
 } from "../redux/cart/cart.actions";
 
 const ItemPage = ({ history, location }) => {
@@ -66,12 +65,11 @@ const ItemPage = ({ history, location }) => {
   };
 
   const handleAddToCart = () => {
-    dispatch(addQuantityDefined({ item, itemQuantity }));
     history.push("/cart");
   };
 
   const handleBuyItem = () => {
-    dispatch(addQuantityDefinedAndChecked({ item, itemQuantity }));
+    dispatch(checkedItem(item));
     history.push("/checkout");
   };
 
@@ -79,8 +77,13 @@ const ItemPage = ({ history, location }) => {
 
   return (
     <div className="">
-      <LabelContainer onClick={() => history.push("/shop")}>
-        <span className="flex items-center justify-center space-x-4">
+      <LabelContainer
+        onClick={() => {
+          dispatch(deleteItem(item));
+          history.push("/shop");
+        }}
+      >
+        <span className="flex items-center justify-center space-x-4 cursor-pointer">
           <span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -148,13 +151,13 @@ const ItemPage = ({ history, location }) => {
               <div className="text-gray-400">
                 <div>
                   <span>Pengiriman ke </span>
-                  <span className="text-gray-900 font-medium text-4xl">
+                  <span className="text-gray-800 font-medium text-4xl">
                     Seluruh Indonesia
                   </span>
                 </div>
                 <div>
                   <span>Ongkos kirim </span>
-                  <span className="text-gray-900 font-medium text-4xl">
+                  <span className="text-gray-800 font-medium text-4xl">
                     Rp 8.000 - Rp 12.000
                   </span>
                 </div>
@@ -164,7 +167,7 @@ const ItemPage = ({ history, location }) => {
               <div>Kuantitas</div>
               <div className="w-96 h-20 border flex justify-between items-center text-gray-800">
                 <div
-                  className="w-1/4 flex items-center justify-center "
+                  className="w-1/4 flex items-center justify-center cursor-pointer"
                   onClick={() => handleItemQuantity("DECREASE")}
                 >
                   <svg
@@ -186,7 +189,7 @@ const ItemPage = ({ history, location }) => {
                   {itemQuantity}
                 </div>
                 <div
-                  className="w-1/4 flex items-center justify-center"
+                  className="w-1/4 flex items-center justify-center cursor-pointer"
                   onClick={() => handleItemQuantity("INCREASE")}
                 >
                   <svg
@@ -247,7 +250,7 @@ const ItemPage = ({ history, location }) => {
         <div className="flex flex-col justify-between h-full m-4">
           <div className="w-full">
             <h3 className="text-4xl">Spesifikasi Product</h3>
-            <div className="grid grid-cols-5 gap-2 text-3xl text-gray-500 w-full mt-4">
+            <div className="grid grid-cols-5 gap-2 text-3xl text-gray-400 w-full mt-4">
               <div className="space-y-2">
                 <div>Stok</div>
                 <div>Dikirim dari</div>
@@ -260,7 +263,7 @@ const ItemPage = ({ history, location }) => {
           </div>
           <div className="mt-20 h-full">
             <h3 className="text-4xl">Deskripsi Product</h3>
-            <div className="text-3xl text-gray-500 mt-4">
+            <div className="text-3xl text-gray-400 mt-4">
               <p className="text-left w-1/2 whitespace-pre-line break-normal">
                 {description}
               </p>

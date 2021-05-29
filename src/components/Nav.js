@@ -47,7 +47,7 @@ const Nav = ({ history, match, location }) => {
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className={`${
-              location.pathname === "/shop" ? "text-gray-900" : "text-gray-300"
+              location.pathname === "/shop" ? "text-gray-800" : "text-gray-100"
             } h-16 w-16`}
             fill="none"
             viewBox="0 0 24 24"
@@ -69,7 +69,7 @@ const Nav = ({ history, match, location }) => {
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className={`${
-              location.pathname === "/cart" ? "text-gray-900" : "text-gray-300"
+              location.pathname === "/cart" ? "text-gray-800" : "text-gray-100"
             } h-16 w-16`}
             fill="none"
             viewBox="0 0 24 24"
@@ -91,7 +91,7 @@ const Nav = ({ history, match, location }) => {
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className={`${
-              location.pathname === "/user" ? "text-gray-900" : "text-gray-300"
+              location.pathname === "/user" ? "text-gray-800" : "text-gray-100"
             } h-16 w-16`}
             fill="none"
             viewBox="0 0 24 24"
@@ -112,7 +112,7 @@ const Nav = ({ history, match, location }) => {
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="text-gray-300 h-16 w-16"
+            className="text-gray-100 h-16 w-16"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"

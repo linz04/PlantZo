@@ -41,16 +41,6 @@ export const decreaseItemQuantity = (item) => ({
   payload: item,
 });
 
-export const addQuantityDefined = (item, quantity) => ({
-  type: ADD_QUANTITY_DEFINED,
-  payload: { item, quantity },
-});
-
-export const addQuantityDefinedAndChecked = (item, quantity) => ({
-  type: ADD_QUANTITY_DEFINED_AND_CHECKED,
-  payload: { item, quantity },
-});
-
 export const setDeliveryType = (payment) => ({
   type: SET_DELIVERY_TYPE,
   payload: payment,

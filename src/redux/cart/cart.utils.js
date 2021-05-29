@@ -66,7 +66,10 @@ export const increaseItemQuantity = (cartItems, cartItemToAdd) => {
     );
   }
 
-  return [...cartItems, { ...cartItemToAdd, quantityDesired: 1 }];
+  return [
+    ...cartItems,
+    { ...cartItemToAdd, quantityDesired: 1, checked: false },
+  ];
 };
 
 export const decreaseItemQuantity = (cartItems, cartItemToDecrease) => {
@@ -80,41 +83,11 @@ export const decreaseItemQuantity = (cartItems, cartItemToDecrease) => {
 
   return cartItems.map((cartItem) =>
     cartItem.pid === cartItemToDecrease.pid
-      ? { ...cartItem, quantityDesired: cartItem.quantityDesired - 1 }
+      ? {
+          ...cartItem,
+          quantityDesired: cartItem.quantityDesired - 1,
+          checked: false,
+        }
       : cartItem
   );
-};
-
-export const addQuantityDefined = (cartItems, cartItemToAdd) => {
-  const { item, quantity } = cartItemToAdd;
-  const existingCartItem = cartItems.find(
-    (cartItem) => cartItem.pid === item.pid
-  );
-
-  if (existingCartItem) {
-    return cartItems.map((cartItem) =>
-      cartItem.pid === item.pid
-        ? { ...cartItem, quantityDesired: quantity }
-        : cartItem
-    );
-  }
-
-  return [...cartItems, { ...item, quantityDesired: 1, checked: false }];
-};
-
-export const addQuantityDefinedAndChecked = (cartItems, cartItemToAdd) => {
-  const { item, quantity } = cartItemToAdd;
-  const existingCartItem = cartItems.find(
-    (cartItem) => cartItem.pid === item.pid
-  );
-
-  if (existingCartItem) {
-    return cartItems.map((cartItem) =>
-      cartItem.pid === item.pid
-        ? { ...cartItem, quantityDesired: quantity, checked: true }
-        : cartItem
-    );
-  }
-
-  return [...cartItems, { ...item, quantityDesired: 1, checked: false }];
 };

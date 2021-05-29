@@ -5,7 +5,7 @@ const FormInput = ({ handleChange, ...otherProps }) => (
     <input
       onChange={handleChange}
       {...otherProps}
-      className="bg-gray-300 text-gray-800 placeholder-gray-800 p-4 w-full"
+      className="bg-gray-200 text-gray-800 placeholder-gray-800 p-4 w-full"
     />
   </div>
 );

@@ -17,8 +17,6 @@ const {
   CHECKED_ALL_ITEM,
   INCREASE_ITEM_QUANTITY,
   DECREASE_ITEM_QUANTITY,
-  ADD_QUANTITY_DEFINED,
-  ADD_QUANTITY_DEFINED_AND_CHECKED,
   SET_DELIVERY_TYPE,
 } = cartActionTypes;
 
@@ -58,19 +56,6 @@ const cartReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         cartItems: decreaseItemQuantity(state.cartItems, action.payload),
-      };
-    case ADD_QUANTITY_DEFINED:
-      return {
-        ...state,
-        cartItems: addQuantityDefined(state.cartItems, action.payload),
-      };
-    case ADD_QUANTITY_DEFINED_AND_CHECKED:
-      return {
-        ...state,
-        cartItems: addQuantityDefinedAndChecked(
-          state.cartItems,
-          action.payload
-        ),
       };
     case SET_DELIVERY_TYPE:
       return {

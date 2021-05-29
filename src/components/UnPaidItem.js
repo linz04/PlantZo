@@ -17,7 +17,7 @@ const UnPaidItem = ({ item }) => {
 
         <div className="flex flex-col justify-center space-y-4 w-2/5 text-xl">
           <div className="text-3xl">{name}</div>
-          <div className="text-gray-500">{description}</div>
+          <div className="text-gray-400">{description}</div>
         </div>
         <div></div>
       </div>
