@@ -21,19 +21,19 @@ const HeaderShop = () => (
       <div className="absolute top-20 right-10 text-center">
         <div className="flex justify-center">
           <img
-            src="/images/background/annie-spratt-ncQ2sguVlgo-unsplash.jpg"
+            src="/images/background/annie-spratt.jpg"
             alt="square green background"
             width="300"
           />
         </div>
         <div className="flex">
           <img
-            src="/images/background/sarah-dorweiler-m2J105CzEAU-unsplash.jpg"
+            src="/images/background/sarah-dorweiler.jpg"
             alt="square green background"
             width="275"
           />
           <img
-            src="/images/background/peter-zagar-bLgWa9b0ioY-unsplash.jpg"
+            src="/images/background/peter-zagar.jpg"
             alt="square green background"
             width="275"
           />

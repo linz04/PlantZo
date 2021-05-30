@@ -13,10 +13,15 @@ const CardItem = ({ item, history }) => {
 
   const startArray = Array.from(new Array(Math.floor(4)));
 
+  const handleClick = () => {
+    history.push(`shop/${pid}`);
+    window.scrollTo(0, 0);
+  };
+
   return (
     <div
       className="flex flex-col w-72 items-center h-full bg-gray-100 cursor-pointer"
-      onClick={() => history.push(`shop/${pid}`)}
+      onClick={handleClick}
     >
       <div className="flex w-11/12 h-3/4 mt-2">
         <img src={imageUrl} alt="Item" height={400} width={400} />

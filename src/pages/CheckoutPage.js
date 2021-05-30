@@ -4,6 +4,7 @@ import { withRouter } from "react-router";
 
 import LabelContainer from "../components/LabelContainer";
 import CheckoutItem from "../components/CheckoutItem";
+import PaymentBanner from "../components/PaymentBanner";
 
 import {
   selectCartItemsChecked,
@@ -14,8 +15,10 @@ import { setDeliveryType } from "../redux/cart/cart.actions";
 
 const CheckoutPage = ({ history }) => {
   const [paymentType, setPaymentType] = useState("");
+  const [paymentClicked, setPaymentClicked] = useState(false);
+
   const deliveryType = useSelector((state) => selectDeliveryType(state));
-  console.log(paymentType);
+
   const dispatch = useDispatch();
 
   const convert = {
@@ -234,38 +237,29 @@ const CheckoutPage = ({ history }) => {
                   />
                 </svg>
               </div>
-              <div className="font-light">Pilih Pembayaran</div>
+              <div className="font-light">Pilih Pembayaran ( Salah satu )</div>
             </div>
             <div className="grid grid-cols-4 gap-4">
-              <div
-                className="flex justify-center items-center bg-blue-600 h-64 cursor-pointer"
+              <PaymentBanner
                 value="DANA"
-                onClick={handlePaymentMethod}
-              >
-                <img src="" />
-                <div>DANA</div>
-              </div>
-              <div
-                className="flex justify-center items-center bg-blue-600 h-64 cursor-pointer"
+                handleClick={handlePaymentMethod}
+                imageUrl="/images/background/dana.jpg"
+              />
+              <PaymentBanner
                 value="OVO"
-                onClick={handlePaymentMethod}
-              >
-                OVO
-              </div>
-              <div
-                className="flex justify-center items-center bg-blue-600 h-64 cursor-pointer"
+                handleClick={handlePaymentMethod}
+                imageUrl="/images/background/ovo.png"
+              />
+              <PaymentBanner
                 value="GOPAY"
-                onClick={handlePaymentMethod}
-              >
-                GOPAY
-              </div>
-              <div
-                className="flex justify-center items-center bg-blue-600 h-64 cursor-pointer"
+                handleClick={handlePaymentMethod}
+                imageUrl="/images/background/gopay.jpg"
+              />
+              <PaymentBanner
                 value="COD"
-                onClick={handlePaymentMethod}
-              >
-                COD
-              </div>
+                handleClick={handlePaymentMethod}
+                imageUrl="/images/background/cod.jpg"
+              />
             </div>
           </div>
         </LabelContainer>

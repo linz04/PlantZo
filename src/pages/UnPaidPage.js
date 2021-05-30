@@ -29,7 +29,7 @@ const UnPaidPage = ({ history }) => {
           <UnPaidItem key={unPaidItem.pid} item={unPaidItem} />
         ))}
       </div>
-      <div className="flex flex-col items-end m-10 text-3xl space-y-4">
+      <div className="flex flex-col items-end mr-10 mb-4 text-3xl space-y-4">
         <div>{`Rp ${unPaidItemsTotal + Number(deliveryType[price])}.000`}</div>
         <button
           onClick={() => history.push("/state/inpaid")}
