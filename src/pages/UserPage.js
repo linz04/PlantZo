@@ -93,7 +93,7 @@ const UserPage = ({ items = {}, history, match }) => {
           <div>Pesanan saya</div>
 
           <div className="flex justify-center">
-            <div className="relative flex flex-col justify-center items-center w-52 h-52 bg-green-300 rounded-full m-10 break-words">
+            <div className="relative flex flex-col justify-center items-center w-52 h-52 bg-green-400 rounded-full m-10 break-words">
               <span className="flex justify-center items-center rounded-full bg-red-600 w-16 h-16 absolute top-0 right-0">
                 {itemsCount}
               </span>
@@ -113,7 +113,7 @@ const UserPage = ({ items = {}, history, match }) => {
               </svg>
               <div className="text-xl">Belum dibayar</div>
             </div>
-            <div className="relative flex flex-col justify-center items-center w-52 h-52 bg-green-300 rounded-full m-10 break-words">
+            <div className="relative flex flex-col justify-center items-center w-52 h-52 bg-green-400 rounded-full m-10 break-words">
               <span className="flex justify-center items-center rounded-full bg-red-600 w-16 h-16 absolute top-0 right-0">
                 {quantityInPack}
               </span>
@@ -133,7 +133,7 @@ const UserPage = ({ items = {}, history, match }) => {
               </svg>
               <div className="text-xl">Dalam pengemasan</div>
             </div>
-            <div className="relative flex flex-col justify-center items-center w-52 h-52 bg-green-300 rounded-full m-10 break-words">
+            <div className="relative flex flex-col justify-center items-center w-52 h-52 bg-green-400 rounded-full m-10 break-words">
               <span className="flex justify-center items-center rounded-full bg-red-600 w-16 h-16 absolute top-0 right-0">
                 {amountInDelivery}
               </span>
@@ -153,7 +153,7 @@ const UserPage = ({ items = {}, history, match }) => {
               </svg>
               <div className="text-xl">Dalam pengiriman</div>
             </div>
-            <div className="relative flex flex-col justify-center items-center w-52 h-52 bg-green-300 rounded-full m-10 break-words">
+            <div className="relative flex flex-col justify-center items-center w-52 h-52 bg-green-400 rounded-full m-10 break-words">
               <span className="flex justify-center items-center rounded-full bg-red-600 w-16 h-16 absolute top-0 right-0">
                 {numberOfProductRatings}
               </span>

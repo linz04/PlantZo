@@ -236,7 +236,7 @@ const ItemPage = ({ history, location }) => {
                 </div>
               </button>
               <button
-                className="flex justify-center items-center border bg-green-800 px-8 py-6  w-96"
+                className="flex justify-center items-center border bg-green-900 px-8 py-6  w-96"
                 onClick={handleBuyItem}
               >
                 <div className="text-white">Beli sekarang</div>

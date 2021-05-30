@@ -12,6 +12,7 @@ import { selectShopItems } from "../redux/shop/shop.selectors";
 import {
   setDefaultQuantityDesired,
   setDefaultChecked,
+  setDefaultSold,
 } from "../redux/shop/shop.actions";
 
 const ShopPage = ({ history, match }) => {
@@ -22,6 +23,7 @@ const ShopPage = ({ history, match }) => {
     axios.get("/shop").then((res) => console.log(res.data));
     dispatch(setDefaultQuantityDesired());
     dispatch(setDefaultChecked());
+    dispatch(setDefaultSold());
   }, []);
 
   return (
@@ -31,7 +33,7 @@ const ShopPage = ({ history, match }) => {
       <LabelContainer
         onClick={() => history.push(`${match.url}/filter/most-purchased`)}
       >
-        <span className="uppercase">paling banyak dibeli</span>
+        <span className="uppercase cursor-pointer">paling banyak dibeli</span>
       </LabelContainer>
 
       <CollectionItem>
@@ -46,7 +48,7 @@ const ShopPage = ({ history, match }) => {
       <LabelContainer
         onClick={() => history.push(`${match.url}/filter/most-wanted`)}
       >
-        <span className="uppercase">paling banyak dicari</span>
+        <span className="uppercase cursor-pointer">paling banyak dicari</span>
       </LabelContainer>
 
       <CollectionItem>

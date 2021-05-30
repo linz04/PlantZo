@@ -241,7 +241,7 @@ const ProfilePage = ({ history }) => {
         <LabelContainer>
           <div className="flex flex-1 justify-end space-x-6">
             <div>
-              <button className="bg-green-300 px-4 py-6">
+              <button className="bg-green-400 px-4 py-6">
                 BUANG PERUBAHAN
               </button>
             </div>

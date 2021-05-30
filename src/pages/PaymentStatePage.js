@@ -39,7 +39,7 @@ const PaymentStatePage = ({ history, match, location }) => {
           <div
             className={
               location.pathname === `${match.url}/unpaid`
-                ? "bg-green-800 px-4 py-2"
+                ? "bg-green-900 px-4 py-2"
                 : ""
             }
             onClick={() => history.push(`${match.url}/unpaid`)}
@@ -49,7 +49,7 @@ const PaymentStatePage = ({ history, match, location }) => {
           <div
             className={
               location.pathname === `${match.url}/pack`
-                ? "bg-green-800 px-4 py-2"
+                ? "bg-green-900 px-4 py-2"
                 : ""
             }
             onClick={() => history.push(`${match.url}/pack`)}
@@ -59,7 +59,7 @@ const PaymentStatePage = ({ history, match, location }) => {
           <div
             className={
               location.pathname === `${match.url}/send`
-                ? "bg-green-800 px-4 py-2"
+                ? "bg-green-900 px-4 py-2"
                 : ""
             }
             onClick={() => history.push(`${match.url}/send`)}
@@ -69,7 +69,7 @@ const PaymentStatePage = ({ history, match, location }) => {
           <div
             className={
               location.pathname === `${match.url}/rate`
-                ? "bg-green-800 px-4 py-2"
+                ? "bg-green-900 px-4 py-2"
                 : ""
             }
             onClick={() => history.push(`${match.url}/rate`)}

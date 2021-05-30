@@ -1,15 +1,9 @@
 import React from "react";
 import { withRouter } from "react-router";
 
-const CardItem = ({ item = {}, history, match }) => {
-  const {
-    name = "Tanaman",
-    imageUrl = "/",
-    pid = 1,
-    price = 1,
-    start = 3,
-    sold = 24,
-  } = item;
+const CardItem = ({ item, history }) => {
+  const { name, imageUrl, pid, price, rating, sold } = item;
+  console.log(item);
 
   let nameEdited = name;
 
@@ -17,7 +11,7 @@ const CardItem = ({ item = {}, history, match }) => {
     nameEdited = [name.slice(0, 14), "..."].join("");
   }
 
-  const startArray = Array.from(new Array(Math.floor(start)));
+  const startArray = Array.from(new Array(Math.floor(4)));
 
   return (
     <div

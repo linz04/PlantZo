@@ -1,8 +1,12 @@
 import { shopActionTypes } from "./shop.types";
 import SHOP_DATA from "./shop.data";
 
-const { SET_SHOP_ITEMS, SET_DEFAULT_QUANTITY_DESIRED, SET_DEFAULT_CHECKED } =
-  shopActionTypes;
+const {
+  SET_SHOP_ITEMS,
+  SET_DEFAULT_QUANTITY_DESIRED,
+  SET_DEFAULT_CHECKED,
+  SET_DEFAULT_SOLD,
+} = shopActionTypes;
 
 const INITIAL_STATE = {
   items: SHOP_DATA,
@@ -21,6 +25,11 @@ const shopReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         items: state.items.map((item) => (item.checked = false)),
+      };
+    case SET_DEFAULT_SOLD:
+      return {
+        ...state,
+        items: state.items.map((item) => (item.sold = item.pid)),
       };
     default:
       return state;

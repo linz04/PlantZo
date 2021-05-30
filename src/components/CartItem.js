@@ -65,7 +65,7 @@ const CartItem = ({ item }) => {
         </div>
       </div>
       <div
-        className="flex justify-center items-center bg-green-800 w-1/6 text-white cursor-pointer"
+        className="flex justify-center items-center bg-green-900 w-1/6 text-white cursor-pointer"
         onClick={() => dispatch(deleteItem(item))}
       >
         Hapus

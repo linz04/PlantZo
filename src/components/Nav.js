@@ -13,7 +13,7 @@ const Nav = ({ history, match, location }) => {
   };
 
   return (
-    <div className="flex justify-between items-center h-24 bg-green-800">
+    <div className="flex justify-between items-center h-24 bg-green-900">
       <div className="flex ml-8" onClick={() => history.push("/")}>
         <img className="w-11 h-11" src="/images/icons/logo.png" alt="Logo" />
 

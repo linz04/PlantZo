@@ -302,7 +302,7 @@ const CheckoutPage = ({ history }) => {
         <LabelContainer>
           <div className="flex flex-auto justify-end items-center space-x-4">
             <button
-              className="w-1/4 px-6 py-4 bg-green-800 text-white"
+              className="w-1/4 px-6 py-4 bg-green-900 text-white"
               onClick={() => history.push("/state/unpaid")}
             >
               Bayar Nanti
@@ -310,7 +310,7 @@ const CheckoutPage = ({ history }) => {
             <button
               type="submit"
               value="submit form"
-              className="w-1/4 px-6 py-4 bg-green-800 text-white"
+              className="w-1/4 px-6 py-4 bg-green-900 text-white"
             >
               Bayar Sekarang
             </button>

@@ -33,7 +33,7 @@ const UnPaidPage = ({ history }) => {
         <div>{`Rp ${unPaidItemsTotal + Number(deliveryType[price])}.000`}</div>
         <button
           onClick={() => history.push("/state/inpaid")}
-          className="bg-green-800 px-6 py-4 text-white"
+          className="bg-green-900 px-6 py-4 text-white"
         >
           Perlu dibayar
         </button>
