@@ -20,6 +20,8 @@ const ShopPage = ({ history, match }) => {
   const items = useSelector((state) => selectShopItems(state));
   const dispatch = useDispatch();
 
+  console.log(items);
+
   useEffect(() => {
     // CATATAN Belum bisa connect
     // axios.get("/shop").then((res) => console.log("RES_DATA_SHOP", res.data));

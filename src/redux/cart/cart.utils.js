@@ -19,7 +19,15 @@ export const addItemToCart = (cartItems, cartItemToAdd) => {
 
 export const addItemAndQuantityToCart = (cartItems, itemAndQuantity) => {
   const { item, itemQuantity } = itemAndQuantity;
-  return [...cartItems, { ...item, quantityDesired: itemQuantity }];
+
+  return [
+    ...cartItems,
+    {
+      ...item,
+      quantityDesired: itemQuantity,
+      state: { unpaid: true, pack: false, send: false, rate: false },
+    },
+  ];
 };
 
 export const deleteItemFromCart = (cartItems, cartItemToClear) => {

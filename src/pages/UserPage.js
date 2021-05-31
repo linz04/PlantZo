@@ -7,13 +7,30 @@ import LabelContainer from "../components/LabelContainer";
 
 import { auth } from "../lib/firebase/firebase.utils";
 import { setCurrentUser } from "../redux/user/user.actions";
-import { selectCurrentUser } from "../redux/user/user.selectors";
-import { selectCartItemsCount } from "../redux/cart/cart.selectors";
 import { deleteAllItem } from "../redux/cart/cart.actions";
+import { selectCurrentUser } from "../redux/user/user.selectors";
+import {
+  selectCartItemsInPackQuantity,
+  selectCartItemsInRateQuantity,
+  selectCartItemsInSendQuantity,
+  selectCartItemsInUnPaidQuantity,
+} from "../redux/cart/cart.selectors";
 
-const UserPage = ({ items = {}, history, match }) => {
+const UserPage = ({ history, match }) => {
   const currentUser = useSelector((state) => selectCurrentUser(state));
-  const itemsCount = useSelector((state) => selectCartItemsCount(state));
+
+  const itemsInUnPaidQuantity = useSelector((state) =>
+    selectCartItemsInUnPaidQuantity(state)
+  );
+  const itemsInPackQuantity = useSelector((state) =>
+    selectCartItemsInPackQuantity(state)
+  );
+  const itemsInSendQuantity = useSelector((state) =>
+    selectCartItemsInSendQuantity(state)
+  );
+  const itemsInRateQuantity = useSelector((state) =>
+    selectCartItemsInRateQuantity(state)
+  );
 
   const dispatch = useDispatch();
 
@@ -23,12 +40,6 @@ const UserPage = ({ items = {}, history, match }) => {
     profileImage = "/images/icons/logo.png",
     backgroundProfileImage = "/images/background/green-square.jpg",
   } = currentUser;
-
-  const {
-    quantityInPack = 1,
-    amountInDelivery = 2,
-    numberOfProductRatings = 3,
-  } = items;
 
   return (
     <div className="mb-10">
@@ -114,7 +125,7 @@ const UserPage = ({ items = {}, history, match }) => {
               onClick={() => history.push("/state/unpaid")}
             >
               <span className="flex justify-center items-center rounded-full bg-red-600 w-16 h-16 absolute top-0 right-0 border-black border-2">
-                {itemsCount}
+                {itemsInUnPaidQuantity}
               </span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -137,7 +148,7 @@ const UserPage = ({ items = {}, history, match }) => {
               onClick={() => history.push("/state/pack")}
             >
               <span className="flex justify-center items-center rounded-full bg-red-600 w-16 h-16 absolute top-0 right-0 border-black border-2">
-                {quantityInPack}
+                {itemsInPackQuantity}
               </span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -160,7 +171,7 @@ const UserPage = ({ items = {}, history, match }) => {
               onClick={() => history.push("/state/send")}
             >
               <span className="flex justify-center items-center rounded-full bg-red-600 w-16 h-16 absolute top-0 right-0 border-black border-2">
-                {amountInDelivery}
+                {itemsInSendQuantity}
               </span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -183,7 +194,7 @@ const UserPage = ({ items = {}, history, match }) => {
               onClick={() => history.push("/state/rate")}
             >
               <span className="flex justify-center items-center rounded-full bg-red-600 w-16 h-16 absolute top-0 right-0 border-black border-2">
-                {numberOfProductRatings}
+                {itemsInRateQuantity}
               </span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"

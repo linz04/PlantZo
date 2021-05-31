@@ -43,9 +43,63 @@ export const selectCartItemsChecked = createSelector(
   [selectCartItems],
   (cartItems) => cartItems.filter((cartItem) => cartItem.checked === true)
 );
+//
+export const selectCartItemsInUnPaid = createSelector(
+  [selectCartItems],
+  (cartItems) => cartItems.filter((cartItem) => cartItem.state.unpaid === true)
+);
 
-// export const selectCartItemInUnPaid =
+export const selectCartItemsInPack = createSelector(
+  [selectCartItems],
+  (cartItems) => cartItems.filter((cartItem) => cartItem.state.pack === true)
+);
 
-// export const selectCartItemInPack;
-// export const selectCartItemInSend;
-// export const selectCartItemInRate;
+export const selectCartItemsInSend = createSelector(
+  [selectCartItems],
+  (cartItems) => cartItems.filter((cartItem) => cartItem.state.send === true)
+);
+
+export const selectCartItemsInRate = createSelector(
+  [selectCartItems],
+  (cartItems) => cartItems.filter((cartItem) => cartItem.state.rate === true)
+);
+
+export const selectCartItemsInUnPaidQuantity = createSelector(
+  [selectCartItemsInUnPaid],
+  (cartItems) =>
+    cartItems.reduce(
+      (accumulatedQuantity, cartItem) =>
+        accumulatedQuantity + cartItem.quantityDesired,
+      0
+    )
+);
+
+export const selectCartItemsInPackQuantity = createSelector(
+  [selectCartItemsInPack],
+  (cartItems) =>
+    cartItems.reduce(
+      (accumulatedQuantity, cartItem) =>
+        accumulatedQuantity + cartItem.quantityDesired,
+      0
+    )
+);
+
+export const selectCartItemsInSendQuantity = createSelector(
+  [selectCartItemsInSend],
+  (cartItems) =>
+    cartItems.reduce(
+      (accumulatedQuantity, cartItem) =>
+        accumulatedQuantity + cartItem.quantityDesired,
+      0
+    )
+);
+
+export const selectCartItemsInRateQuantity = createSelector(
+  [selectCartItemsInRate],
+  (cartItems) =>
+    cartItems.reduce(
+      (accumulatedQuantity, cartItem) =>
+        accumulatedQuantity + cartItem.quantityDesired,
+      0
+    )
+);
