@@ -4,7 +4,7 @@ const HeaderShop = () => (
   <div className="flex justify-end m-2">
     <div className="bg-green-500 mr-4 h-full w-4/6 relative">
       <img
-        src="/images/background/bg-green-square.jpg"
+        src="/images/background/green-square.jpg"
         alt="square green background"
       />
       <div className="absolute top-20 left-40 text-center">

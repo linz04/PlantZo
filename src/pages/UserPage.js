@@ -13,16 +13,15 @@ import { selectCartItemsCount } from "../redux/cart/cart.selectors";
 const UserPage = ({ items = {}, history, match }) => {
   const currentUser = useSelector((state) => selectCurrentUser(state));
   const itemsCount = useSelector((state) => selectCartItemsCount(state));
+
   const dispatch = useDispatch();
 
   const {
-    displayName = "Display Name",
-    email = "RPL_A@plantzo.com",
-    profileImage = "https://i.pinimg.com/236x/54/aa/23/54aa23c43d642664d0d8d55e060caad5--indian-meme-meme-faces.jpg",
-    backgroundProfileImage = "https://awsimages.detik.net.id/community/media/visual/2018/01/17/4c003a60-7b3f-452b-a719-9d84fb489e79_169.jpeg?w=700&q=90",
+    displayName,
+    email,
+    profileImage = "/images/icons/logo.png",
+    backgroundProfileImage = "/images/background/green-square.jpg",
   } = currentUser;
-
-  console.log(displayName);
 
   const {
     quantityInPack = 1,
@@ -71,7 +70,7 @@ const UserPage = ({ items = {}, history, match }) => {
                     alt="Profile"
                   />
                 </div>
-                <div className="ml-10 mt-16 text-gray-800">
+                <div className="ml-10 mt-16 text-gray-200">
                   <div className="text-7xl font-bold">{displayName}</div>
                   <div className="text-4xl font-medium mt-2">{email}</div>
                 </div>
@@ -81,20 +80,39 @@ const UserPage = ({ items = {}, history, match }) => {
         </div>
       </LabelContainer>
       <LabelContainer>
-        <span onClick={() => history.push(`${match.path}/about`)}>
+        <span
+          className="cursor-pointer font-light"
+          onClick={() => history.push(`${match.path}/about`)}
+        >
           Tentang anda
         </span>
       </LabelContainer>
-      <LabelContainer onClick={() => history.push("/settings/profile")}>
-        Lengkapi profil anda!!
+      <LabelContainer>
+        <span
+          className="cursor-pointer font-light"
+          onClick={() => history.push(`${match.path}/address`)}
+        >
+          Edit alamat
+        </span>
+      </LabelContainer>
+      <LabelContainer>
+        <span
+          className="cursor-pointer font-light"
+          onClick={() => history.push("/settings/profile")}
+        >
+          Lengkapi profil anda
+        </span>
       </LabelContainer>
       <LabelContainer>
         <div className="w-full h-full">
-          <div>Pesanan saya</div>
+          <div className="font-light">Pesanan saya</div>
 
           <div className="flex justify-center">
-            <div className="relative flex flex-col justify-center items-center w-52 h-52 bg-green-400 rounded-full m-10 break-words">
-              <span className="flex justify-center items-center rounded-full bg-red-600 w-16 h-16 absolute top-0 right-0">
+            <div
+              className="relative flex flex-col justify-center items-center w-52 h-52 bg-green-400 rounded-full m-10 break-words cursor-pointer border-black border-2"
+              onClick={() => history.push("/state/unpaid")}
+            >
+              <span className="flex justify-center items-center rounded-full bg-red-600 w-16 h-16 absolute top-0 right-0 border-black border-2">
                 {itemsCount}
               </span>
               <svg
@@ -113,8 +131,11 @@ const UserPage = ({ items = {}, history, match }) => {
               </svg>
               <div className="text-xl">Belum dibayar</div>
             </div>
-            <div className="relative flex flex-col justify-center items-center w-52 h-52 bg-green-400 rounded-full m-10 break-words">
-              <span className="flex justify-center items-center rounded-full bg-red-600 w-16 h-16 absolute top-0 right-0">
+            <div
+              className="relative flex flex-col justify-center items-center w-52 h-52 bg-green-400 rounded-full m-10 break-words cursor-pointer border-black border-2"
+              onClick={() => history.push("/state/pack")}
+            >
+              <span className="flex justify-center items-center rounded-full bg-red-600 w-16 h-16 absolute top-0 right-0 border-black border-2">
                 {quantityInPack}
               </span>
               <svg
@@ -133,8 +154,11 @@ const UserPage = ({ items = {}, history, match }) => {
               </svg>
               <div className="text-xl">Dalam pengemasan</div>
             </div>
-            <div className="relative flex flex-col justify-center items-center w-52 h-52 bg-green-400 rounded-full m-10 break-words">
-              <span className="flex justify-center items-center rounded-full bg-red-600 w-16 h-16 absolute top-0 right-0">
+            <div
+              className="relative flex flex-col justify-center items-center w-52 h-52 bg-green-400 rounded-full m-10 break-words cursor-pointer border-black border-2"
+              onClick={() => history.push("/state/send")}
+            >
+              <span className="flex justify-center items-center rounded-full bg-red-600 w-16 h-16 absolute top-0 right-0 border-black border-2">
                 {amountInDelivery}
               </span>
               <svg
@@ -153,8 +177,11 @@ const UserPage = ({ items = {}, history, match }) => {
               </svg>
               <div className="text-xl">Dalam pengiriman</div>
             </div>
-            <div className="relative flex flex-col justify-center items-center w-52 h-52 bg-green-400 rounded-full m-10 break-words">
-              <span className="flex justify-center items-center rounded-full bg-red-600 w-16 h-16 absolute top-0 right-0">
+            <div
+              className="relative flex flex-col justify-center items-center w-52 h-52 bg-green-400 rounded-full m-10 break-words cursor-pointer border-black border-2"
+              onClick={() => history.push("/state/rate")}
+            >
+              <span className="flex justify-center items-center rounded-full bg-red-600 w-16 h-16 absolute top-0 right-0 border-black border-2">
                 {numberOfProductRatings}
               </span>
               <svg
@@ -168,7 +195,7 @@ const UserPage = ({ items = {}, history, match }) => {
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   strokeWidth={2}
-                  d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
+                  d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"
                 />
               </svg>
               <div className="text-xl text-center">Penilaian produk</div>
@@ -176,21 +203,22 @@ const UserPage = ({ items = {}, history, match }) => {
           </div>
         </div>
       </LabelContainer>
-      <LabelContainer>Pengaturan</LabelContainer>
+      <LabelContainer>
+        <span className="font-normal text-6xl flex justify-center items-center flex-1">
+          Pengaturan
+        </span>
+      </LabelContainer>
       <LabelContainer>
         <span
-          className="text-xl ml-20"
+          className="cursor-pointer font-light"
           onClick={() => history.push("/settings/profile")}
         >
           Profil
         </span>
       </LabelContainer>
       <LabelContainer>
-        <span className="text-xl ml-20">Bahasa</span>
-      </LabelContainer>
-      <LabelContainer>
         <span
-          className="flex justify-center items-center text-xl ml-20"
+          className="flex flex-1 justify-center items-center cursor-pointer font-bold bg-red-600 text-gray-200 py-4"
           onClick={() => {
             dispatch(setCurrentUser(null));
             auth.signOut();

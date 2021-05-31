@@ -30,7 +30,11 @@ const UnPaidPage = ({ history }) => {
         ))}
       </div>
       <div className="flex flex-col items-end mr-10 mb-4 text-3xl space-y-4">
-        <div>{`Rp ${unPaidItemsTotal + Number(deliveryType[price])}.000`}</div>
+        <div>{`Rp ${
+          deliveryType[price]
+            ? `${unPaidItemsTotal + Number(deliveryType[price])}`
+            : "0"
+        } .000`}</div>
         <button
           onClick={() => history.push("/state/inpaid")}
           className="bg-green-900 px-6 py-4 text-white"

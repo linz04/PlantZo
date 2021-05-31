@@ -37,41 +37,41 @@ const PaymentStatePage = ({ history, match, location }) => {
       <LabelContainer>
         <div className="flex justify-between flex-1 text-2xl items-center">
           <div
-            className={
+            className={`${
               location.pathname === `${match.url}/unpaid`
                 ? "bg-green-900 text-white px-4 py-2"
                 : ""
-            }
+            } cursor-pointer`}
             onClick={() => history.push(`${match.url}/unpaid`)}
           >
             Belum dibayar
           </div>
           <div
-            className={
+            className={`${
               location.pathname === `${match.url}/pack`
                 ? "bg-green-900 text-white px-4 py-2"
                 : ""
-            }
+            } cursor-pointer`}
             onClick={() => history.push(`${match.url}/pack`)}
           >
             Dalam pengemasan
           </div>
           <div
-            className={
+            className={`${
               location.pathname === `${match.url}/send`
                 ? "bg-green-900 text-white px-4 py-2"
                 : ""
-            }
+            } cursor-pointer`}
             onClick={() => history.push(`${match.url}/send`)}
           >
             Dalam pengiriman
           </div>
           <div
-            className={
+            className={`${
               location.pathname === `${match.url}/rate`
                 ? "bg-green-900 text-white px-4 py-2"
                 : ""
-            }
+            } cursor-pointer`}
             onClick={() => history.push(`${match.url}/rate`)}
           >
             Penilaian produk

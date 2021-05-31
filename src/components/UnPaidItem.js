@@ -2,11 +2,7 @@ import React from "react";
 import LabelContainer from "./LabelContainer";
 
 const UnPaidItem = ({ item }) => {
-  const {
-    name = "JUDUL",
-    imageUrl = "https://images.unsplash.com/photo-1502810365585-56ffa361fdde?ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8bGVhdmVzfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80",
-    description = "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.",
-  } = item;
+  const { name, description, image: imageUrl } = item;
 
   return (
     <LabelContainer>

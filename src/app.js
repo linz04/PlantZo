@@ -26,6 +26,7 @@ import Footer from "./components/Footer";
 
 import { auth } from "./lib/firebase/firebase.utils";
 import { selectCurrentUser } from "./redux/user/user.selectors";
+import EditAddressPage from "./pages/EditAddressPage";
 
 const App = () => {
   const currentUser = useSelector((state) => selectCurrentUser(state));
@@ -85,6 +86,12 @@ const App = () => {
           }
         />
         <Route
+          path="/user/address"
+          render={() =>
+            !currentUser ? <Redirect to="/" /> : <EditAddressPage />
+          }
+        />
+        <Route
           path="/state/"
           render={() =>
             !currentUser ? <Redirect to="/" /> : <PaymentStatePage />
@@ -94,6 +101,7 @@ const App = () => {
           path="/settings/"
           render={() => (!currentUser ? <Redirect to="/" /> : <SettingsPage />)}
         />
+
         <Route exact path="/test" component={TestPage} />
       </Switch>
       <Footer />

@@ -8,10 +8,10 @@ import { selectCurrentUser } from "../redux/user/user.selectors";
 const AboutUserPage = ({ history }) => {
   const currentUser = useSelector((state) => selectCurrentUser(state));
   const {
-    email = "RPL_A@plantzo.com",
-    profileImage = "https://i.pinimg.com/236x/54/aa/23/54aa23c43d642664d0d8d55e060caad5--indian-meme-meme-faces.jpg",
-    backgroundProfileImage = "https://awsimages.detik.net.id/community/media/visual/2018/01/17/4c003a60-7b3f-452b-a719-9d84fb489e79_169.jpeg?w=700&q=90",
-    address = "Kampus IPB, Jl. Raya Dramaga, Babakan, Kec. Dramaga, Kota Bogor, Jawa Barat 16680",
+    email,
+    profileImage = "/images/icons/logo.png",
+    backgroundProfileImage = "/images/background/green-square.jpg",
+    address,
   } = currentUser;
 
   return (
@@ -39,19 +39,19 @@ const AboutUserPage = ({ history }) => {
       </LabelContainer>
       <LabelContainer>
         <div className="flex flex-col flex-1">
-          <div>Foto sampul Anda</div>
+          <div className="font-light">Foto sampul Anda</div>
           <div className="mt-4">
             <img
               src={backgroundProfileImage}
               alt="Latar profil"
-              className="h-full w-full bg-cover"
+              className="w-full bg-cover"
             />
           </div>
         </div>
       </LabelContainer>
       <LabelContainer>
         <div className="flex flex-col flex-1">
-          <div>Foto profil Anda</div>
+          <div className="font-light">Foto profil Anda</div>
           <div className="flex justify-center">
             <div className="flex justify-center items-center w-52 h-52 bg-white rounded-full overflow-hidden mt-4 border-2 border-black">
               <img
@@ -65,13 +65,13 @@ const AboutUserPage = ({ history }) => {
       </LabelContainer>
       <LabelContainer>
         <div className="flex flex-1 justify-between items-center">
-          <div>Username Anda</div>
+          <div className="font-light">Username Anda</div>
           <div className="text-2xl">{email}</div>
         </div>
       </LabelContainer>
       <LabelContainer>
         <div className="flex flex-col flex-1 space-y-2">
-          <div className="mb-4">Alamat Anda</div>
+          <div className="font-light">Alamat Anda</div>
           <UserFormInput
             type="text"
             name="address"

@@ -14,7 +14,10 @@ const Nav = ({ history, match, location }) => {
 
   return (
     <div className="flex justify-between items-center h-24 bg-green-900">
-      <div className="flex ml-8" onClick={() => history.push("/")}>
+      <div
+        className="flex ml-8 cursor-pointer"
+        onClick={() => history.push("/")}
+      >
         <img className="w-11 h-11" src="/images/icons/logo.png" alt="Logo" />
 
         <span className="text-gray-100 text-3xl">PlantZo</span>
@@ -41,7 +44,7 @@ const Nav = ({ history, match, location }) => {
 
       <div className="flex">
         <div
-          className="w-14 mx-4 flex justify-center items-center"
+          className="w-14 mx-4 flex justify-center items-center cursor-pointer"
           onClick={() => history.push("/shop")}
         >
           <svg
@@ -63,7 +66,7 @@ const Nav = ({ history, match, location }) => {
         </div>
 
         <div
-          className="w-14 mx-4 flex justify-center items-center"
+          className="w-14 mx-4 flex justify-center items-center cursor-pointer"
           onClick={() => history.push("/cart")}
         >
           <svg
@@ -85,7 +88,7 @@ const Nav = ({ history, match, location }) => {
         </div>
 
         <div
-          className="w-14 mx-4 flex justify-center items-center"
+          className="w-14 mx-4 flex justify-center items-center cursor-pointer"
           onClick={() => history.push("/user")}
         >
           <svg

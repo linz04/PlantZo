@@ -8,9 +8,13 @@ import {
 } from "../redux/cart/cart.actions";
 
 const CartItem = ({ item }) => {
-  const { name, image: imageUrl, price, quantityDesired } = item;
+  const { name, image: imageUrl, price, quantityDesired, quantity } = item;
 
   const dispatch = useDispatch();
+
+  const handleIncreaseButton = () => {
+    if (quantityDesired < quantity) dispatch(increaseItemQuantity(item));
+  };
 
   return (
     <div className="flex justify-between h-56 w-full">
@@ -45,7 +49,7 @@ const CartItem = ({ item }) => {
           <span>{quantityDesired}</span>
           <div
             className="flex justify-center items-center w-12 text-center cursor-pointer"
-            onClick={() => dispatch(increaseItemQuantity(item))}
+            onClick={handleIncreaseButton}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

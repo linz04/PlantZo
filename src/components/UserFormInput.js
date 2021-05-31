@@ -12,8 +12,8 @@ const UserFormInput = ({
       {label ? <label className="mr-10">{label}</label> : null}
       <input
         className={`${large ? "h-56 w-full" : ""} ${
-          clean ? "bg-gray-100" : "bg-green-200"
-        } w-9/12 rounded-xl border-none p-2 text-3xl text-left`}
+          clean ? "bg-gray-100" : "bg-green-400"
+        } w-9/12 rounded-xl border-none p-2 text-3xl text-left text-center`}
         onChange={handleChange}
         {...otherProps}
       />
