@@ -6,8 +6,6 @@ import SharePopup from "./SharePopup";
 const Nav = ({ history, match, location }) => {
   const [popupVisibility, setPopupVisibility] = useState(false);
 
-  console.log(location.pathname === "/shop");
-
   const handleClickPopupShare = () => {
     setPopupVisibility(!popupVisibility);
   };

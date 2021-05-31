@@ -7,9 +7,8 @@ import LabelContainer from "../components/LabelContainer";
 
 import {
   deleteItem,
-  increaseItemQuantity,
-  decreaseItemQuantity,
   checkedItem,
+  addItemWithQuantity,
 } from "../redux/cart/cart.actions";
 
 const ItemPage = ({ history, location }) => {
@@ -36,39 +35,29 @@ const ItemPage = ({ history, location }) => {
 
   useEffect(() => {
     axios.get(location.pathname).then((res) => {
-      console.log(res.data);
       setItem(res.data);
     });
   }, []);
 
   const dispatch = useDispatch();
 
-  const handleSubmit = (e) => {
+  const handleAddToCart = (e) => {
     e.preventDefault();
 
-    const data = { pid: 1 };
+    dispatch(addItemWithQuantity({ item, itemQuantity }));
+    // CATATAN Belum bisa connect
+    // axios.post(location.pathname, {pid, quantity}).then((res) => {
+    //   setItemQuantity(0);
 
-    // axios.post(`${location.pathname}`, { data }).then((res) => {
     //   console.log(res);
     //   console.log(res.data);
     // });
-  };
-
-  const handleItemQuantity = (type) => {
-    if (type === "INCREASE" && itemQuantity < item.quantity) {
-      dispatch(increaseItemQuantity(item));
-      setItemQuantity(itemQuantity + 1);
-    } else if (type === "DECREASE" && itemQuantity > 1) {
-      dispatch(decreaseItemQuantity(item));
-      setItemQuantity(itemQuantity - 1);
-    }
-  };
-
-  const handleAddToCart = () => {
-    history.push("/cart");
+    // setClickToCard(true);
+    alert("Sukses memasukan ke keranjang");
   };
 
   const handleBuyItem = () => {
+    dispatch(addItemWithQuantity({ item, itemQuantity }));
     dispatch(checkedItem(item));
     history.push("/checkout");
   };
@@ -76,10 +65,10 @@ const ItemPage = ({ history, location }) => {
   const ratingArray = Array.from(new Array(Math.floor(rating)));
 
   return (
-    <div className="">
+    <>
       <LabelContainer
         onClick={() => {
-          dispatch(deleteItem(item));
+          setItemQuantity(0);
           history.push("/shop");
         }}
       >
@@ -168,7 +157,9 @@ const ItemPage = ({ history, location }) => {
               <div className="w-96 h-20 border flex justify-between items-center text-gray-800">
                 <div
                   className="w-1/4 flex items-center justify-center cursor-pointer"
-                  onClick={() => handleItemQuantity("DECREASE")}
+                  onClick={() => {
+                    if (itemQuantity > 1) setItemQuantity(itemQuantity - 1);
+                  }}
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -190,7 +181,10 @@ const ItemPage = ({ history, location }) => {
                 </div>
                 <div
                   className="w-1/4 flex items-center justify-center cursor-pointer"
-                  onClick={() => handleItemQuantity("INCREASE")}
+                  onClick={() => {
+                    if (quantity > itemQuantity)
+                      setItemQuantity(itemQuantity + 1);
+                  }}
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -332,7 +326,7 @@ const ItemPage = ({ history, location }) => {
           </div>
         </div>
       </LabelContainer>
-    </div>
+    </>
   );
 };
 

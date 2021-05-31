@@ -20,8 +20,6 @@ const UnPaidPage = ({ history }) => {
   };
   const { price } = convert;
 
-  console.log(deliveryType);
-
   return (
     <div className="flex flex-1 flex-col justify-between">
       <div className="flex flex-col">

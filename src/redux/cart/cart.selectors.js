@@ -38,3 +38,9 @@ export const selectCartItemsChecked = createSelector(
   [selectCartItems],
   (cartItems) => cartItems.filter((cartItem) => cartItem.checked === true)
 );
+
+// export const selectCartItemInUnPaid =
+
+// export const selectCartItemInPack;
+// export const selectCartItemInSend;
+// export const selectCartItemInRate;

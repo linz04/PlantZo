@@ -9,6 +9,7 @@ import { auth } from "../lib/firebase/firebase.utils";
 import { setCurrentUser } from "../redux/user/user.actions";
 import { selectCurrentUser } from "../redux/user/user.selectors";
 import { selectCartItemsCount } from "../redux/cart/cart.selectors";
+import { deleteAllItem } from "../redux/cart/cart.actions";
 
 const UserPage = ({ items = {}, history, match }) => {
   const currentUser = useSelector((state) => selectCurrentUser(state));
@@ -221,6 +222,7 @@ const UserPage = ({ items = {}, history, match }) => {
           className="flex flex-1 justify-center items-center cursor-pointer font-bold bg-red-600 text-gray-200 py-4"
           onClick={() => {
             dispatch(setCurrentUser(null));
+            dispatch(deleteAllItem());
             auth.signOut();
           }}
         >

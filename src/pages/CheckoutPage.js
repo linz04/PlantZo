@@ -6,18 +6,20 @@ import LabelContainer from "../components/LabelContainer";
 import CheckoutItem from "../components/CheckoutItem";
 import PaymentBanner from "../components/PaymentBanner";
 
+import { setDeliveryType } from "../redux/cart/cart.actions";
+
 import {
   selectCartItemsChecked,
   selectCartItemsTotal,
   selectDeliveryType,
 } from "../redux/cart/cart.selectors";
-import { setDeliveryType } from "../redux/cart/cart.actions";
+import { selectCurrentUser } from "../redux/user/user.selectors";
 
 const CheckoutPage = ({ history }) => {
   const [paymentType, setPaymentType] = useState("");
-  const [paymentClicked, setPaymentClicked] = useState(false);
 
   const deliveryType = useSelector((state) => selectDeliveryType(state));
+  const currentUser = useSelector((state) => selectCurrentUser(state));
 
   const dispatch = useDispatch();
 
@@ -44,6 +46,7 @@ const CheckoutPage = ({ history }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    // CATATAN belum bisa connect, dan belum memikirkan apa yang akan dikirim
     // axios.post("api/signup", {  }).then((res) => {
     //   console.log(res.data);
     //   if ("User Already Exist!" === res.data) {
@@ -108,7 +111,7 @@ const CheckoutPage = ({ history }) => {
               <div>Pengiriman</div>
             </div>
           </div>
-          <div className="m-16">Alamat lengkap disini ...</div>
+          <div className="m-16">{currentUser.address}</div>
         </div>
       </LabelContainer>
       <form

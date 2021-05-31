@@ -6,6 +6,7 @@ const {
   SET_DEFAULT_QUANTITY_DESIRED,
   SET_DEFAULT_CHECKED,
   SET_DEFAULT_SOLD,
+  SET_DEFAULT_STATE,
 } = shopActionTypes;
 
 const INITIAL_STATE = {
@@ -30,6 +31,19 @@ const shopReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         items: state.items.map((item) => (item.sold = item.pid)),
+      };
+    case SET_DEFAULT_STATE:
+      return {
+        ...state,
+        items: state.items.map(
+          (item) =>
+            (item.state = {
+              unpaid: true,
+              pack: false,
+              send: false,
+              rate: false,
+            })
+        ),
       };
     default:
       return state;

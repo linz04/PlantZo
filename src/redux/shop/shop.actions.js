@@ -5,6 +5,7 @@ const {
   SET_DEFAULT_QUANTITY_DESIRED,
   SET_DEFAULT_CHECKED,
   SET_DEFAULT_SOLD,
+  SET_DEFAULT_STATE,
 } = shopActionTypes;
 
 export const setShopItems = () => ({
@@ -21,4 +22,8 @@ export const setDefaultChecked = () => ({
 
 export const setDefaultSold = () => ({
   type: SET_DEFAULT_SOLD,
+});
+
+export const setDefaultState = () => ({
+  type: SET_DEFAULT_STATE,
 });

@@ -30,7 +30,6 @@ import EditAddressPage from "./pages/EditAddressPage";
 
 const App = () => {
   const currentUser = useSelector((state) => selectCurrentUser(state));
-  console.log(currentUser);
 
   const location = useLocation();
 

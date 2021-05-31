@@ -17,6 +17,11 @@ export const addItemToCart = (cartItems, cartItemToAdd) => {
   ];
 };
 
+export const addItemAndQuantityToCart = (cartItems, itemAndQuantity) => {
+  const { item, itemQuantity } = itemAndQuantity;
+  return [...cartItems, { ...item, quantityDesired: itemQuantity }];
+};
+
 export const deleteItemFromCart = (cartItems, cartItemToClear) => {
   return cartItems.filter((cartItem) => cartItem.pid !== cartItemToClear.pid);
 };

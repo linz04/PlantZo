@@ -5,24 +5,29 @@ import {
   checkedItem,
   decreaseItemQuantity,
   deleteItemFromCart,
-  addQuantityDefined,
-  addQuantityDefinedAndChecked,
+  deleteAllItem,
   increaseItemQuantity,
+  addItemAndQuantityToCart,
 } from "./cart.utils";
 
 const {
   ADD_ITEM,
+  ADD_ITEM_WITH_QUANTITY,
   DELETE_ITEM,
+  DELETE_ALL_ITEM,
   CHECKED_ITEM,
   CHECKED_ALL_ITEM,
   INCREASE_ITEM_QUANTITY,
   DECREASE_ITEM_QUANTITY,
   SET_DELIVERY_TYPE,
+  SET_PAYMENT_TYPE,
+  STATE_ITEM_TO_NEXT,
 } = cartActionTypes;
 
 const INITIAL_STATE = {
   cartItems: [],
   deliveryType: [],
+  paymentType: [],
 };
 
 const cartReducer = (state = INITIAL_STATE, action) => {
@@ -32,10 +37,20 @@ const cartReducer = (state = INITIAL_STATE, action) => {
         ...state,
         cartItems: addItemToCart(state.cartItems, action.payload),
       };
+    case ADD_ITEM_WITH_QUANTITY:
+      return {
+        ...state,
+        cartItems: addItemAndQuantityToCart(state.cartItems, action.payload),
+      };
     case DELETE_ITEM:
       return {
         ...state,
         cartItems: deleteItemFromCart(state.cartItems, action.payload),
+      };
+    case DELETE_ALL_ITEM:
+      return {
+        ...state,
+        cartItems: [],
       };
     case CHECKED_ITEM:
       return {
@@ -61,6 +76,15 @@ const cartReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         deliveryType: action.payload,
+      };
+    case SET_PAYMENT_TYPE:
+      return {
+        ...state,
+        paymentType: action.payload,
+      };
+    case STATE_ITEM_TO_NEXT:
+      return {
+        ...state,
       };
     default:
       return state;

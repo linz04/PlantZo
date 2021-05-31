@@ -108,7 +108,7 @@ const CartPage = ({ history }) => {
             <span className="text-5xl">{`Rp ${cartItemsTotal}.000`}</span>
           </div>
           <button
-            className="border-2 border-gray-800 w-1/6 px-6 py-2 bg-green-700 text-white"
+            className="border-2 border-gray-800 w-1/6 px-6 py-2 bg-green-800 text-white"
             onClick={() => {
               if (cartItemsChecked.length) history.push("/checkout");
             }}

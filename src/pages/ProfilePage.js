@@ -1,15 +1,17 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { withRouter } from "react-router";
 
 import LabelContainer from "../components/LabelContainer";
 import UserFormInput from "../components/UserFormInput";
+import { setCurrentUser } from "../redux/user/user.actions";
 import { selectCurrentUser } from "../redux/user/user.selectors";
 
 const ProfilePage = ({ history }) => {
   const currentUser = useSelector((state) => selectCurrentUser(state));
-  const { displayName } = currentUser;
+  const { displayName, email } = currentUser;
+  const dispatch = useDispatch();
 
   const [formProfile, setFormProfile] = useState({
     firstName: "",
@@ -33,6 +35,14 @@ const ProfilePage = ({ history }) => {
     selectedBackgroundProfileImage,
   } = formProfile;
 
+  const user = {
+    displayName: `${firstName} ${lastName}`,
+    email,
+    address,
+    profileImage: selectedProfileImage,
+    backgroundImage: selectedBackgroundProfileImage,
+  };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormProfile({ ...formProfile, [name]: value });
@@ -43,8 +53,24 @@ const ProfilePage = ({ history }) => {
     setFormProfile({ ...formProfile, [name]: files[0] });
   };
 
+  const handleResetChanged = () => {
+    setFormProfile({
+      firstName: "",
+      lastName: "",
+      oldPassword: "",
+      newPassword: "",
+      confirmPassword: "",
+      address: "",
+      selectedProfileImage: null,
+      selectedBackgroundProfileImage: null,
+    });
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    // CATATAN: Masih butuh perbaikan untuk menggunakan foto dari file
+    dispatch(setCurrentUser(user));
 
     if (newPassword !== confirmPassword) {
       setFormProfile({ ...formProfile, newPassword: "", confirmPassword: "" });
@@ -64,8 +90,8 @@ const ProfilePage = ({ history }) => {
       selectedBackgroundProfileImage.name
     );
 
+    // CATATAN: Response belum sesuai tapi sudah bisa connect :)
     axios.post("/settings/profile", fd).then((res) => {
-      console.log(res);
       console.log(res.data);
     });
 
@@ -241,7 +267,10 @@ const ProfilePage = ({ history }) => {
         <LabelContainer>
           <div className="flex flex-1 justify-end space-x-6">
             <div>
-              <button className="bg-green-400 px-4 py-6">
+              <button
+                className="bg-green-400 px-4 py-6"
+                onClick={handleResetChanged}
+              >
                 BUANG PERUBAHAN
               </button>
             </div>

@@ -1,5 +1,7 @@
 import React, { useState } from "react";
+import axios from "axios";
 import { useSelector } from "react-redux";
+
 import LabelContainer from "../components/LabelContainer";
 import UserFormInput from "../components/UserFormInput";
 
@@ -11,11 +13,10 @@ const EditAddressPage = () => {
   const currentUser = useSelector((state) => selectCurrentUser(state));
 
   const {
+    pid,
     address:
       addressBefored = "Kampus IPB, Jl. Raya Dramaga, Babakan, Kec. Dramaga, Kota Bogor, Jawa Barat 16680",
   } = currentUser;
-
-  console.log(currentUser);
 
   const handleChange = (e) => {
     const { value } = e.target;
@@ -25,6 +26,13 @@ const EditAddressPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    // CATATAN belum bisa connect
+    // axios.post("api/user/address", { pid, address }).then((res) => {
+    //   setAddress("");
+
+    //   console.log(res.data);
+    // });
   };
 
   return (

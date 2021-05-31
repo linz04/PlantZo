@@ -13,6 +13,7 @@ import {
   setDefaultQuantityDesired,
   setDefaultChecked,
   setDefaultSold,
+  setDefaultState,
 } from "../redux/shop/shop.actions";
 
 const ShopPage = ({ history, match }) => {
@@ -20,10 +21,13 @@ const ShopPage = ({ history, match }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    axios.get("/shop").then((res) => console.log(res.data));
+    // CATATAN Belum bisa connect
+    // axios.get("/shop").then((res) => console.log("RES_DATA_SHOP", res.data));
+
     dispatch(setDefaultQuantityDesired());
     dispatch(setDefaultChecked());
     dispatch(setDefaultSold());
+    dispatch(setDefaultState());
   }, []);
 
   return (
