@@ -12,6 +12,11 @@ export const selectDeliveryType = createSelector(
   (cart) => cart.deliveryType
 );
 
+export const selectPaymentType = createSelector(
+  [selectCart],
+  (cart) => cart.paymentType
+);
+
 export const selectCartItemsCount = createSelector(
   [selectCartItems],
   (cartItems) =>

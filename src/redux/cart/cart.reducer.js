@@ -27,7 +27,7 @@ const {
 const INITIAL_STATE = {
   cartItems: [],
   deliveryType: [],
-  paymentType: [],
+  paymentType: "",
 };
 
 const cartReducer = (state = INITIAL_STATE, action) => {

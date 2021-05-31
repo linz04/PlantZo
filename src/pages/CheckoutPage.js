@@ -16,8 +16,6 @@ import {
 import { selectCurrentUser } from "../redux/user/user.selectors";
 
 const CheckoutPage = ({ history }) => {
-  const [paymentType, setPaymentType] = useState("");
-
   const deliveryType = useSelector((state) => selectDeliveryType(state));
   const currentUser = useSelector((state) => selectCurrentUser(state));
 
@@ -36,11 +34,6 @@ const CheckoutPage = ({ history }) => {
   const handleCheckRadio = (e) => {
     const { value } = e.target;
     dispatch(setDeliveryType(value.split(",")));
-  };
-
-  const handlePaymentMethod = (e) => {
-    const { innerHTML } = e.target;
-    setPaymentType(innerHTML);
   };
 
   const handleSubmit = (e) => {
@@ -202,7 +195,6 @@ const CheckoutPage = ({ history }) => {
                 </div>
                 <div className="flex items-center">
                   <input
-                    my-4
                     className="h-8 w-8 cursor-pointer"
                     type="radio"
                     name="delivery_type"
@@ -245,22 +237,18 @@ const CheckoutPage = ({ history }) => {
             <div className="grid grid-cols-4 gap-4">
               <PaymentBanner
                 value="DANA"
-                handleClick={handlePaymentMethod}
                 imageUrl="/images/background/dana.jpg"
               />
               <PaymentBanner
                 value="OVO"
-                handleClick={handlePaymentMethod}
                 imageUrl="/images/background/ovo.png"
               />
               <PaymentBanner
                 value="GOPAY"
-                handleClick={handlePaymentMethod}
                 imageUrl="/images/background/gopay.jpg"
               />
               <PaymentBanner
                 value="COD"
-                handleClick={handlePaymentMethod}
                 imageUrl="/images/background/cod.jpg"
               />
             </div>
