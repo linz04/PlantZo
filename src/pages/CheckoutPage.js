@@ -6,7 +6,7 @@ import LabelContainer from "../components/LabelContainer";
 import CheckoutItem from "../components/CheckoutItem";
 import PaymentBanner from "../components/PaymentBanner";
 
-import { setDeliveryType } from "../redux/cart/cart.actions";
+import { setDeliveryType, stateItemsToNext } from "../redux/cart/cart.actions";
 
 import {
   selectCartItemsChecked,
@@ -51,6 +51,8 @@ const CheckoutPage = ({ history }) => {
 
     history.push("/state/inpaid");
   };
+
+  console.log(cartItems);
 
   return (
     <div className="flex flex-1 flex-col justify-between">
@@ -110,8 +112,8 @@ const CheckoutPage = ({ history }) => {
         </div>
       </LabelContainer>
       <form
-        onSubmit={handleSubmit}
-        method="post"
+        // onSubmit={handleSubmit}
+        // method="post"
         className="flex-col justify-center items-center space-y-4"
       >
         <LabelContainer>
@@ -302,6 +304,10 @@ const CheckoutPage = ({ history }) => {
               type="submit"
               value="submit form"
               className="w-1/4 px-6 py-4 bg-green-900 text-white"
+              onClick={() => {
+                dispatch(stateItemsToNext(cartItems));
+                history.push("/state/inpaid");
+              }}
             >
               Bayar Sekarang
             </button>

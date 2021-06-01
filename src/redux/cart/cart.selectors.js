@@ -103,3 +103,5 @@ export const selectCartItemsInRateQuantity = createSelector(
       0
     )
 );
+
+export const selectItemStateNumberToString = ["UNPAID", "PACK", "SEND", "RATE"];

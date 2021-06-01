@@ -4,7 +4,9 @@ const TestPage = () => {
   return (
     // Code HTML dan Styling disini yoo
     // Hasil bisa dilihat di /test pada urlnya
-    <div>Hai</div>
+    <div>
+      <div>Hai</div>
+    </div>
   );
 };
 

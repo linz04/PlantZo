@@ -81,6 +81,7 @@ const CartPage = ({ history }) => {
                   type="checkbox"
                   name="itemToCheckout"
                   checked={item.checked}
+                  onChange={() => {}}
                   required
                 />
               </div>

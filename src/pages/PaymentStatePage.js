@@ -81,8 +81,15 @@ const PaymentStatePage = ({ history, match, location }) => {
         </LabelContainer>
       )}
 
-      <Route exact path={`${match.url}/unpaid`} component={UnPaidPage} />
+      {location.pathname === match.url ? (
+        <div className="flex flex-1 justify-center items-center text-6xl font-light">
+          Periksa keberadaan barang Anda disini
+        </div>
+      ) : null}
+
       <Route exact path={`${match.url}/inpaid`} component={InPaidPage} />
+
+      <Route exact path={`${match.url}/unpaid`} component={UnPaidPage} />
       <Route exact path={`${match.url}/pack`} component={PackPage} />
       <Route exact path={`${match.url}/send`} component={SendPage} />
       <Route exact path={`${match.url}/rate`} component={RatePage} />

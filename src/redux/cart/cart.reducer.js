@@ -5,7 +5,6 @@ import {
   checkedItem,
   decreaseItemQuantity,
   deleteItemFromCart,
-  deleteAllItem,
   increaseItemQuantity,
   addItemAndQuantityToCart,
 } from "./cart.utils";
@@ -22,6 +21,7 @@ const {
   SET_DELIVERY_TYPE,
   SET_PAYMENT_TYPE,
   STATE_ITEM_TO_NEXT,
+  STATE_ITEMS_TO_NEXT,
   FINISHED_TRANSACTION,
 } = cartActionTypes;
 
@@ -83,9 +83,19 @@ const cartReducer = (state = INITIAL_STATE, action) => {
         ...state,
         paymentType: action.payload,
       };
+
     case STATE_ITEM_TO_NEXT:
       return {
         ...state,
+        cartItems: [...state.cartItems, action.payload.state++],
+      };
+    case STATE_ITEMS_TO_NEXT:
+      return {
+        ...state,
+        cartItems: [
+          ...state.cartItems,
+          action.payload.map((cartItem) => cartItem.state++),
+        ],
       };
     case FINISHED_TRANSACTION:
       return {

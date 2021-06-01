@@ -25,7 +25,8 @@ export const addItemAndQuantityToCart = (cartItems, itemAndQuantity) => {
     {
       ...item,
       quantityDesired: itemQuantity,
-      state: { unpaid: true, pack: false, send: false, rate: false },
+      checked: false,
+      state: 0,
     },
   ];
 };

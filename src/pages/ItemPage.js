@@ -39,7 +39,6 @@ const ItemPage = ({ history, location }) => {
 
   const handleAddToCart = (e) => {
     e.preventDefault();
-
     dispatch(addItemWithQuantity({ item, itemQuantity }));
     // CATATAN Belum bisa connect
     // axios.post(location.pathname, {pid, quantity}).then((res) => {
