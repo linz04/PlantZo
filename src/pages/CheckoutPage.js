@@ -12,12 +12,14 @@ import {
   selectCartItemsChecked,
   selectCartItemsTotal,
   selectDeliveryType,
+  selectPaymentType,
 } from "../redux/cart/cart.selectors";
 import { selectCurrentUser } from "../redux/user/user.selectors";
 
 const CheckoutPage = ({ history }) => {
-  const deliveryType = useSelector((state) => selectDeliveryType(state));
   const currentUser = useSelector((state) => selectCurrentUser(state));
+  const deliveryType = useSelector((state) => selectDeliveryType(state));
+  const paymentType = useSelector((state) => selectPaymentType(state));
 
   const dispatch = useDispatch();
 
@@ -238,18 +240,22 @@ const CheckoutPage = ({ history }) => {
               <PaymentBanner
                 value="DANA"
                 imageUrl="/images/background/dana.jpg"
+                size="large"
               />
               <PaymentBanner
                 value="OVO"
                 imageUrl="/images/background/ovo.png"
+                size="large"
               />
               <PaymentBanner
                 value="GOPAY"
                 imageUrl="/images/background/gopay.jpg"
+                size="large"
               />
               <PaymentBanner
                 value="COD"
                 imageUrl="/images/background/cod.jpg"
+                size="large"
               />
             </div>
           </div>

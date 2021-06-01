@@ -4,8 +4,8 @@ const CheckoutItem = ({ item }) => {
   const { name, description, image: imageUrl, price, quantityDesired } = item;
 
   return (
-    <>
-      <div className="flex justify-between h-56 m-4 pt-4">
+    <div>
+      <div className="flex justify-between h-56 pt-4">
         <div className="w-1/5 pl-10">
           <img src={imageUrl} alt="Item" className="h-full" />
         </div>
@@ -21,8 +21,8 @@ const CheckoutItem = ({ item }) => {
           Rp {quantityDesired * price}.000
         </div>
       </div>
-      <div className="w-full h-0.5 bg-gray-800" />
-    </>
+      <div className="w-full h-0.5 bg-gray-800 mt-8" />
+    </div>
   );
 };
 

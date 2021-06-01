@@ -34,50 +34,52 @@ const PaymentStatePage = ({ history, match, location }) => {
         </span>
       </LabelContainer>
 
-      <LabelContainer>
-        <div className="flex justify-between flex-1 text-2xl items-center">
-          <div
-            className={`${
-              location.pathname === `${match.url}/unpaid`
-                ? "bg-green-900 text-white px-4 py-2"
-                : ""
-            } cursor-pointer`}
-            onClick={() => history.push(`${match.url}/unpaid`)}
-          >
-            Belum dibayar
+      {location.pathname === `${match.url}/inpaid` ? null : (
+        <LabelContainer>
+          <div className="flex justify-between flex-1 text-2xl items-center">
+            <div
+              className={`${
+                location.pathname === `${match.url}/unpaid`
+                  ? "bg-green-900 text-white px-4 py-2"
+                  : ""
+              } cursor-pointer`}
+              onClick={() => history.push(`${match.url}/unpaid`)}
+            >
+              Belum dibayar
+            </div>
+            <div
+              className={`${
+                location.pathname === `${match.url}/pack`
+                  ? "bg-green-900 text-white px-4 py-2"
+                  : ""
+              } cursor-pointer`}
+              onClick={() => history.push(`${match.url}/pack`)}
+            >
+              Dalam pengemasan
+            </div>
+            <div
+              className={`${
+                location.pathname === `${match.url}/send`
+                  ? "bg-green-900 text-white px-4 py-2"
+                  : ""
+              } cursor-pointer`}
+              onClick={() => history.push(`${match.url}/send`)}
+            >
+              Dalam pengiriman
+            </div>
+            <div
+              className={`${
+                location.pathname === `${match.url}/rate`
+                  ? "bg-green-900 text-white px-4 py-2"
+                  : ""
+              } cursor-pointer`}
+              onClick={() => history.push(`${match.url}/rate`)}
+            >
+              Penilaian produk
+            </div>
           </div>
-          <div
-            className={`${
-              location.pathname === `${match.url}/pack`
-                ? "bg-green-900 text-white px-4 py-2"
-                : ""
-            } cursor-pointer`}
-            onClick={() => history.push(`${match.url}/pack`)}
-          >
-            Dalam pengemasan
-          </div>
-          <div
-            className={`${
-              location.pathname === `${match.url}/send`
-                ? "bg-green-900 text-white px-4 py-2"
-                : ""
-            } cursor-pointer`}
-            onClick={() => history.push(`${match.url}/send`)}
-          >
-            Dalam pengiriman
-          </div>
-          <div
-            className={`${
-              location.pathname === `${match.url}/rate`
-                ? "bg-green-900 text-white px-4 py-2"
-                : ""
-            } cursor-pointer`}
-            onClick={() => history.push(`${match.url}/rate`)}
-          >
-            Penilaian produk
-          </div>
-        </div>
-      </LabelContainer>
+        </LabelContainer>
+      )}
 
       <Route exact path={`${match.url}/unpaid`} component={UnPaidPage} />
       <Route exact path={`${match.url}/inpaid`} component={InPaidPage} />

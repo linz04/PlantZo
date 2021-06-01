@@ -5,14 +5,10 @@ import axios from "axios";
 
 import LabelContainer from "../components/LabelContainer";
 
-import {
-  deleteItem,
-  checkedItem,
-  addItemWithQuantity,
-} from "../redux/cart/cart.actions";
+import { checkedItem, addItemWithQuantity } from "../redux/cart/cart.actions";
 
 const ItemPage = ({ history, location }) => {
-  const [itemQuantity, setItemQuantity] = useState(0);
+  const [itemQuantity, setItemQuantity] = useState(1);
   const [item, setItem] = useState({
     name: "",
     description: "",
@@ -204,9 +200,9 @@ const ItemPage = ({ history, location }) => {
               </div>
               <div>Tersisa {quantity}</div>
             </div>
-            <div className="flex justify-center space-x-8">
+            <div className="flex justify-center space-x-8 -mb-8">
               <button
-                className="flex justify-between items-center border border-green-800 px-8 py-6 w-96"
+                className="flex justify-between items-center border-2 border-black px-8 py-6 w-96"
                 onClick={handleAddToCart}
               >
                 <div>
@@ -230,10 +226,26 @@ const ItemPage = ({ history, location }) => {
                 </div>
               </button>
               <button
-                className="flex justify-center items-center border bg-green-900 px-8 py-6  w-96"
+                className="flex justify-between items-center border-2 border-black bg-green-800 px-8 py-6 w-96"
                 onClick={handleBuyItem}
               >
-                <div className="text-white">Beli sekarang</div>
+                <div>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-10 w-10 text-white"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
+                    />
+                  </svg>
+                </div>
+                <div className="text-white font-normal">Bayar Sekarang</div>
               </button>
             </div>
           </div>

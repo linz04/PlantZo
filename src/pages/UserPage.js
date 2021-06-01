@@ -43,7 +43,7 @@ const UserPage = ({ history, match }) => {
 
   return (
     <div className="mb-10">
-      <LabelContainer>
+      <LabelContainer onClick={() => history.push("/shop")}>
         <span className="flex items-center justify-center space-x-4 cursor-pointer">
           <span>
             <svg
@@ -214,19 +214,6 @@ const UserPage = ({ history, match }) => {
             </div>
           </div>
         </div>
-      </LabelContainer>
-      <LabelContainer>
-        <span className="font-normal text-6xl flex justify-center items-center flex-1">
-          Pengaturan
-        </span>
-      </LabelContainer>
-      <LabelContainer>
-        <span
-          className="cursor-pointer font-light"
-          onClick={() => history.push("/settings/profile")}
-        >
-          Profil
-        </span>
       </LabelContainer>
       <LabelContainer>
         <span

@@ -12,6 +12,7 @@ const {
   SET_DELIVERY_TYPE,
   SET_PAYMENT_TYPE,
   STATE_ITEM_TO_NEXT,
+  FINISHED_TRANSACTION,
 } = cartActionTypes;
 
 export const addItem = (item) => ({
@@ -64,4 +65,8 @@ export const setPaymentType = (payment) => ({
 
 export const stateItemToNext = () => ({
   type: STATE_ITEM_TO_NEXT,
+});
+
+export const finishedTransaction = () => ({
+  type: FINISHED_TRANSACTION,
 });

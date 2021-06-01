@@ -22,6 +22,7 @@ const {
   SET_DELIVERY_TYPE,
   SET_PAYMENT_TYPE,
   STATE_ITEM_TO_NEXT,
+  FINISHED_TRANSACTION,
 } = cartActionTypes;
 
 const INITIAL_STATE = {
@@ -85,6 +86,13 @@ const cartReducer = (state = INITIAL_STATE, action) => {
     case STATE_ITEM_TO_NEXT:
       return {
         ...state,
+      };
+    case FINISHED_TRANSACTION:
+      return {
+        ...state,
+        cartItems: [],
+        deliveryType: [],
+        paymentType: "",
       };
     default:
       return state;
