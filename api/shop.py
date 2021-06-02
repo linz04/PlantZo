@@ -4,6 +4,20 @@ from db import mysql
 from flask import jsonify, request
 import jwt
 
+@app.route('/shop', methods=['GET'])
+def index():
+	if request.method == 'GET':
+		cur = mysql.connection.cursor()
+		cur.execute("SELECT * FROM product")
+		row_headers= [x[0] for x in cur.description]
+		rv = cur.fetchall()
+		json_data = []
+		for result in rv:
+			json_data.append(dict(zip(row_headers,result)))
+		res = json.loads(json.dumps(json_data))
+		return jsonify(res)
+
+
 @app.route('/shop/<int:pid>', methods=['GET','POST'])
 def shop(pid):
 	if request.method == 'GET':
