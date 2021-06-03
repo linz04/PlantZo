@@ -8,8 +8,9 @@ const {
   SET_DEFAULT_STATE,
 } = shopActionTypes;
 
-export const setShopItems = () => ({
+export const setShopItems = (items) => ({
   type: SET_SHOP_ITEMS,
+  payload: items,
 });
 
 export const setDefaultQuantityDesired = () => ({

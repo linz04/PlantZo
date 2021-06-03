@@ -41,13 +41,12 @@ const ItemPage = ({ history, location }) => {
     e.preventDefault();
     dispatch(addItemWithQuantity({ item, itemQuantity }));
     // CATATAN Belum bisa connect
-    // axios.post(location.pathname, {pid, quantity}).then((res) => {
-    //   setItemQuantity(0);
+    // axios.post("/cart", { pid, quantity }).then((res) => {
 
     //   console.log(res);
     //   console.log(res.data);
     // });
-    // setClickToCard(true);
+    setItemQuantity(1);
     alert("Sukses memasukan ke keranjang");
   };
 

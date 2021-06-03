@@ -12,7 +12,11 @@ import LabelContainer from "../components/LabelContainer";
 const PaymentStatePage = ({ history, match, location }) => {
   return (
     <div className="flex flex-1 flex-col">
-      <LabelContainer onClick={() => history.push("/checkout")}>
+      <LabelContainer
+        onClick={() => {
+          history.push("/checkout");
+        }}
+      >
         <span className="flex items-center justify-center space-x-4 cursor-pointer">
           <span>
             <svg

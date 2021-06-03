@@ -1,5 +1,4 @@
 import { shopActionTypes } from "./shop.types";
-import SHOP_DATA from "./shop.data";
 
 const {
   SET_SHOP_ITEMS,
@@ -10,13 +9,16 @@ const {
 } = shopActionTypes;
 
 const INITIAL_STATE = {
-  items: SHOP_DATA,
+  items: [],
 };
 
 const shopReducer = (state = INITIAL_STATE, action) => {
-  switch (action) {
+  switch (action.type) {
     case SET_SHOP_ITEMS:
-      return { ...state, items: [...action.payload] };
+      return {
+        ...state,
+        items: action.payload,
+      };
     case SET_DEFAULT_QUANTITY_DESIRED:
       return {
         ...state,

@@ -89,6 +89,7 @@ const ProfilePage = ({ history }) => {
       selectedBackgroundProfileImage,
       selectedBackgroundProfileImage.name
     );
+    fd.append("address", address);
 
     // CATATAN: Response belum sesuai tapi sudah bisa connect :)
     axios.post("/settings/profile", fd).then((res) => {

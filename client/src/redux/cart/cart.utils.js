@@ -19,6 +19,20 @@ export const addItemToCart = (cartItems, cartItemToAdd) => {
 
 export const addItemAndQuantityToCart = (cartItems, itemAndQuantity) => {
   const { item, itemQuantity } = itemAndQuantity;
+  const existingCartItem = cartItems.find(
+    (cartItem) => cartItem.pid === item.pid
+  );
+
+  if (existingCartItem) {
+    return cartItems.map((cartItem) =>
+      cartItem.pid === item.pid
+        ? {
+            ...cartItem,
+            quantityDesired: cartItem.quantityDesired + itemQuantity,
+          }
+        : cartItem
+    );
+  }
 
   return [
     ...cartItems,

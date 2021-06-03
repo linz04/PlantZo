@@ -43,25 +43,45 @@ export const selectCartItemsChecked = createSelector(
   [selectCartItems],
   (cartItems) => cartItems.filter((cartItem) => cartItem.checked === true)
 );
-//
+
+export const selectCartItemsInCart = createSelector(
+  [selectCartItems],
+  (cartItems) =>
+    cartItems.filter(
+      (cartItem) => selectItemStateNumberToString(cartItem.state) === "INCART"
+    )
+);
+
 export const selectCartItemsInUnPaid = createSelector(
   [selectCartItems],
-  (cartItems) => cartItems.filter((cartItem) => cartItem.state.unpaid === true)
+  (cartItems) =>
+    cartItems.filter(
+      (cartItem) => selectItemStateNumberToString(cartItem.state) === "UNPAID"
+    )
 );
 
 export const selectCartItemsInPack = createSelector(
   [selectCartItems],
-  (cartItems) => cartItems.filter((cartItem) => cartItem.state.pack === true)
+  (cartItems) =>
+    cartItems.filter(
+      (cartItem) => selectItemStateNumberToString(cartItem.state) === "PACK"
+    )
 );
 
 export const selectCartItemsInSend = createSelector(
   [selectCartItems],
-  (cartItems) => cartItems.filter((cartItem) => cartItem.state.send === true)
+  (cartItems) =>
+    cartItems.filter(
+      (cartItem) => selectItemStateNumberToString(cartItem.state) === "SEND"
+    )
 );
 
 export const selectCartItemsInRate = createSelector(
   [selectCartItems],
-  (cartItems) => cartItems.filter((cartItem) => cartItem.state.rate === true)
+  (cartItems) =>
+    cartItems.filter(
+      (cartItem) => selectItemStateNumberToString(cartItem.state) === "RATE"
+    )
 );
 
 export const selectCartItemsInUnPaidQuantity = createSelector(
@@ -104,4 +124,10 @@ export const selectCartItemsInRateQuantity = createSelector(
     )
 );
 
-export const selectItemStateNumberToString = ["UNPAID", "PACK", "SEND", "RATE"];
+export const selectItemStateNumberToString = [
+  "INCART",
+  "UNPAID",
+  "PACK",
+  "SEND",
+  "RATE",
+];

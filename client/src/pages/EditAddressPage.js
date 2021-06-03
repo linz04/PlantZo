@@ -28,11 +28,11 @@ const EditAddressPage = () => {
     e.preventDefault();
 
     // CATATAN belum bisa connect
-    // axios.post("api/user/address", { pid, address }).then((res) => {
-    //   setAddress("");
+    axios.post("api/user/address", { pid, address }).then((res) => {
+      setAddress("");
 
-    //   console.log(res.data);
-    // });
+      console.log(res.data);
+    });
   };
 
   return (

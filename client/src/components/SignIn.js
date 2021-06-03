@@ -25,6 +25,8 @@ const SignIn = ({ history }) => {
         alert(res.data.error);
       } else {
         const encodeData = jwt(res.data);
+        console.log("COOKIE", res.data);
+        console.log("HASIL DECODE JWT", encodeData);
         const { email, first_name, last_name } = encodeData.sub;
         dispatch(
           setCurrentUser({

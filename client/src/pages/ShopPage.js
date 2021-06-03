@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { withRouter } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
@@ -14,20 +14,24 @@ import {
   setDefaultChecked,
   setDefaultSold,
   setDefaultState,
+  setShopItems,
 } from "../redux/shop/shop.actions";
+
+import { addItem } from "../redux/cart/cart.actions";
 
 const ShopPage = ({ history, match }) => {
   const items = useSelector((state) => selectShopItems(state));
   const dispatch = useDispatch();
 
   useEffect(() => {
-    // CATATAN Belum bisa connect
-    // axios.get("/shop").then((res) => console.log("RES_DATA_SHOP", res.data));
+    axios.get("/shop").then((res) => {
+      dispatch(setShopItems(res.data));
+    });
 
-    dispatch(setDefaultQuantityDesired());
-    dispatch(setDefaultChecked());
-    dispatch(setDefaultSold());
-    dispatch(setDefaultState());
+    // dispatch(setDefaultQuantityDesired());
+    // dispatch(setDefaultChecked());
+    // dispatch(setDefaultSold());
+    // dispatch(setDefaultState());
   }, []);
 
   return (

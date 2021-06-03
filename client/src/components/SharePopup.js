@@ -2,7 +2,7 @@ import React from "react";
 
 const SharePopup = () => {
   return (
-    <div className="flex flex-col justify-evenly items-center my-2 w-16 h-64 rounded-xl bg-gray-100 z-10">
+    <div className="flex flex-col justify-evenly items-center absolute -left-8 my-2 w-16 h-64 rounded-xl bg-gray-100 z-50">
       <div>
         <svg
           xmlns="http://www.w3.org/2000/svg"

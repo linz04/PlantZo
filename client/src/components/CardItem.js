@@ -2,7 +2,7 @@ import React from "react";
 import { withRouter } from "react-router";
 
 const CardItem = ({ item, history }) => {
-  const { name, imageUrl, pid, price, rating, sold } = item;
+  const { name, image: imageUrl, pid, price, rating, sold } = item;
 
   let nameEdited = name;
 
