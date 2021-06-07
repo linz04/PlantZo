@@ -1,0 +1,46 @@
+version: "3"
+services:
+  mysql:
+    image: mysql:8.0
+    command: --default-authentication-plugin=mysql_native_password
+    volumes:
+      - .:/application
+      - ./db/db.sql:/docker-entrypoint-initdb.d/db.sql
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=PlantZo@123
+      - MYSQL_DATABASE=plantzo
+    networks:
+      - python-network
+  plantzo-backend:
+    container_name: plantzo-backend
+    build: ./api
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./api:/app
+    environment:
+      FLASK_ENV: development
+    restart: always
+    depends_on:
+      - mysql
+    networks:
+      - python-network
+    links:
+      - mysql
+  plantzo-frontend:
+    container_name: plantzo-frontend
+    build: ./client
+    ports:
+      - "80:3000"
+    volumes:
+      - ./client:/user/src/app
+    depends_on:
+      - plantzo-backend
+    restart: unless-stopped
+    networks:
+      - python-network
+
+networks:
+  python-network:
+    driver: bridge

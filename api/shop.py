@@ -7,7 +7,7 @@ import jwt
 @app.route('/shop', methods=['GET'])
 def index():
 	if request.method == 'GET':
-		cur = mysql.connection.cursor()
+		cur = mysql.cursor(buffered=True)
 		cur.execute("SELECT * FROM product")
 		row_headers= [x[0] for x in cur.description]
 		rv = cur.fetchall()
@@ -21,7 +21,7 @@ def index():
 @app.route('/shop/<int:pid>', methods=['GET','POST'])
 def shop(pid):
 	if request.method == 'GET':
-		cur = mysql.connection.cursor()
+		cur = mysql.cursor(buffered=True)
 		cur.execute("SELECT * FROM product where pid = %s", (pid,))
 		row_headers= [x[0] for x in cur.description]
 		rv = cur.fetchall()
@@ -36,7 +36,7 @@ def shop(pid):
 		token = request.cookies.get('auth')
 		payload = jwt.decode(token, app.config.get('JWT_SECRET_KEY'), algorithms=['HS256'])
 		auth = payload['sub']
-		cur = mysql.connection.cursor()
+		cur = mysql.connection.cursor(buffered=True)
 		cur.execute("INSERT INTO cart (uid, pid) VALUES (%s, %s)", (auth['uid'], data['pid']))
 		mysql.connection.commit()
 		cur.close()

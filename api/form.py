@@ -11,7 +11,7 @@ def signup():
 	first_name = data['firstName']
 	last_name = data['lastName']
 	password = bcrypt.generate_password_hash(data['password']).decode('utf-8')
-	cur = mysql.connection.cursor()
+	cur = mysql.cursor(buffered=True)
 
 	cur.execute("SELECT 1 FROM users WHERE email=%s", (email,))
 	if cur.rowcount == 1:
@@ -19,7 +19,7 @@ def signup():
 
 	cur.execute("INSERT INTO users (first_name, last_name, email, password) VALUES (%s, %s, %s, %s)", (first_name, last_name, email, password))
 
-	mysql.connection.commit()
+	mysql.commit()
 	cur.close()
 	print("success")
 
@@ -32,7 +32,7 @@ def signup():
 @app.route('/api/login', methods=['POST', 'GET'])
 def login():
 	if request.method == 'POST':
-		cur = mysql.connection.cursor()
+		cur = mysql.cursor(buffered=True)
 		data = request.get_json()['user']
 		email = data['email']
 		password = data['password']

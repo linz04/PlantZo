@@ -60,5 +60,5 @@
     "prop-types": "^15.7.2",
     "tailwindcss": "^2.1.1"
   },
-  "proxy": "http://localhost:5000"
+  "proxy": "http://plantzo-backend:5000"
 }
