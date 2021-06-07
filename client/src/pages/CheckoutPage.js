@@ -1,13 +1,10 @@
-import React, { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { withRouter } from "react-router";
-
-import LabelContainer from "../components/LabelContainer";
 import CheckoutItem from "../components/CheckoutItem";
+import LabelContainer from "../components/LabelContainer";
 import PaymentBanner from "../components/PaymentBanner";
-
 import { setDeliveryType, stateItemsToNext } from "../redux/cart/cart.actions";
-
 import {
   selectCartItemsChecked,
   selectCartItemsTotal,

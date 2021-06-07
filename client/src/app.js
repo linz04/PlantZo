@@ -1,32 +1,29 @@
 import React, { useEffect } from "react";
-import {
-  Switch,
-  Route,
-  Redirect,
-  withRouter,
-  useLocation,
-} from "react-router-dom";
 import { useSelector } from "react-redux";
-
-import HomePage from "./pages/HomePage";
-import ShopPage from "./pages/ShopPage";
-import CartPage from "./pages/CartPage";
-import UserPage from "./pages/UserPage";
-import AboutUserPage from "./pages/AboutUserPage";
-import ItemPage from "./pages/ItemPage";
-import CheckoutPage from "./pages/CheckoutPage";
-import PaymentStatePage from "./pages/PaymentStatePage";
-import SettingsPage from "./pages/SettingsPage";
-import TestPage from "./pages/TestPage";
-
+import {
+  Redirect,
+  Route,
+  Switch,
+  useLocation,
+  withRouter,
+} from "react-router-dom";
+import Footer from "./components/Footer";
+import Nav from "./components/Nav";
 import NavHome from "./components/NavHome";
 import PageContainer from "./components/PageContainer";
-import Nav from "./components/Nav";
-import Footer from "./components/Footer";
-
 import { auth } from "./lib/firebase/firebase.utils";
-import { selectCurrentUser } from "./redux/user/user.selectors";
+import AboutUserPage from "./pages/AboutUserPage";
+import CartPage from "./pages/CartPage";
+import CheckoutPage from "./pages/CheckoutPage";
 import EditAddressPage from "./pages/EditAddressPage";
+import HomePage from "./pages/HomePage";
+import ItemPage from "./pages/ItemPage";
+import PaymentStatePage from "./pages/PaymentStatePage";
+import SettingsPage from "./pages/SettingsPage";
+import ShopPage from "./pages/ShopPage";
+import TestPage from "./pages/TestPage";
+import UserPage from "./pages/UserPage";
+import { selectCurrentUser } from "./redux/user/user.selectors";
 
 const App = () => {
   const currentUser = useSelector((state) => selectCurrentUser(state));

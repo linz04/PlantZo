@@ -1,16 +1,13 @@
 import React, { useEffect } from "react";
-import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
 import { withRouter } from "react-router";
-import { useSelector, useDispatch } from "react-redux";
-
 import PaymentBanner from "../components/PaymentBanner";
-
+import { finishedTransaction } from "../redux/cart/cart.actions";
 import {
   selectCartItemsTotal,
   selectPaymentType,
 } from "../redux/cart/cart.selectors";
 import { selectCurrentUser } from "../redux/user/user.selectors";
-import { finishedTransaction } from "../redux/cart/cart.actions";
 
 const InPaidPage = ({ history }) => {
   const paymentType = useSelector((state) => selectPaymentType(state));

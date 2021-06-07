@@ -1,14 +1,11 @@
-import React, { useState } from "react";
-import { withRouter } from "react-router";
-import { useDispatch } from "react-redux";
 import axios from "axios";
 import jwt from "jwt-decode";
-
-import FormInput from "./FormInput";
-
-import { setCurrentUser } from "../redux/user/user.actions";
-
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { withRouter } from "react-router";
 import { signInWithGoogle } from "../lib/firebase/firebase.utils";
+import { setCurrentUser } from "../redux/user/user.actions";
+import FormInput from "./FormInput";
 
 const SignIn = ({ history }) => {
   const [user, setUser] = useState({ email: "", password: "" });

@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { withRouter } from "react-router-dom";
-
 import SharePopup from "./SharePopup";
 
 const Nav = ({ history, match, location }) => {

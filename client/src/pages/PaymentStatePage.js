@@ -1,13 +1,11 @@
 import React from "react";
 import { Route, withRouter } from "react-router";
-
+import LabelContainer from "../components/LabelContainer";
 import InPaidPage from "./InPaidPage";
 import PackPage from "./PackPage";
 import RatePage from "./RatePage";
 import SendPage from "./SendPage";
 import UnPaidPage from "./UnPaidPage";
-
-import LabelContainer from "../components/LabelContainer";
 
 const PaymentStatePage = ({ history, match, location }) => {
   return (

@@ -1,7 +1,6 @@
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setPaymentType } from "../redux/cart/cart.actions";
-
 import { selectPaymentType } from "../redux/cart/cart.selectors";
 
 const PaymentBanner = ({ imageUrl, value, size }) => {

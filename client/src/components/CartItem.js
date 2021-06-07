@@ -1,10 +1,9 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-
 import {
-  increaseItemQuantity,
   decreaseItemQuantity,
   deleteItem,
+  increaseItemQuantity,
 } from "../redux/cart/cart.actions";
 
 const CartItem = ({ item }) => {

@@ -1,15 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { withRouter } from "react-router";
-
 import CartItem from "../components/CartItem";
 import LabelContainer from "../components/LabelContainer";
-
 import { checkedAllItems, checkedItem } from "../redux/cart/cart.actions";
 import {
   selectCartItems,
-  selectCartItemsTotal,
   selectCartItemsChecked,
+  selectCartItemsTotal,
 } from "../redux/cart/cart.selectors";
 
 const CartPage = ({ history }) => {

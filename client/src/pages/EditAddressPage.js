@@ -1,10 +1,8 @@
-import React, { useState } from "react";
 import axios from "axios";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
-
 import LabelContainer from "../components/LabelContainer";
 import UserFormInput from "../components/UserFormInput";
-
 import { selectCurrentUser } from "../redux/user/user.selectors";
 
 const EditAddressPage = () => {

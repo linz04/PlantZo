@@ -1,8 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { withRouter } from "react-router";
-
 import LabelContainer from "../components/LabelContainer";
 import UserFormInput from "../components/UserFormInput";
 import { setCurrentUser } from "../redux/user/user.actions";

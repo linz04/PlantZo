@@ -1,12 +1,12 @@
 import { cartActionTypes } from "./cart.types";
 import {
+  addItemAndQuantityToCart,
   addItemToCart,
   checkedAllItems,
   checkedItem,
   decreaseItemQuantity,
   deleteItemFromCart,
   increaseItemQuantity,
-  addItemAndQuantityToCart,
 } from "./cart.utils";
 
 const {

@@ -1,20 +1,17 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { withRouter } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
-
 import LabelContainer from "../components/LabelContainer";
-
 import { auth } from "../lib/firebase/firebase.utils";
-import { setCurrentUser } from "../redux/user/user.actions";
 import { deleteAllItem } from "../redux/cart/cart.actions";
-import { selectCurrentUser } from "../redux/user/user.selectors";
 import {
   selectCartItemsInPackQuantity,
   selectCartItemsInRateQuantity,
   selectCartItemsInSendQuantity,
   selectCartItemsInUnPaidQuantity,
 } from "../redux/cart/cart.selectors";
+import { setCurrentUser } from "../redux/user/user.actions";
+import { selectCurrentUser } from "../redux/user/user.selectors";
 
 const UserPage = ({ history, match }) => {
   const currentUser = useSelector((state) => selectCurrentUser(state));

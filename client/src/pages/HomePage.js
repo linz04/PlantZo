@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-
 import Popup from "../components/Popup";
-import SignUp from "../components/SignUp";
 import SignIn from "../components/SignIn";
+import SignUp from "../components/SignUp";
 
 const HomePage = () => {
   const [signUpPopupVisible, setSignUpPopupVisible] = useState(false);

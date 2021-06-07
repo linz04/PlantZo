@@ -1,11 +1,9 @@
-import React, { useState, useEffect } from "react";
-import { withRouter } from "react-router";
-import { useDispatch } from "react-redux";
 import axios from "axios";
-
+import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { withRouter } from "react-router";
 import LabelContainer from "../components/LabelContainer";
-
-import { checkedItem, addItemWithQuantity } from "../redux/cart/cart.actions";
+import { addItemWithQuantity, checkedItem } from "../redux/cart/cart.actions";
 
 const ItemPage = ({ history, location }) => {
   const [itemQuantity, setItemQuantity] = useState(1);
@@ -33,7 +31,7 @@ const ItemPage = ({ history, location }) => {
     axios.get(location.pathname).then((res) => {
       setItem(res.data);
     });
-  }, []);
+  }, [location.pathname]);
 
   const dispatch = useDispatch();
 

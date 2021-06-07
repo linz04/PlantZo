@@ -1,23 +1,13 @@
-import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { withRouter } from "react-router";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
-import HeaderShop from "../components/HeaderShop";
-import LabelContainer from "../components/LabelContainer";
+import { withRouter } from "react-router";
 import CardItem from "../components/CardItem";
 import CollectionItem from "../components/CollectionItem";
-
+import HeaderShop from "../components/HeaderShop";
+import LabelContainer from "../components/LabelContainer";
+import { setShopItems } from "../redux/shop/shop.actions";
 import { selectShopItems } from "../redux/shop/shop.selectors";
-import {
-  setDefaultQuantityDesired,
-  setDefaultChecked,
-  setDefaultSold,
-  setDefaultState,
-  setShopItems,
-} from "../redux/shop/shop.actions";
-
-import { addItem } from "../redux/cart/cart.actions";
 
 const ShopPage = ({ history, match }) => {
   const items = useSelector((state) => selectShopItems(state));
@@ -27,12 +17,7 @@ const ShopPage = ({ history, match }) => {
     axios.get("/shop").then((res) => {
       dispatch(setShopItems(res.data));
     });
-
-    // dispatch(setDefaultQuantityDesired());
-    // dispatch(setDefaultChecked());
-    // dispatch(setDefaultSold());
-    // dispatch(setDefaultState());
-  }, []);
+  }, [dispatch]);
 
   return (
     <div className="bg-gray-200 flex flex-col">

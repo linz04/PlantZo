@@ -1,8 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-
 import UnPaidItem from "../components/UnPaidItem";
-
 import { selectCartItemsChecked } from "../redux/cart/cart.selectors";
 
 const PackPage = () => {
