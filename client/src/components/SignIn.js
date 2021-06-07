@@ -21,14 +21,18 @@ const SignIn = ({ history }) => {
       if (res.data.error === "Invalid username and password") {
         alert(res.data.error);
       } else {
+        const header = new Headers();
         const encodeData = jwt(res.data);
+        header.append("AUTH", encodeData);
         console.log("COOKIE", res.data);
+        console.log("HEADER", header);
         console.log("HASIL DECODE JWT", encodeData);
         const { email, first_name, last_name } = encodeData.sub;
         dispatch(
           setCurrentUser({
             displayName: `${first_name} ${last_name}`,
             email,
+            token: res.data,
           })
         );
         history.push("/shop");

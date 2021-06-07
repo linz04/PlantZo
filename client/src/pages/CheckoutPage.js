@@ -45,11 +45,9 @@ const CheckoutPage = ({ history }) => {
     //     console.log("USER_EXIST");
     //   }
     // });
-
+    dispatch(stateItemsToNext());
     history.push("/state/inpaid");
   };
-
-  console.log(cartItems);
 
   return (
     <div className="flex flex-1 flex-col justify-between">
@@ -76,7 +74,7 @@ const CheckoutPage = ({ history }) => {
       </LabelContainer>
 
       <LabelContainer>
-        <div className="flex flex-col">
+        <div className="flex flex-auto flex-col">
           <div className="flex">
             <div className="mr-4">
               <svg
@@ -105,12 +103,30 @@ const CheckoutPage = ({ history }) => {
               <div>Pengiriman</div>
             </div>
           </div>
-          <div className="m-16">{currentUser.address}</div>
+          <div className="m-16 flex">
+            {currentUser.address ? (
+              currentUser.address
+            ) : (
+              <div className="w-full flex-1">
+                <div className="flex justify-center items-center">
+                  <p className="text-5xl">Alamat tidak terdaftar</p>
+                </div>
+                <div className="flex justify-end mt-10">
+                  <button
+                    className="w-1/4 px-6 py-4 bg-green-900 text-white"
+                    onClick={() => history.push("/user/address")}
+                  >
+                    Tambah alamat
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
         </div>
       </LabelContainer>
       <form
-        // onSubmit={handleSubmit}
-        // method="post"
+        onSubmit={handleSubmit}
+        method="post"
         className="flex-col justify-center items-center space-y-4"
       >
         <LabelContainer>
@@ -168,6 +184,7 @@ const CheckoutPage = ({ history }) => {
                   <input
                     className="h-8 w-8 cursor-pointer"
                     type="radio"
+                    required
                     name="delivery_type"
                     value={["JNE", 8]}
                     onChange={handleCheckRadio}
@@ -183,6 +200,7 @@ const CheckoutPage = ({ history }) => {
                   <input
                     className="h-8 w-8 cursor-pointer"
                     type="radio"
+                    required
                     name="delivery_type"
                     value={["J&T", 10]}
                     onChange={handleCheckRadio}
@@ -198,6 +216,7 @@ const CheckoutPage = ({ history }) => {
                   <input
                     className="h-8 w-8 cursor-pointer"
                     type="radio"
+                    required
                     name="delivery_type"
                     value={["ID", 12]}
                     onChange={handleCheckRadio}
@@ -293,7 +312,15 @@ const CheckoutPage = ({ history }) => {
           <div className="flex flex-auto justify-end items-center space-x-4">
             <button
               className="w-1/4 px-6 py-4 bg-green-900 text-white"
-              onClick={() => history.push("/state/unpaid")}
+              onClick={() => {
+                if (
+                  !currentUser.address &&
+                  deliveryType.length === 0 &&
+                  paymentType === ""
+                ) {
+                  history.push("/state/unpaid");
+                }
+              }}
             >
               Bayar Nanti
             </button>
@@ -302,8 +329,14 @@ const CheckoutPage = ({ history }) => {
               value="submit form"
               className="w-1/4 px-6 py-4 bg-green-900 text-white"
               onClick={() => {
-                dispatch(stateItemsToNext(cartItems));
-                history.push("/state/inpaid");
+                if (
+                  !currentUser.address &&
+                  deliveryType.length === 0 &&
+                  paymentType === ""
+                ) {
+                  // dispatch(stateItemToNext(cartItems));
+                  history.push("/state/inpaid");
+                }
               }}
             >
               Bayar Sekarang

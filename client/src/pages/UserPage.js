@@ -15,10 +15,10 @@ import { selectCurrentUser } from "../redux/user/user.selectors";
 
 const UserPage = ({ history, match }) => {
   const currentUser = useSelector((state) => selectCurrentUser(state));
-
   const itemsInUnPaidQuantity = useSelector((state) =>
     selectCartItemsInUnPaidQuantity(state)
   );
+  console.log(itemsInUnPaidQuantity);
   const itemsInPackQuantity = useSelector((state) =>
     selectCartItemsInPackQuantity(state)
   );

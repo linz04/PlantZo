@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import {
@@ -23,11 +24,12 @@ import SettingsPage from "./pages/SettingsPage";
 import ShopPage from "./pages/ShopPage";
 import TestPage from "./pages/TestPage";
 import UserPage from "./pages/UserPage";
+import { selectCartItemsChecked } from "./redux/cart/cart.selectors";
 import { selectCurrentUser } from "./redux/user/user.selectors";
 
 const App = () => {
   const currentUser = useSelector((state) => selectCurrentUser(state));
-
+  const cartItems = useSelector((state) => selectCartItemsChecked(state));
   const location = useLocation();
 
   let unsubscribeFromAuth = null;
@@ -41,6 +43,21 @@ const App = () => {
     return () => {
       unsubscribeFromAuth();
     };
+  }, []);
+
+  useEffect(() => {
+    if (currentUser) {
+      const headers = {
+        Authorization: `Bearer ${currentUser.token}`,
+      };
+
+      axios
+        .get("/", { headers })
+        .then((res) => {
+          console.log("SUCCESS");
+        })
+        .catch((e) => console.log("ABAIKAN"));
+    }
   }, []);
 
   return (
@@ -66,7 +83,13 @@ const App = () => {
         <Route
           exact
           path="/checkout"
-          render={() => (!currentUser ? <Redirect to="/" /> : <CheckoutPage />)}
+          render={() =>
+            !currentUser && cartItems.length === 0 ? (
+              <Redirect to="/" />
+            ) : (
+              <CheckoutPage />
+            )
+          }
         />
         <Route
           exact

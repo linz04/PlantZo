@@ -69,9 +69,8 @@ export const stateItemToNext = (item) => ({
   payload: item,
 });
 
-export const stateItemsToNext = (items) => ({
+export const stateItemsToNext = () => ({
   type: STATE_ITEMS_TO_NEXT,
-  payload: items,
 });
 
 export const finishedTransaction = () => ({

@@ -23,6 +23,9 @@ const ProfilePage = ({ history }) => {
     selectedBackgroundProfileImage: null,
   });
 
+  const [fotoProfilePreview, setFotoProfilePreview] = useState(null);
+  const [backgroundImagePreview, setBackgroundImagePreview] = useState(null);
+
   const {
     firstName,
     lastName,
@@ -51,6 +54,8 @@ const ProfilePage = ({ history }) => {
     const { name, files } = e.target;
     setFormProfile({ ...formProfile, [name]: files[0] });
   };
+
+  const handleImageForPreview = (e) => {};
 
   const handleResetChanged = () => {
     setFormProfile({

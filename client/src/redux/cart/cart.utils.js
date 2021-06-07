@@ -119,3 +119,34 @@ export const decreaseItemQuantity = (cartItems, cartItemToDecrease) => {
       : cartItem
   );
 };
+
+export const stateItemToNext = (cartItems, cartItemToNext) => {
+  const existingCartItem = cartItems.find(
+    (cartItem) => cartItem.pid === cartItemToNext.pid
+  );
+
+  if (existingCartItem) {
+    return cartItems.map((cartItem) =>
+      cartItem.pid === cartItemToNext.pid
+        ? { ...cartItem, state: cartItem.state + 1 }
+        : cartItem
+    );
+  }
+
+  return cartItems;
+};
+
+export const stateItemsToNext = (cartItems) => {
+  const existingCartItem = cartItems.filter(
+    (cartItem) => cartItem.checked === true
+  );
+
+  if (existingCartItem) {
+    return cartItems.map((cartItem) => ({
+      ...cartItem,
+      state: cartItem.state + 1,
+    }));
+  }
+
+  return cartItems;
+};

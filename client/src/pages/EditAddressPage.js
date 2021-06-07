@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import LabelContainer from "../components/LabelContainer";
 import UserFormInput from "../components/UserFormInput";
 import { selectCurrentUser } from "../redux/user/user.selectors";
@@ -9,6 +9,8 @@ const EditAddressPage = () => {
   const [address, setAddress] = useState("");
 
   const currentUser = useSelector((state) => selectCurrentUser(state));
+
+  const dispatch = useDispatch();
 
   const {
     pid,
@@ -28,7 +30,6 @@ const EditAddressPage = () => {
     // CATATAN belum bisa connect
     axios.post("api/user/address", { pid, address }).then((res) => {
       setAddress("");
-
       console.log(res.data);
     });
   };

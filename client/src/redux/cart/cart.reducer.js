@@ -7,6 +7,7 @@ import {
   decreaseItemQuantity,
   deleteItemFromCart,
   increaseItemQuantity,
+  stateItemsToNext,
 } from "./cart.utils";
 
 const {
@@ -83,19 +84,18 @@ const cartReducer = (state = INITIAL_STATE, action) => {
         ...state,
         paymentType: action.payload,
       };
-
     case STATE_ITEM_TO_NEXT:
-      return {
-        ...state,
-        cartItems: [...state.cartItems, action.payload.state++],
-      };
-    case STATE_ITEMS_TO_NEXT:
       return {
         ...state,
         cartItems: [
           ...state.cartItems,
-          action.payload.map((cartItem) => cartItem.state++),
+          { ...action.payload, state: action.payload++ },
         ],
+      };
+    case STATE_ITEMS_TO_NEXT:
+      return {
+        ...state,
+        cartItems: stateItemsToNext(state.cartItems),
       };
     case FINISHED_TRANSACTION:
       return {

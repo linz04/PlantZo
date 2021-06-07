@@ -44,90 +44,92 @@ export const selectCartItemsChecked = createSelector(
   (cartItems) => cartItems.filter((cartItem) => cartItem.checked === true)
 );
 
-export const selectCartItemsInCart = createSelector(
-  [selectCartItems],
-  (cartItems) =>
-    cartItems.filter(
-      (cartItem) => selectItemStateNumberToString(cartItem.state) === "INCART"
-    )
-);
+export const selectItemStateNumberToString = ["UNPAID", "PACK", "SEND", "RATE"];
 
 export const selectCartItemsInUnPaid = createSelector(
   [selectCartItems],
   (cartItems) =>
     cartItems.filter(
-      (cartItem) => selectItemStateNumberToString(cartItem.state) === "UNPAID"
+      (cartItem) => selectItemStateNumberToString[cartItem.state] === "UNPAID"
     )
+);
+
+export const selectCartItemsInUnPaidQuantity = createSelector(
+  [selectCartItems],
+  (cartItems) =>
+    cartItems
+      .filter(
+        (cartItem) => selectItemStateNumberToString[cartItem.state] === "UNPAID"
+      )
+      .reduce(
+        (accumulatedQuantity, cartItem) =>
+          accumulatedQuantity + cartItem.quantityDesired,
+        0
+      )
 );
 
 export const selectCartItemsInPack = createSelector(
   [selectCartItems],
   (cartItems) =>
     cartItems.filter(
-      (cartItem) => selectItemStateNumberToString(cartItem.state) === "PACK"
+      (cartItem) => selectItemStateNumberToString[cartItem.state] === "PACK"
     )
+);
+
+export const selectCartItemsInPackQuantity = createSelector(
+  [selectCartItems],
+  (cartItems) =>
+    cartItems
+      .filter(
+        (cartItem) => selectItemStateNumberToString[cartItem.state] === "PACK"
+      )
+      .reduce(
+        (accumulatedQuantity, cartItem) =>
+          accumulatedQuantity + cartItem.quantityDesired,
+        0
+      )
 );
 
 export const selectCartItemsInSend = createSelector(
   [selectCartItems],
   (cartItems) =>
     cartItems.filter(
-      (cartItem) => selectItemStateNumberToString(cartItem.state) === "SEND"
+      (cartItem) => selectItemStateNumberToString[cartItem.state] === "SEND"
     )
+);
+
+export const selectCartItemsInSendQuantity = createSelector(
+  [selectCartItems],
+  (cartItems) =>
+    cartItems
+      .filter(
+        (cartItem) => selectItemStateNumberToString[cartItem.state] === "SEND"
+      )
+      .reduce(
+        (accumulatedQuantity, cartItem) =>
+          accumulatedQuantity + cartItem.quantityDesired,
+        0
+      )
 );
 
 export const selectCartItemsInRate = createSelector(
   [selectCartItems],
   (cartItems) =>
     cartItems.filter(
-      (cartItem) => selectItemStateNumberToString(cartItem.state) === "RATE"
-    )
-);
-
-export const selectCartItemsInUnPaidQuantity = createSelector(
-  [selectCartItemsInUnPaid],
-  (cartItems) =>
-    cartItems.reduce(
-      (accumulatedQuantity, cartItem) =>
-        accumulatedQuantity + cartItem.quantityDesired,
-      0
-    )
-);
-
-export const selectCartItemsInPackQuantity = createSelector(
-  [selectCartItemsInPack],
-  (cartItems) =>
-    cartItems.reduce(
-      (accumulatedQuantity, cartItem) =>
-        accumulatedQuantity + cartItem.quantityDesired,
-      0
-    )
-);
-
-export const selectCartItemsInSendQuantity = createSelector(
-  [selectCartItemsInSend],
-  (cartItems) =>
-    cartItems.reduce(
-      (accumulatedQuantity, cartItem) =>
-        accumulatedQuantity + cartItem.quantityDesired,
-      0
+      (cartItem) => selectItemStateNumberToString[cartItem.state] === "RATE"
     )
 );
 
 export const selectCartItemsInRateQuantity = createSelector(
-  [selectCartItemsInRate],
+  [selectCartItems],
   (cartItems) =>
-    cartItems.reduce(
-      (accumulatedQuantity, cartItem) =>
-        accumulatedQuantity + cartItem.quantityDesired,
-      0
-    )
+    cartItems
+      .filter(
+        (cartItem) => selectItemStateNumberToString[cartItem.state] === "RATE"
+      )
+      .reduce(
+        (accumulatedQuantity, cartItem) =>
+          accumulatedQuantity + cartItem.quantityDesired,
+        0
+      )
 );
-
-export const selectItemStateNumberToString = [
-  "INCART",
-  "UNPAID",
-  "PACK",
-  "SEND",
-  "RATE",
-];

@@ -43,7 +43,7 @@ const InPaidPage = ({ history }) => {
   };
 
   const handleClickOk = () => {
-    dispatch(finishedTransaction());
+    // dispatch(finishedTransaction());
     history.push("/state/pack");
   };
 

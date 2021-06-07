@@ -8,16 +8,21 @@ import HeaderShop from "../components/HeaderShop";
 import LabelContainer from "../components/LabelContainer";
 import { setShopItems } from "../redux/shop/shop.actions";
 import { selectShopItems } from "../redux/shop/shop.selectors";
+import { selectCurrentUser } from "../redux/user/user.selectors";
 
 const ShopPage = ({ history, match }) => {
   const items = useSelector((state) => selectShopItems(state));
   const dispatch = useDispatch();
+  const currentUser = useSelector((state) => selectCurrentUser(state));
 
   useEffect(() => {
-    axios.get("/shop").then((res) => {
+    const headers = {
+      Authorization: `Bearer ${currentUser.token}`,
+    };
+    axios.get("/shop", { headers }).then((res) => {
       dispatch(setShopItems(res.data));
     });
-  }, [dispatch]);
+  }, []);
 
   return (
     <div className="bg-gray-200 flex flex-col">

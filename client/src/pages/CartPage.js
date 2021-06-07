@@ -108,7 +108,10 @@ const CartPage = ({ history }) => {
           <button
             className="border-2 border-gray-800 w-1/6 px-6 py-2 bg-green-800 text-white"
             onClick={() => {
-              if (cartItemsChecked.length) history.push("/checkout");
+              if (cartItemsChecked.length) {
+                history.push("/checkout");
+                window.scrollTo(0, 0);
+              }
             }}
           >
             Checkout
