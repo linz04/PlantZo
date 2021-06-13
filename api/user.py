@@ -19,7 +19,13 @@ def edit_profile():
 	if request.method == 'POST':
 		profile = request.files['profile_image']
 		bg = request.files['background_image']
+		bg_temp = bg.filename.split(".")
+		profile_temp = profile.filename.split(".")
 		data = dict(request.form)
+		#set profile name as uid.png
+		cur = mysql.cursor(buffered=True)
+		#cur.execute("SELECT  FROM users WHERE email=%s", (email,))
+		print(bg_temp,profile_temp,bg.filename,profile.filename)
 		print(data)
 		if profile.filename == '' and bg.filename == '':
 			return "No Selected File"
