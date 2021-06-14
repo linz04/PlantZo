@@ -22,13 +22,14 @@ def index():
 def shop(pid):
 	if request.method == 'GET':
 		cur = mysql.cursor(buffered=True)
-		cur.execute("SELECT * FROM product comment where pid = %s", (pid,))
+		cur.execute("SELECT * FROM product p, comment c WHERE p.pid = %s;", (pid,))
 		row_headers= [x[0] for x in cur.description]
 		rv = cur.fetchall()
 		json_data = []
 		for result in rv:
 			json_data.append(dict(zip(row_headers,result)))
 		res = json.loads(json.dumps(json_data))[0]
+		print(res)
 		return jsonify(res)
 
 	elif request.method == 'POST':
