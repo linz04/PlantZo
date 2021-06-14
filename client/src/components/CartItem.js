@@ -1,18 +1,28 @@
+import axios from "axios";
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   decreaseItemQuantity,
   deleteItem,
   increaseItemQuantity,
 } from "../redux/cart/cart.actions";
+import { selectCurrentUser } from "../redux/user/user.selectors";
 
 const CartItem = ({ item }) => {
-  const { name, image: imageUrl, price, quantityDesired, quantity } = item;
+  const currentUser = useSelector((state) => selectCurrentUser(state));
+  const { name, image: imageUrl, price, quantityDesired, quantity, pid } = item;
+
+  const { uid } = currentUser;
 
   const dispatch = useDispatch();
 
   const handleIncreaseButton = () => {
     if (quantityDesired < quantity) dispatch(increaseItemQuantity(item));
+  };
+
+  const handleDeleteItemClick = () => {
+    axios.post("/cart-delete", { uid, pid });
+    dispatch(deleteItem(item));
   };
 
   return (
@@ -69,7 +79,7 @@ const CartItem = ({ item }) => {
       </div>
       <div
         className="flex justify-center items-center bg-green-900 w-1/6 text-white cursor-pointer"
-        onClick={() => dispatch(deleteItem(item))}
+        onClick={handleDeleteItemClick}
       >
         Hapus
       </div>

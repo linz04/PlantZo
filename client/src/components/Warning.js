@@ -135,7 +135,7 @@ const Warning = () => {
                     trigger={signUpPopupVisible}
                     handleClick={handleClickSignup}
                   >
-                    <SignUp />
+                    <SignUp handleClick={handleClickSignup} />
                   </Popup>
                 </div>
                 <div>

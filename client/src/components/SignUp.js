@@ -6,7 +6,7 @@ import { signInWithGoogle } from "../lib/firebase/firebase.utils";
 import { setCurrentUser } from "../redux/user/user.actions";
 import FormInput from "./FormInput";
 
-const SignUp = ({ history }) => {
+const SignUp = ({ history, handleClick }) => {
   const [user, setUser] = useState({
     firstName: "",
     lastName: "",
@@ -52,8 +52,7 @@ const SignUp = ({ history }) => {
         alert(res.data);
       } else {
         dispatch(setCurrentUser(null));
-
-        history.push("/");
+        handleClick();
       }
     });
   };
