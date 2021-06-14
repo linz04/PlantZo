@@ -22,7 +22,7 @@ def index():
 def shop(pid):
 	if request.method == 'GET':
 		cur = mysql.cursor(buffered=True)
-		cur.execute("SELECT * FROM product where pid = %s", (pid,))
+		cur.execute("SELECT * FROM product comment where pid = %s", (pid,))
 		row_headers= [x[0] for x in cur.description]
 		rv = cur.fetchall()
 		json_data = []

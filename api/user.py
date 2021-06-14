@@ -59,3 +59,16 @@ def edit_address():
 		mysql.commit()
 		cur.close()
 		return 'Success'
+
+@app.route("/comments", methods=['POST'])
+def comment():
+	if request.method == 'POST':
+		data = request.get_json()
+		print(data)
+		cur = mysql.cursor(buffered=True)
+		cur.execute("INSERT INTO comment (uid, pid, rating, comment) VALUES (%s, %s, %s, %s)", (data['uid'], data['pid'], data['currentValue'], data['textArea'],))
+		mysql.commit()
+		cur.close()
+		return "Success give comment"
+
+	return "Success"
