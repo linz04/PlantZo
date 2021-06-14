@@ -5,6 +5,7 @@ const { SET_CURRENT_USER, SET_USER_ADDRESS, EDIT_USER_PROFILE } =
 
 const INITIAL_STATE = {
   currentUser: {
+    uid: null,
     displayName: "",
     email: "",
     token: "",

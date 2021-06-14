@@ -13,10 +13,12 @@ const EditAddressPage = () => {
   const dispatch = useDispatch();
 
   const {
-    pid,
+    uid,
     address:
       addressBefored = "Kampus IPB, Jl. Raya Dramaga, Babakan, Kec. Dramaga, Kota Bogor, Jawa Barat 16680",
   } = currentUser;
+
+  console.log(currentUser);
 
   const handleChange = (e) => {
     const { value } = e.target;
@@ -28,7 +30,7 @@ const EditAddressPage = () => {
     e.preventDefault();
 
     // CATATAN belum bisa connect
-    axios.post("api/user/address", { pid, address }).then((res) => {
+    axios.post("api/user/address", { uid, address }).then((res) => {
       setAddress("");
       console.log(res.data);
     });

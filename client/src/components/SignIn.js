@@ -1,15 +1,16 @@
 import axios from "axios";
 import jwt from "jwt-decode";
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { withRouter } from "react-router";
 import { signInWithGoogle } from "../lib/firebase/firebase.utils";
 import { setCurrentUser } from "../redux/user/user.actions";
+import { selectCurrentUser } from "../redux/user/user.selectors";
 import FormInput from "./FormInput";
 
 const SignIn = ({ history }) => {
   const [user, setUser] = useState({ email: "", password: "" });
-
+  const currentUser = useSelector((state) => selectCurrentUser(state));
   const dispatch = useDispatch();
 
   const handleSubmit = (event) => {
@@ -24,14 +25,12 @@ const SignIn = ({ history }) => {
         const header = new Headers();
         const encodeData = jwt(res.data);
         header.append("AUTH", encodeData);
-        console.log("COOKIE", res.data);
-        console.log("HEADER", header);
-        console.log("HASIL DECODE JWT", encodeData);
-        const { email, first_name, last_name } = encodeData.sub;
+        const { email, first_name, last_name, uid } = encodeData.sub;
         dispatch(
           setCurrentUser({
             displayName: `${first_name} ${last_name}`,
             email,
+            uid,
             token: res.data,
           })
         );
@@ -39,6 +38,8 @@ const SignIn = ({ history }) => {
       }
     });
   };
+
+  console.log(currentUser);
 
   const handleChange = (event) => {
     const { name, value } = event.target;

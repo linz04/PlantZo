@@ -45,6 +45,8 @@ const ProfilePage = ({ history }) => {
     backgroundImage: selectedBackgroundProfileImage,
   };
 
+  console.log(currentUser);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormProfile({ ...formProfile, [name]: value });
@@ -74,7 +76,6 @@ const ProfilePage = ({ history }) => {
     e.preventDefault();
 
     // CATATAN: Masih butuh perbaikan untuk menggunakan foto dari file
-    dispatch(setCurrentUser(user));
 
     if (newPassword !== confirmPassword) {
       setFormProfile({ ...formProfile, newPassword: "", confirmPassword: "" });
@@ -83,17 +84,29 @@ const ProfilePage = ({ history }) => {
 
     const fd = new FormData();
 
+    if (
+      !(selectedProfileImage === null) &&
+      !(selectedBackgroundProfileImage === null)
+    ) {
+      fd.append(
+        "profile_image",
+        selectedProfileImage,
+        selectedProfileImage.name
+      );
+      fd.append(
+        "background_image",
+        selectedBackgroundProfileImage,
+        selectedBackgroundProfileImage.name
+      );
+    }
+
     fd.append("firstName", firstName);
     fd.append("lastName", lastName);
     fd.append("oldPassword", oldPassword);
     fd.append("newPassword", newPassword);
-    fd.append("profile_image", selectedProfileImage, selectedProfileImage.name);
-    fd.append(
-      "background_image",
-      selectedBackgroundProfileImage,
-      selectedBackgroundProfileImage.name
-    );
+
     fd.append("address", address);
+    fd.append("uid", currentUser.uid);
 
     // CATATAN: Response belum sesuai tapi sudah bisa connect :)
     axios.post("/settings/profile", fd).then((res) => {
@@ -112,6 +125,7 @@ const ProfilePage = ({ history }) => {
       selectedBackgroundProfileImage: null,
     });
 
+    dispatch(setCurrentUser(user));
     alert("Data berhasil diubah");
     history.push("/user");
   };
@@ -193,7 +207,6 @@ const ProfilePage = ({ history }) => {
               type="file"
               name="selectedProfileImage"
               label="Upload profile image"
-              required
               handleChange={handleImageSelected}
             />
           </div>
@@ -221,7 +234,6 @@ const ProfilePage = ({ history }) => {
               type="file"
               name="selectedBackgroundProfileImage"
               label="Upload profile image"
-              required
               handleChange={handleImageSelected}
             />
           </div>

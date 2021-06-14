@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
+import Rating from "../components/Rating";
 import UnPaidItem from "../components/UnPaidItem";
 import { selectCartItemsInRate } from "../redux/cart/cart.selectors";
 
 const RatePage = () => {
+  const [rateNumber, setRateNumber] = useState(0);
+  const [commencts, setCommencts] = useState("");
   const inRateItems = useSelector((state) => selectCartItemsInRate(state));
 
   return (
@@ -18,6 +21,7 @@ const RatePage = () => {
             <UnPaidItem key={unPaidItem.pid} item={unPaidItem} />
           ))
         )}
+        <Rating />
       </div>
     </div>
   );
