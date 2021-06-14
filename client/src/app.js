@@ -8,6 +8,7 @@ import {
   useLocation,
   withRouter,
 } from "react-router-dom";
+import CollectionItemPage from "./components/CollectionItemPage";
 import Footer from "./components/Footer";
 import Nav from "./components/Nav";
 import NavHome from "./components/NavHome";
@@ -75,6 +76,13 @@ const App = () => {
           exact
           path="/cart"
           render={() => (!currentUser ? <Redirect to="/" /> : <CartPage />)}
+        />
+        <Route
+          exact
+          path="/collection"
+          render={() =>
+            !currentUser ? <Redirect to="/" /> : <CollectionItemPage />
+          }
         />
         <Route
           exact

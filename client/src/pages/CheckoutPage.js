@@ -43,24 +43,14 @@ const CheckoutPage = ({ history }) => {
 
   const { uid } = currentUser;
 
-  const dateObj = new Date();
-  const month = dateObj.getUTCMonth();
-  const day = dateObj.getUTCDate();
-  const year = dateObj.getUTCFullYear();
-  console.log(day);
-  const dateRes = `${year}-${day}-${month}`;
-
   const handleSubmit = (e) => {
     e.preventDefault();
     generatePids(cartItems);
-    // CATATAN belum bisa connect, dan belum memikirkan apa yang akan dikirim
     axios
-      .post("api/transaction", { uid, pids, checkoutItemsTotal, dateRes })
+      .post("api/transaction", { uid, pids, checkoutItemsTotal })
       .then((res) => {
         console.log(res.data);
-        if ("User Already Exist!" === res.data) {
-          console.log("USER_EXIST");
-        }
+        // transaction_id
       });
     dispatch(stateItemsToNext());
     history.push("/state/inpaid");

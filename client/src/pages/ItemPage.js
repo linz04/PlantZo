@@ -43,7 +43,7 @@ const ItemPage = ({ history, location }) => {
     e.preventDefault();
     dispatch(addItemWithQuantity({ item, itemQuantity }));
 
-    axios.post("/cart", { pid, quantity, uid });
+    axios.post("/cart", { pid, itemQuantity, uid });
 
     setItemQuantity(1);
     alert("Sukses memasukan ke keranjang");

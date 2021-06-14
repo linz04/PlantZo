@@ -141,7 +141,7 @@ const MidHome = () => {
 
         <div className="col-span-2">
           Paling Banyak Dibeli
-          <div className="flex space-x-4 justify-center items-center mt-4">
+          <div className="flex space-x-8 justify-center items-center mt-4">
             {shopItems.length !== 0 ? (
               shopItems
                 .sort((item1, item2) => item2.pid - item1.pid)

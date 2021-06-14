@@ -28,7 +28,7 @@ const ShopPage = ({ history, match }) => {
       <LabelContainer
         onClick={() => history.push(`${match.url}/filter/most-purchased`)}
       >
-        <span className="uppercase cursor-pointer">paling banyak dibeli</span>
+        <span className="uppercase">paling banyak dibeli</span>
       </LabelContainer>
 
       <CollectionItem>
@@ -43,7 +43,7 @@ const ShopPage = ({ history, match }) => {
       <LabelContainer
         onClick={() => history.push(`${match.url}/filter/most-wanted`)}
       >
-        <span className="uppercase cursor-pointer">paling banyak dicari</span>
+        <span className="uppercase">paling banyak dicari</span>
       </LabelContainer>
 
       <CollectionItem>
@@ -55,8 +55,11 @@ const ShopPage = ({ history, match }) => {
           ))}
       </CollectionItem>
 
-      <div className="flex justify-evenly bg-gray-100 p-3 m-2 mt-6 text-3xl uppercase">
-        Filter
+      <div
+        className="flex justify-evenly bg-gray-100 p-3 m-2 mt-6 text-3xl uppercase cursor-pointer"
+        onClick={() => history.push("/collection")}
+      >
+        Lebih banyak Item
       </div>
 
       <CollectionItem>

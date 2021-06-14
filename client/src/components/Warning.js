@@ -19,13 +19,13 @@ const Warning = () => {
 
   return (
     <>
-      <div className="flex justify-between items-center h-24">
+      <div className="flex justify-between items-center h-24 w-full">
         <button
-          className="flex justify-between items-center h-24 text-white active:bg-pink-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+          className="flex justify-between items-center h-24 text-white active:bg-pink-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 w-full"
           type="button"
           onClick={() => setShowModal(true)}
         >
-          <div className="flex ml-8 cursor-pointer">
+          <div className="flex ml-8 cursor-pointer w-96">
             <img
               className="w-11 h-11"
               src="/images/icons/logo.png"
@@ -33,25 +33,8 @@ const Warning = () => {
             />
             <span className="text-gray-100 text-3xl">PlantZo</span>
           </div>
-          <div className="flex justify-center items-center rounded-full md:ml-20">
-            <input className="p-5 rounded-full border-none focus:outline-none" />
-          </div>
-          <div className="flex justify-center items-center rounded-full md:ml-20">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-0 w-0 md:h-11 md:w-11"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-              />
-            </svg>
-          </div>
+          <div className="flex justify-center items-center rounded-full md:ml-20"></div>
+          <div className="flex justify-center items-center rounded-full w-96"></div>
           <div className="w-0 md:w-14 mx-4 flex justify-center items-center cursor-pointer md:ml-20">
             <svg
               xmlns="http://www.w3.org/2000/svg"

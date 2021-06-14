@@ -13,7 +13,7 @@ const CardItem = ({ item, history }) => {
     nameEdited = [name.slice(0, 14), "..."].join("");
   }
 
-  const startArray = Array.from(new Array(Math.floor(4)));
+  const startArray = Array.from(new Array(Math.floor(rating)));
 
   const handleClick = () => {
     if (currentUser !== null) {

@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { withRouter } from "react-router";
@@ -9,8 +10,11 @@ import {
   selectCartItemsChecked,
   selectCartItemsTotal,
 } from "../redux/cart/cart.selectors";
+import { selectCurrentUser } from "../redux/user/user.selectors";
 
 const CartPage = ({ history }) => {
+  const currentUser = useSelector((state) => selectCurrentUser(state));
+  const { token } = currentUser;
   const [isCheckedAll, setIsCheckedAll] = useState(false);
 
   const cartItems = useSelector((state) => selectCartItems(state));
@@ -22,6 +26,11 @@ const CartPage = ({ history }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    axios
+      .get("/cart", {
+        headers: { Authorization: "Bearer " + token },
+      })
+      .then((res) => console.log(res.data));
     setIsCheckedAll(false);
   }, []);
 
@@ -66,27 +75,33 @@ const CartPage = ({ history }) => {
           </span>
         </LabelContainer>
 
-        {cartItems.map((item) => {
-          return (
-            <LabelContainer key={item.pid}>
-              <div
-                onClick={() => {
-                  dispatch(checkedItem(item));
-                }}
-              >
-                <input
-                  className="w-8 h-8 mr-4 cursor-pointer"
-                  type="checkbox"
-                  name="itemToCheckout"
-                  checked={item.checked}
-                  onChange={() => {}}
-                  required
-                />
-              </div>
-              <CartItem item={item} />
-            </LabelContainer>
-          );
-        })}
+        {cartItems.length === 0 ? (
+          <div className="flex justify-center items-center text-5xl mt-10">
+            Tidak ada barang di dalam Cart
+          </div>
+        ) : (
+          cartItems.map((item) => {
+            return (
+              <LabelContainer key={item.pid}>
+                <div
+                  onClick={() => {
+                    dispatch(checkedItem(item));
+                  }}
+                >
+                  <input
+                    className="w-8 h-8 mr-4 cursor-pointer"
+                    type="checkbox"
+                    name="itemToCheckout"
+                    checked={item.checked}
+                    onChange={() => {}}
+                    required
+                  />
+                </div>
+                <CartItem item={item} />
+              </LabelContainer>
+            );
+          })
+        )}
       </div>
 
       <LabelContainer>

@@ -51,15 +51,9 @@ const SignUp = ({ history }) => {
       if (res.data === "User Already Exist!") {
         alert(res.data);
       } else {
-        const { display_name, email } = res.data.result;
-        dispatch(
-          setCurrentUser({
-            displayName: display_name,
-            email,
-          })
-        );
+        dispatch(setCurrentUser(null));
 
-        history.push("/shop");
+        history.push("/");
       }
     });
   };
