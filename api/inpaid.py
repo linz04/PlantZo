@@ -1,11 +1,21 @@
 from app import app
-import string
+from db import mysql
+from flask import Flask, flash, request, redirect, url_for, jsonify
+import time
 import random
 
-@app.route('/inpaid')
+@app.route('/state/api/transaction', methods=['POST'])
 def inpaid():
-	def generate(size=12, chars=string.ascii_letters + string.digits):
-		return ''.join(random.choice(chars) for _ in range(size))
+	if request.method == 'POST':
+		cur = mysql.cursor(buffered=True)
+		data = request.get_json()
+		uid = data['uid']
+		pids = data['pids']
+		total = data['checkoutItemsTotal']
+		date = (time.strftime('%Y-%m-%d %H:%M:%S'))
+		ticket = random.randint(1000000,2000000000)
+		for i in range(len(pids)):
+			cur.execute("INSERT INTO history (`uid`, `pid`, `total_cost`, `date`, `ticket`) VALUES (%s, %s, %s, %s, %s)", (uid, pids[i], total, date, ticket))
+			mysql.commit()
 
-	code = generate()
-	return code
+	return jsonify({"transaction_id":ticket})

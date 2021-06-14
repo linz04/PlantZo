@@ -21,3 +21,12 @@ def cart():
 			json_data.append(dict(zip(row_headers,result)))
 		res = json.loads(json.dumps(json_data))
 		return jsonify(res)
+
+	if request.method == 'POST':
+		data = request.get_json()
+		cur = mysql.cursor(buffered=True)
+		cur.execute("INSERT INTO cart (uid, pid, total) VALUES (%s, %s, %s)", (data['uid'], data['pid'], data['quantity']))
+		mysql.commit()
+		return 'Success'
+
+	return 'Success'
