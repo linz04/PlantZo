@@ -13,7 +13,8 @@ def cart():
 		auth = payload['sub']
 
 		cur = mysql.cursor(buffered=True)
-		cur.execute("SELECT * FROM cart where uid = %s", (auth['uid'],))
+		cur.execute("SELECT * FROM cart c, product p where c.uid = %s and p.pid = c.pid", (auth['uid'],))
+		#cur.execute("SELECT * FROM cart where uid = %s", (auth['uid'],))
 		row_headers= [x[0] for x in cur.description]
 		rv = cur.fetchall()
 		print(rv)
@@ -46,4 +47,9 @@ def cart_delete():
 	if request.method == 'POST':
 		data = request.get_json()
 		cur = mysql.cursor(buffered=True)
-		cur.execute("DELETE FROM cart where uid = %s ")
+		cur.execute("DELETE FROM cart where uid = %s and pid = %s")
+		mysql.commit()
+		cur.close()
+		return "Success"
+
+	return "Success"
