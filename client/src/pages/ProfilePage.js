@@ -38,14 +38,13 @@ const ProfilePage = ({ history }) => {
   } = formProfile;
 
   const user = {
+    uid: currentUser.uid,
     displayName: `${firstName} ${lastName}`,
     email,
     address,
     profileImage: selectedProfileImage,
     backgroundImage: selectedBackgroundProfileImage,
   };
-
-  console.log(currentUser);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -72,10 +71,11 @@ const ProfilePage = ({ history }) => {
     });
   };
 
+  console.log(currentUser);
+  console.log(currentUser.uid);
+
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    // CATATAN: Masih butuh perbaikan untuk menggunakan foto dari file
 
     if (newPassword !== confirmPassword) {
       setFormProfile({ ...formProfile, newPassword: "", confirmPassword: "" });
@@ -85,8 +85,8 @@ const ProfilePage = ({ history }) => {
     const fd = new FormData();
 
     if (
-      !(selectedProfileImage === null) &&
-      !(selectedBackgroundProfileImage === null)
+      selectedProfileImage !== null &&
+      selectedBackgroundProfileImage !== null
     ) {
       fd.append(
         "profile_image",
@@ -104,14 +104,10 @@ const ProfilePage = ({ history }) => {
     fd.append("lastName", lastName);
     fd.append("oldPassword", oldPassword);
     fd.append("newPassword", newPassword);
-
     fd.append("address", address);
     fd.append("uid", currentUser.uid);
 
-    // CATATAN: Response belum sesuai tapi sudah bisa connect :)
-    axios.post("/settings/profile", fd).then((res) => {
-      console.log(res.data);
-    });
+    axios.post("/settings/profile", fd);
 
     setFormProfile({
       ...formProfile,

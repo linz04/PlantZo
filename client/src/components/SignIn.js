@@ -39,8 +39,6 @@ const SignIn = ({ history }) => {
     });
   };
 
-  console.log(currentUser);
-
   const handleChange = (event) => {
     const { name, value } = event.target;
     setUser({ ...user, [name]: value });

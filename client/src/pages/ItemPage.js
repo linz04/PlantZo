@@ -1,11 +1,13 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { withRouter } from "react-router";
 import LabelContainer from "../components/LabelContainer";
 import { addItemWithQuantity, checkedItem } from "../redux/cart/cart.actions";
+import { selectCurrentUser } from "../redux/user/user.selectors";
 
 const ItemPage = ({ history, location }) => {
+  const currentUser = useSelector((state) => selectCurrentUser(state));
   const [itemQuantity, setItemQuantity] = useState(1);
   const [item, setItem] = useState({
     name: "",
@@ -27,6 +29,8 @@ const ItemPage = ({ history, location }) => {
     rating,
   } = item;
 
+  const { uid } = currentUser;
+
   useEffect(() => {
     axios.get(location.pathname).then((res) => {
       setItem(res.data);
@@ -39,11 +43,7 @@ const ItemPage = ({ history, location }) => {
     e.preventDefault();
     dispatch(addItemWithQuantity({ item, itemQuantity }));
     // CATATAN Belum bisa connect
-    // axios.post("/cart", { pid, quantity }).then((res) => {
-
-    //   console.log(res);
-    //   console.log(res.data);
-    // });
+    axios.post("/cart", { pid, quantity, uid });
     setItemQuantity(1);
     alert("Sukses memasukan ke keranjang");
   };

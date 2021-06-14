@@ -18,7 +18,6 @@ const UserPage = ({ history, match }) => {
   const itemsInUnPaidQuantity = useSelector((state) =>
     selectCartItemsInUnPaidQuantity(state)
   );
-  console.log(itemsInUnPaidQuantity);
   const itemsInPackQuantity = useSelector((state) =>
     selectCartItemsInPackQuantity(state)
   );
@@ -227,6 +226,7 @@ const UserPage = ({ history, match }) => {
             dispatch(setCurrentUser(null));
             dispatch(deleteAllItem());
             auth.signOut();
+            window.scrollTo(0, 0);
           }}
         >
           SIGN OUT
