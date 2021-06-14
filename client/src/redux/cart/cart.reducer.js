@@ -24,12 +24,14 @@ const {
   STATE_ITEM_TO_NEXT,
   STATE_ITEMS_TO_NEXT,
   FINISHED_TRANSACTION,
+  ADD_ID_TRANSACTION,
 } = cartActionTypes;
 
 const INITIAL_STATE = {
   cartItems: [],
   deliveryType: [],
   paymentType: "",
+  transactionId: null,
 };
 
 const cartReducer = (state = INITIAL_STATE, action) => {
@@ -103,6 +105,11 @@ const cartReducer = (state = INITIAL_STATE, action) => {
         cartItems: [],
         deliveryType: [],
         paymentType: "",
+      };
+    case ADD_ID_TRANSACTION:
+      return {
+        ...state,
+        transactionId: action.payload,
       };
     default:
       return state;

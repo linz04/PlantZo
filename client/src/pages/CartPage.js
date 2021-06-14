@@ -4,33 +4,47 @@ import { useDispatch, useSelector } from "react-redux";
 import { withRouter } from "react-router";
 import CartItem from "../components/CartItem";
 import LabelContainer from "../components/LabelContainer";
-import { checkedAllItems, checkedItem } from "../redux/cart/cart.actions";
+import {
+  addItemWithQuantity,
+  checkedAllItems,
+  checkedItem,
+} from "../redux/cart/cart.actions";
 import {
   selectCartItems,
   selectCartItemsChecked,
   selectCartItemsTotal,
 } from "../redux/cart/cart.selectors";
+import { selectShopItems } from "../redux/shop/shop.selectors";
 import { selectCurrentUser } from "../redux/user/user.selectors";
 
 const CartPage = ({ history }) => {
   const currentUser = useSelector((state) => selectCurrentUser(state));
-  const { token } = currentUser;
   const [isCheckedAll, setIsCheckedAll] = useState(false);
-
+  const [pidsRes, setPidsRes] = useState([]);
   const cartItems = useSelector((state) => selectCartItems(state));
   const cartItemsChecked = useSelector((state) =>
     selectCartItemsChecked(state)
   );
+  const [checkData, setCheckData] = useState([]);
   const cartItemsTotal = useSelector((state) => selectCartItemsTotal(state));
-
+  const shopItems = useSelector((state) => selectShopItems(state));
   const dispatch = useDispatch();
 
+  const { token } = currentUser;
+
   useEffect(() => {
-    axios
-      .get("/cart", {
-        headers: { Authorization: "Bearer " + token },
-      })
-      .then((res) => console.log(res.data));
+    // axios
+    //   .get("/cart", {
+    //     headers: { Authorization: "Bearer " + token },
+    //   })
+    //   .then((res) => {
+    //     setPidsRes(res.data);
+    //     setCheckData(res.data);
+    //     res.data.map((item) => {
+    //       const quantityDesired = parseInt(item.total, 10);
+    //       dispatch(addItemWithQuantity({ item, quantityDesired }));
+    //     });
+    //   });
     setIsCheckedAll(false);
   }, []);
 

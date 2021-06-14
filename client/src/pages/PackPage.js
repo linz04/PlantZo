@@ -1,17 +1,23 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import UnPaidItem from "../components/UnPaidItem";
-import { stateItemToNext } from "../redux/cart/cart.actions";
+import { stateItemsToNext, stateItemToNext } from "../redux/cart/cart.actions";
 import { selectCartItemsInPack } from "../redux/cart/cart.selectors";
 
 const PackPage = () => {
   const inPackItems = useSelector((state) => selectCartItemsInPack(state));
   const dispatch = useDispatch();
 
+  // useEffect(() => {
+  //   if (inPackItems.length !== 0) {
+  //     handleToNextBaseOnTime(inPackItems);
+  //   }
+  // }, []);
+
   useEffect(() => {
-    if (inPackItems.length !== 0) {
-      handleToNextBaseOnTime(inPackItems);
-    }
+    setTimeout(() => {
+      dispatch(stateItemsToNext());
+    }, 5000);
   }, []);
 
   const handleToNextBaseOnTime = (items) => {

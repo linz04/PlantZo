@@ -6,7 +6,6 @@ import LabelContainer from "./LabelContainer";
 
 const CollectionItemPage = () => {
   const collectionItems = useSelector((state) => selectShopItems(state));
-  console.log(collectionItems);
   return (
     <div className="w-screen mb-4">
       <LabelContainer>

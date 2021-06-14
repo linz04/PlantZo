@@ -49,9 +49,14 @@ const ItemPage = ({ history, location }) => {
     alert("Sukses memasukan ke keranjang");
   };
 
-  const handleBuyItem = () => {
+  const handleBuyItem = (e) => {
+    e.preventDefault();
     dispatch(addItemWithQuantity({ item, itemQuantity }));
     dispatch(checkedItem(item));
+
+    axios.post("/cart", { pid, itemQuantity, uid });
+
+    setItemQuantity(1);
     history.push("/checkout");
   };
 

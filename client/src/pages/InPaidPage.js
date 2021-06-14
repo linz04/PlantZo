@@ -1,11 +1,11 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { withRouter } from "react-router";
 import PaymentBanner from "../components/PaymentBanner";
-import { finishedTransaction } from "../redux/cart/cart.actions";
 import {
   selectCartItemsTotal,
   selectPaymentType,
+  selectTransactionId,
 } from "../redux/cart/cart.selectors";
 import { selectCurrentUser } from "../redux/user/user.selectors";
 
@@ -13,15 +13,9 @@ const InPaidPage = ({ history }) => {
   const paymentType = useSelector((state) => selectPaymentType(state));
   const currentUser = useSelector((state) => selectCurrentUser(state));
   const totalPayment = useSelector((state) => selectCartItemsTotal(state));
+  const transactionId = useSelector((state) => selectTransactionId(state));
 
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    // CATATAN belum bisa connect
-    // axios.get("inpaid").then((res) => {
-    //   console.log(res.data);
-    // });
-  }, []);
 
   const backgroundImage = {
     DANA: {
@@ -72,7 +66,7 @@ const InPaidPage = ({ history }) => {
 
         <div className="flex justify-between flex-1 text-3xl font-bold">
           <div>ID Transaksi</div>
-          <div>#13231231</div>
+          <div>#{transactionId}</div>
         </div>
       </div>
       <div className="flex flex-col justify-center items-center text-4xl font-bold my-8">

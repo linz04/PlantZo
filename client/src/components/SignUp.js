@@ -53,6 +53,7 @@ const SignUp = ({ history, handleClick }) => {
       } else {
         dispatch(setCurrentUser(null));
         handleClick();
+        alert("User berhasil dibuat");
       }
     });
   };

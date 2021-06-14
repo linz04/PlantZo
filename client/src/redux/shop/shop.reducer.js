@@ -6,10 +6,15 @@ const {
   SET_DEFAULT_CHECKED,
   SET_DEFAULT_SOLD,
   SET_DEFAULT_STATE,
+  SET_COMMENTS,
 } = shopActionTypes;
 
 const INITIAL_STATE = {
   items: [],
+  comments: {
+    comment: "",
+    rate: 0,
+  },
 };
 
 const shopReducer = (state = INITIAL_STATE, action) => {
@@ -46,6 +51,11 @@ const shopReducer = (state = INITIAL_STATE, action) => {
               rate: false,
             })
         ),
+      };
+    case SET_COMMENTS:
+      return {
+        ...state,
+        comments: action.payload,
       };
     default:
       return state;

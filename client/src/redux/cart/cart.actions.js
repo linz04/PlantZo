@@ -14,6 +14,7 @@ const {
   STATE_ITEM_TO_NEXT,
   STATE_ITEMS_TO_NEXT,
   FINISHED_TRANSACTION,
+  ADD_ID_TRANSACTION,
 } = cartActionTypes;
 
 export const addItem = (item) => ({
@@ -75,4 +76,9 @@ export const stateItemsToNext = () => ({
 
 export const finishedTransaction = () => ({
   type: FINISHED_TRANSACTION,
+});
+
+export const addIdTransaction = (id) => ({
+  type: ADD_ID_TRANSACTION,
+  payload: id,
 });

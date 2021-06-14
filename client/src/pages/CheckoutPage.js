@@ -5,7 +5,11 @@ import { withRouter } from "react-router";
 import CheckoutItem from "../components/CheckoutItem";
 import LabelContainer from "../components/LabelContainer";
 import PaymentBanner from "../components/PaymentBanner";
-import { setDeliveryType, stateItemsToNext } from "../redux/cart/cart.actions";
+import {
+  setDeliveryType,
+  stateItemsToNext,
+  addIdTransaction,
+} from "../redux/cart/cart.actions";
 import {
   selectCartItemsChecked,
   selectCartItemsTotal,
@@ -49,8 +53,7 @@ const CheckoutPage = ({ history }) => {
     axios
       .post("api/transaction", { uid, pids, checkoutItemsTotal })
       .then((res) => {
-        console.log(res.data);
-        // transaction_id
+        dispatch(addIdTransaction(res.data.transaction_id));
       });
     dispatch(stateItemsToNext());
     history.push("/state/inpaid");

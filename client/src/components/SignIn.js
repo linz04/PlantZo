@@ -22,7 +22,6 @@ const SignIn = ({ history }) => {
       } else {
         const header = new Headers();
         const encodeData = jwt(res.data);
-        console.log(encodeData);
         header.append("AUTH", encodeData);
         const { email, first_name, last_name, uid, address } = encodeData.sub;
         dispatch(
