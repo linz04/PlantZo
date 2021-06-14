@@ -9,6 +9,8 @@ import { selectCurrentUser } from "../redux/user/user.selectors";
 
 const ProfilePage = ({ history }) => {
   const currentUser = useSelector((state) => selectCurrentUser(state));
+  const [profilePreview, setProfilePreview] = useState(null);
+  const [backgroundPreview, setBackgroundPreview] = useState(null);
   const { displayName, email } = currentUser;
   const dispatch = useDispatch();
 
@@ -22,9 +24,6 @@ const ProfilePage = ({ history }) => {
     selectedProfileImage: null,
     selectedBackgroundProfileImage: null,
   });
-
-  const [fotoProfilePreview, setFotoProfilePreview] = useState(null);
-  const [backgroundImagePreview, setBackgroundImagePreview] = useState(null);
 
   const {
     firstName,
@@ -54,9 +53,12 @@ const ProfilePage = ({ history }) => {
   const handleImageSelected = (e) => {
     const { name, files } = e.target;
     setFormProfile({ ...formProfile, [name]: files[0] });
+    if (name === "selectedProfileImage") {
+      setProfilePreview(URL.createObjectURL(files[0]));
+    } else if (name === "selectedBackgroundProfileImage") {
+      setBackgroundPreview(URL.createObjectURL(files[0]));
+    }
   };
-
-  const handleImageForPreview = (e) => {};
 
   const handleResetChanged = () => {
     setFormProfile({
@@ -70,9 +72,6 @@ const ProfilePage = ({ history }) => {
       selectedBackgroundProfileImage: null,
     });
   };
-
-  console.log(currentUser);
-  console.log(currentUser.uid);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -184,20 +183,28 @@ const ProfilePage = ({ history }) => {
           <div className="flex flex-col flex-1 space-y-2">
             <div className="mb-4">FOTO PROFILE</div>
             <div className="flex justify-center">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-80 w-80"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+              {profilePreview === null ? (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-80 w-80"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+              ) : (
+                <img
+                  src={profilePreview}
+                  alt="profile"
+                  className="h-28 rounded-lg"
                 />
-              </svg>
+              )}
             </div>
             <UserFormInput
               type="file"
@@ -211,20 +218,28 @@ const ProfilePage = ({ history }) => {
           <div className="flex flex-col flex-1 space-y-2">
             <div className="mb-4">FOTO SAMPUL</div>
             <div className="flex justify-center">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-80 w-80"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
+              {backgroundPreview === null ? (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-80 w-80"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
+                  />
+                </svg>
+              ) : (
+                <img
+                  src={backgroundPreview}
+                  alt="background"
+                  className="h-28 rounded-lg"
                 />
-              </svg>
+              )}
             </div>
             <UserFormInput
               type="file"

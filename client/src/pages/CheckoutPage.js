@@ -1,3 +1,4 @@
+import axios from "axios";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { withRouter } from "react-router";
@@ -35,16 +36,32 @@ const CheckoutPage = ({ history }) => {
     dispatch(setDeliveryType(value.split(",")));
   };
 
+  let pids = [];
+  const generatePids = (cartItems) => {
+    cartItems.forEach((cartItem) => (pids = [...pids, cartItem.pid]));
+  };
+
+  const { uid } = currentUser;
+
+  const dateObj = new Date();
+  const month = dateObj.getUTCMonth();
+  const day = dateObj.getUTCDate();
+  const year = dateObj.getUTCFullYear();
+  console.log(day);
+  const dateRes = `${year}-${day}-${month}`;
+
   const handleSubmit = (e) => {
     e.preventDefault();
-
+    generatePids(cartItems);
     // CATATAN belum bisa connect, dan belum memikirkan apa yang akan dikirim
-    // axios.post("api/signup", {  }).then((res) => {
-    //   console.log(res.data);
-    //   if ("User Already Exist!" === res.data) {
-    //     console.log("USER_EXIST");
-    //   }
-    // });
+    axios
+      .post("api/transaction", { uid, pids, checkoutItemsTotal, dateRes })
+      .then((res) => {
+        console.log(res.data);
+        if ("User Already Exist!" === res.data) {
+          console.log("USER_EXIST");
+        }
+      });
     dispatch(stateItemsToNext());
     history.push("/state/inpaid");
   };

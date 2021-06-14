@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import LabelContainer from "../components/LabelContainer";
 import UserFormInput from "../components/UserFormInput";
+import { setUserAddress } from "../redux/user/user.actions";
 import { selectCurrentUser } from "../redux/user/user.selectors";
 
 const EditAddressPage = () => {
@@ -26,9 +27,9 @@ const EditAddressPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    dispatch(setUserAddress(address));
 
-    // CATATAN belum bisa connect
-    axios.post("api/user/address", { uid, address }).then((res) => {
+    axios.post("api/user/address", { uid, address }).then(() => {
       setAddress("");
     });
   };

@@ -1,8 +1,10 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { withRouter } from "react-router";
-import { setCurrentUser } from "../redux/user/user.actions";
+import { selectCurrentUser } from "../redux/user/user.selectors";
 
 const CardItem = ({ item, history }) => {
+  const currentUser = useSelector((state) => selectCurrentUser(state));
   const { name, image: imageUrl, pid, price, rating } = item;
 
   let nameEdited = name;
@@ -14,10 +16,10 @@ const CardItem = ({ item, history }) => {
   const startArray = Array.from(new Array(Math.floor(4)));
 
   const handleClick = () => {
-    if (setCurrentUser !== null) return;
-
-    history.push(`shop/${pid}`);
-    window.scrollTo(0, 0);
+    if (currentUser !== null) {
+      history.push(`shop/${pid}`);
+      window.scrollTo(0, 0);
+    }
   };
 
   return (

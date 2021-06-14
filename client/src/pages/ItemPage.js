@@ -42,8 +42,9 @@ const ItemPage = ({ history, location }) => {
   const handleAddToCart = (e) => {
     e.preventDefault();
     dispatch(addItemWithQuantity({ item, itemQuantity }));
-    // CATATAN Belum bisa connect
+
     axios.post("/cart", { pid, quantity, uid });
+
     setItemQuantity(1);
     alert("Sukses memasukan ke keranjang");
   };

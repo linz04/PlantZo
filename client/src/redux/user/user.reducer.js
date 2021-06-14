@@ -26,7 +26,7 @@ const userReducer = (state = INITIAL_STATE, action) => {
     case SET_USER_ADDRESS:
       return {
         ...state,
-        address: action.payload,
+        currentUser: { ...state.currentUser, address: action.payload },
       };
     case EDIT_USER_PROFILE:
       return {

@@ -16,10 +16,7 @@ const ShopPage = ({ history, match }) => {
   const currentUser = useSelector((state) => selectCurrentUser(state));
 
   useEffect(() => {
-    const headers = {
-      Authorization: `Bearer ${currentUser.token}`,
-    };
-    axios.get("/shop", { headers }).then((res) => {
+    axios.get("/shop").then((res) => {
       dispatch(setShopItems(res.data));
     });
   }, []);

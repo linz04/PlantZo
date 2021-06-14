@@ -47,12 +47,8 @@ const App = () => {
 
   useEffect(() => {
     if (currentUser) {
-      const headers = {
-        Authorization: `Bearer ${currentUser.token}`,
-      };
-
       axios
-        .get("/", { headers })
+        .get("/")
         .then((res) => {
           console.log("SUCCESS");
         })
