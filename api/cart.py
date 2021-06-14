@@ -32,11 +32,11 @@ def cart():
 			rv = cur.fetchone()
 			quantity = int(rv[2])+int(data['itemQuantity'])
 			print(quantity)
-			cur.execute("UPDATE cart SET total = %s where uid = %s and pid = %s", (str(quantity),data['uid'],data['pid'],))
+			cur.execute("UPDATE cart SET total = %s where uid = %s and pid = %s", (quantity,data['uid'],data['pid'],))
 			mysql.commit()
 			return "Success"
 
-		cur.execute("INSERT INTO cart (uid, pid, total) VALUES (%s, %s, %s)", (data['uid'], data['pid'], data['itemQuantity']))
+		cur.execute("INSERT INTO cart (uid, pid, total) VALUES (%s, %s, %s)", (data['uid'], data['pid'], int(data['itemQuantity'])))
 		mysql.commit()
 		return 'Success'
 
@@ -47,7 +47,7 @@ def cart_delete():
 	if request.method == 'POST':
 		data = request.get_json()
 		cur = mysql.cursor(buffered=True)
-		cur.execute("DELETE FROM cart where uid = %s and pid = %s")
+		cur.execute("DELETE FROM cart where uid = %s and pid = %s", (data['uid'], data['pid'],))
 		mysql.commit()
 		cur.close()
 		return "Success"
