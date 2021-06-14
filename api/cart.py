@@ -16,8 +16,7 @@ def cart():
 		cur.execute("SELECT * FROM cart c, product p where c.uid = %s and p.pid = c.pid", (auth['uid'],))
 		#cur.execute("SELECT * FROM cart where uid = %s", (auth['uid'],))
 		row_headers= [x[0] for x in cur.description]
-		rv = cur.fetchall()
-		print(rv)
+		rv = cur.fetchall()	
 		json_data = []
 		for result in rv:
 			json_data.append(dict(zip(row_headers,result)))

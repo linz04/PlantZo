@@ -72,3 +72,13 @@ def comment():
 		return "Success give comment"
 
 	return "Success"
+
+
+@app.route("/history", methods=['GET'])
+def history_view():
+	if request.method == 'GET':
+		data = request.get_json()
+		print(data)
+		cur = mysql.cursor(buffered=True)
+		cur.execute("SELECT * FROM history h, product p WHERE h.uid = %s and h.pid = p.pid", (auth['uid'],))
+		row_headers= [x[0] for x in cur.description]
