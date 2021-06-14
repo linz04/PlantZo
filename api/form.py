@@ -40,9 +40,10 @@ def login():
 		
 		cur.execute("SELECT * FROM users where email = %s", (email,))
 		rv = cur.fetchone()
+		print(rv)
 		try:
 			if bcrypt.check_password_hash(rv[4], password):
-				access_token = create_access_token(identity = {'uid': rv[0],'email': rv[1],'first_name': rv[2],'last_name': rv[3]})
+				access_token = create_access_token(identity = {'uid': rv[0],'email': rv[1],'first_name': rv[2],'last_name': rv[3], 'address': rv[5]})
 				result = access_token
 				print(result)
 			else:

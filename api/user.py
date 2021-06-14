@@ -1,4 +1,4 @@
-from app import app
+from app import app, bcrypt
 from db import mysql
 from flask import Flask, flash, request, redirect, url_for
 from werkzeug.utils import secure_filename
@@ -35,13 +35,19 @@ def edit_profile():
 				bgname = secure_filename(bg.filename)
 				profile.save(os.path.join(app.config['UPLOAD_FOLDER'], profilename))
 				bg.save(os.path.join(app.config['UPLOAD_FOLDER'], bgname))
-		
+
 		cur.execute("SELECT password FROM users where uid = %s", (data['uid'],))
 		rv = cur.fetchone()
-		print(rv)
-		#cur.execute("UPDATE users SET first_name = %s, last_name = %s, password = %s, address = %s where uid = %s", (data['firstName'],data['lastName']))
+		new_password = bcrypt.generate_password_hash(data['newPassword']).decode('utf-8')
+		if bcrypt.check_password_hash(rv[0], data['oldPassword']):
+			cur.execute("UPDATE users SET first_name = %s, last_name = %s, password = %s, address = %s where uid = %s", (data['firstName'],data['lastName'],new_password,data['address'],data['uid']))
+			mysql.commit()
+			print("Success")
+		else:
+			print("missmatch")
+			return "Password missmatch!"
 
-		return "Berhasil"
+		return "Success"
 
 #/user/api/user/address
 @app.route("/user/api/user/address", methods=['POST'])
