@@ -17,22 +17,39 @@ def allowed_file(filename):
 @app.route("/settings/profile", methods=['POST'])
 def edit_profile():
 	if request.method == 'POST':
-		profile = request.files['profile_image']
-		bg = request.files['background_image']
-		bg_temp = bg.filename.split(".")
-		profile_temp = profile.filename.split(".")
-		data = dict(request.form)
-		#set profile name as uid.png
 		cur = mysql.cursor(buffered=True)
-		#cur.execute("SELECT  FROM users WHERE email=%s", (email,))
-		print(bg_temp,profile_temp,bg.filename,profile.filename)
-		print(data)
-		if profile.filename == '' and bg.filename == '':
-			return "No Selected File"
-		if profile and allowed_file(profile.filename) and bg and allowed_file(bg.filename):
-			profilename = secure_filename(profile.filename)
-			bgname = secure_filename(bg.filename)
-			profile.save(os.path.join(app.config['UPLOAD_FOLDER'], profilename))
-			bg.save(os.path.join(app.config['UPLOAD_FOLDER'], bgname))
-			print("Success")
-			return 'Success'
+		data = dict(request.form)
+		if(request.files):
+			#handle image
+			profile = request.files['profile_image']
+			bg = request.files['background_image']
+			bg_temp = bg.filename.split(".")
+			profile_temp = profile.filename.split(".")
+			profile.filename = data['uid']+"_profile."+profile_temp[1]
+			bg.filename = data['uid']+"_background."+bg_temp[1]
+			print(bg.filename, profile.filename)
+			if profile.filename == '' and bg.filename == '':
+				return "No Selected File"
+			if profile and allowed_file(profile.filename) and bg and allowed_file(bg.filename):
+				profilename = secure_filename(profile.filename)
+				bgname = secure_filename(bg.filename)
+				profile.save(os.path.join(app.config['UPLOAD_FOLDER'], profilename))
+				bg.save(os.path.join(app.config['UPLOAD_FOLDER'], bgname))
+		
+		cur.execute("SELECT password FROM users where uid = %s", (data['uid'],))
+		rv = cur.fetchone()
+		print(rv)
+		#cur.execute("UPDATE users SET first_name = %s, last_name = %s, password = %s, address = %s where uid = %s", (data['firstName'],data['lastName']))
+
+		return "Berhasil"
+
+#/user/api/user/address
+@app.route("/user/api/user/address", methods=['POST'])
+def edit_address():
+	if request.method == 'POST':
+		data = request.get_json()
+		cur = mysql.cursor(buffered=True)
+		cur.execute("UPDATE users SET address = %s where uid = %s", (data['address'], data['uid'],))
+		mysql.commit()
+		cur.close()
+		return 'Success'

@@ -25,6 +25,7 @@ DROP TABLE IF EXISTS `cart`;
 CREATE TABLE `cart` (
   `uid` int DEFAULT NULL,
   `pid` int DEFAULT NULL,
+  `total` int DEFAULT NULL,
   KEY `uid` (`uid`),
   KEY `pid` (`pid`),
   CONSTRAINT `cart_ibfk_1` FOREIGN KEY (`uid`) REFERENCES `users` (`uid`),
@@ -39,6 +40,66 @@ CREATE TABLE `cart` (
 LOCK TABLES `cart` WRITE;
 /*!40000 ALTER TABLE `cart` DISABLE KEYS */;
 /*!40000 ALTER TABLE `cart` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `comment`
+--
+
+DROP TABLE IF EXISTS `comment`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `comment` (
+  `postid` int NOT NULL AUTO_INCREMENT,
+  `uid` int DEFAULT NULL,
+  `pid` int DEFAULT NULL,
+  `rating` int DEFAULT NULL,
+  `comment` varchar(255) NOT NULL,
+  PRIMARY KEY (`postid`),
+  KEY `uid` (`uid`),
+  KEY `pid` (`pid`),
+  CONSTRAINT `comment_ibfk_1` FOREIGN KEY (`uid`) REFERENCES `users` (`uid`),
+  CONSTRAINT `comment_ibfk_2` FOREIGN KEY (`pid`) REFERENCES `product` (`pid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `comment`
+--
+
+LOCK TABLES `comment` WRITE;
+/*!40000 ALTER TABLE `comment` DISABLE KEYS */;
+/*!40000 ALTER TABLE `comment` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `history`
+--
+
+DROP TABLE IF EXISTS `history`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `history` (
+  `tid` int NOT NULL AUTO_INCREMENT,
+  `uid` int DEFAULT NULL,
+  `pid` int DEFAULT NULL,
+  `total_cost` int DEFAULT NULL,
+  `date` date NOT NULL,
+  PRIMARY KEY (`tid`),
+  KEY `uid` (`uid`),
+  KEY `pid` (`pid`),
+  CONSTRAINT `history_ibfk_1` FOREIGN KEY (`uid`) REFERENCES `users` (`uid`),
+  CONSTRAINT `history_ibfk_2` FOREIGN KEY (`pid`) REFERENCES `product` (`pid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `history`
+--
+
+LOCK TABLES `history` WRITE;
+/*!40000 ALTER TABLE `history` DISABLE KEYS */;
+/*!40000 ALTER TABLE `history` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -109,4 +170,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-06-08  1:06:17
+-- Dump completed on 2021-06-14 22:47:38

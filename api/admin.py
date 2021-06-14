@@ -1,4 +1,4 @@
-from app import app
+from app import app, bcrypt
 from db import mysql
 from flask import request, redirect, jsonify, render_template
 import json
