@@ -1,16 +1,21 @@
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import CardItem from "../components/CardItem";
 import Popup from "../components/Popup";
 import SignIn from "../components/SignIn";
 import SignUp from "../components/SignUp";
-import { selectShopItems } from "../redux/shop/shop.selectors";
 
 const MidHome = () => {
   const [signUpPopupVisible, setSignUpPopupVisible] = useState(false);
   const [signInPopupVisible, setSignInPopupVisible] = useState(false);
 
-  const shopItems = useSelector((state) => selectShopItems(state));
+  const [shopItems, setShopItems] = useState([]);
+
+  useEffect(() => {
+    axios.get("/shop").then((res) => {
+      setShopItems(res.data);
+    });
+  }, []);
 
   const handleClickSignup = () => {
     setSignUpPopupVisible(!signUpPopupVisible);
@@ -136,11 +141,11 @@ const MidHome = () => {
 
         <div className="col-span-2">
           Paling Banyak Dibeli
-          <div>
+          <div className="flex space-x-4 justify-center items-center mt-4">
             {shopItems.length !== 0 ? (
               shopItems
-                .sort((item1, item2) => item2.quantity - item1.quantity)
-                .filter((item, idx) => idx < 6)
+                .sort((item1, item2) => item2.pid - item1.pid)
+                .filter((item, idx) => idx < 3)
                 .map((item) => <CardItem key={item.pid} item={item} />)
             ) : (
               <div>Shop data masih belum terambil</div>

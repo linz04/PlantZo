@@ -6,7 +6,6 @@ import { selectCartItemsInPack } from "../redux/cart/cart.selectors";
 
 const PackPage = () => {
   const inPackItems = useSelector((state) => selectCartItemsInPack(state));
-  console.log(inPackItems);
   const dispatch = useDispatch();
 
   useEffect(() => {
