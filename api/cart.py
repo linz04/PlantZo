@@ -7,12 +7,13 @@ import json
 @app.route('/cart', methods=['GET','POST'])
 def cart():
 	if request.method == 'GET':
-		token = request.cookies.get('auth')
+		token = request.headers.get('Authorization').replace("Bearer ","")
+		print(token)
 		payload = jwt.decode(token, app.config.get('JWT_SECRET_KEY'), algorithms=['HS256'])
 		auth = payload['sub']
 
 		cur = mysql.cursor(buffered=True)
-		cur.execute("SELECT * FROM cart c, product p where c.uid = %s and p.pid = c.pid", (auth['uid'],))
+		cur.execute("SELECT * FROM cart where uid = %s", (auth['uid'],))
 		row_headers= [x[0] for x in cur.description]
 		rv = cur.fetchall()
 		print(rv)
@@ -22,10 +23,10 @@ def cart():
 		res = json.loads(json.dumps(json_data))
 		return jsonify(res)
 
-	if request.method == 'POST':
+	elif request.method == 'POST':
 		data = request.get_json()
 		cur = mysql.cursor(buffered=True)
-		cur.execute("INSERT INTO cart (uid, pid, total) VALUES (%s, %s, %s)", (data['uid'], data['pid'], data['quantity']))
+		cur.execute("INSERT INTO cart (uid, pid, total) VALUES (%s, %s, %s)", (data['uid'], data['pid'], data['itemQuantity']))
 		mysql.commit()
 		return 'Success'
 
