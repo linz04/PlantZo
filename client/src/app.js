@@ -18,6 +18,7 @@ import AboutUserPage from "./pages/AboutUserPage";
 import CartPage from "./pages/CartPage";
 import CheckoutPage from "./pages/CheckoutPage";
 import EditAddressPage from "./pages/EditAddressPage";
+import HistoryPage from "./pages/HistoryPage";
 import HomePage from "./pages/HomePage";
 import ItemPage from "./pages/ItemPage";
 import PaymentStatePage from "./pages/PaymentStatePage";
@@ -119,6 +120,11 @@ const App = () => {
           render={() =>
             !currentUser ? <Redirect to="/" /> : <PaymentStatePage />
           }
+        />
+        <Route
+          exact
+          path="/user/history"
+          render={() => (!currentUser ? <Redirect to="/" /> : <HistoryPage />)}
         />
         <Route
           path="/settings/"

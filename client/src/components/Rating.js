@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import { FaStar } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
+import { withRouter } from "react-router";
 import { setComments } from "../redux/shop/shop.actions";
 import { selectCurrentUser } from "../redux/user/user.selectors";
 
@@ -10,7 +11,7 @@ const colors = {
   grey: "#a9a9a9",
 };
 
-function Rating({ item = [] }) {
+function Rating({ item = [], history }) {
   const currentUser = useSelector((state) => selectCurrentUser(state));
   const { uid } = currentUser;
   const [currentValue, setCurrentValue] = useState(0);
@@ -32,6 +33,8 @@ function Rating({ item = [] }) {
     dispatch(setComments({ currentValue, textArea }));
 
     axios.post("/comments", { currentValue, textArea, uid, pid });
+    history.push("/user");
+    window.scrollTo(0, 0);
   };
 
   const handleMouseOver = (newHoverValue) => {
@@ -90,4 +93,4 @@ function Rating({ item = [] }) {
     </div>
   );
 }
-export default Rating;
+export default withRouter(Rating);
