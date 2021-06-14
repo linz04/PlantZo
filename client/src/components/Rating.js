@@ -10,7 +10,7 @@ const colors = {
   grey: "#a9a9a9",
 };
 
-function Rating({ item }) {
+function Rating({ item = [] }) {
   const currentUser = useSelector((state) => selectCurrentUser(state));
   const { uid } = currentUser;
   const [currentValue, setCurrentValue] = useState(0);
@@ -24,9 +24,14 @@ function Rating({ item }) {
 
   const handleClick = (value) => {
     setCurrentValue(value);
-    console.log(value);
-    dispatch(setComments({ value, textArea }));
-    axios.post("/comments", { value, textArea, uid, pid });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    dispatch(setComments({ currentValue, textArea }));
+
+    axios.post("/comments", { currentValue, textArea, uid, pid });
   };
 
   const handleMouseOver = (newHoverValue) => {
@@ -38,7 +43,7 @@ function Rating({ item }) {
   };
 
   return (
-    <div className="flex flex-col justify-center item-center text-center">
+    <div className="flex flex-col justify-center item-center text-center w-screen">
       <h2 className="font-serif font-bold text-2xl mb-5">
         {" "}
         Silahkan Beri Penilaian Terhadap Produk Ini{" "}
@@ -67,15 +72,18 @@ function Rating({ item }) {
           );
         })}
       </div>
-      <div className="my-5">
+      <div className="my-5 w-screen">
         <textarea
-          className="w-1/4 h-48"
+          className=" w-screen h-48"
           placeholder="What's your experience?"
           onChange={(e) => setTextArea(e.target.value)}
         />
       </div>
       <div className="flex justify-center md:justify-end md:mr-40 text-black">
-        <button className="btn ml-2 p-5 bg-blue-300 border-blue-500 hover:bg-blue-800 hover:text-white transition ease-out duration 500 ">
+        <button
+          className="btn ml-2 p-5 bg-blue-300 border-blue-500 hover:bg-blue-800 hover:text-white transition ease-out duration 500 "
+          onClick={handleSubmit}
+        >
           Kirim Penilaian
         </button>
       </div>
