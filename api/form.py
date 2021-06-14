@@ -48,7 +48,7 @@ def login():
 				access_token = create_access_token(identity = {'uid': rv[0],'email': rv[1],'first_name': rv[2],'last_name': rv[3]})
 				result = access_token
 				set_access_cookies(response, access_token)
-				print(result)
+				print(result,response)
 				return response
 			else:
 				result = jsonify({"error":"Invalid username and password"})
