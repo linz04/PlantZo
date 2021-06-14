@@ -85,6 +85,7 @@ CREATE TABLE `history` (
   `pid` int DEFAULT NULL,
   `total_cost` int DEFAULT NULL,
   `date` date NOT NULL,
+  `ticket` int DEFAULT NULL,
   PRIMARY KEY (`tid`),
   KEY `uid` (`uid`),
   KEY `pid` (`pid`),
@@ -170,4 +171,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-06-14 22:47:38
+-- Dump completed on 2021-06-15  2:29:32

@@ -26,8 +26,24 @@ def cart():
 	elif request.method == 'POST':
 		data = request.get_json()
 		cur = mysql.cursor(buffered=True)
+		cur.execute("SELECT * FROM cart where uid = %s and pid = %s", (data['uid'],data['pid'],))
+		if cur.rowcount == 1:
+			rv = cur.fetchone()
+			quantity = int(rv[2])+int(data['itemQuantity'])
+			print(quantity)
+			cur.execute("UPDATE cart SET total = %s where uid = %s and pid = %s", (str(quantity),data['uid'],data['pid'],))
+			mysql.commit()
+			return "Success"
+
 		cur.execute("INSERT INTO cart (uid, pid, total) VALUES (%s, %s, %s)", (data['uid'], data['pid'], data['itemQuantity']))
 		mysql.commit()
 		return 'Success'
 
 	return 'Success'
+
+@app.route("/cart-delete", methods=['POST'])
+def cart_delete():
+	if request.method == 'POST':
+		data = request.get_json()
+		cur = mysql.cursor(buffered=True)
+		cur.execute("DELETE FROM cart where uid = %s ")
