@@ -18,4 +18,4 @@ def inpaid():
 			cur.execute("INSERT INTO history (`uid`, `pid`, `total_cost`, `date`, `ticket`) VALUES (%s, %s, %s, %s, %s)", (uid, pids[i], total, date, ticket))
 			mysql.commit()
 
-	return jsonify({"transaction_id":ticket})
+	return jsonify({"transaction_id":ticket, "date":,date})
