@@ -19,7 +19,10 @@ function Rating({ item = [], history }) {
   const [textArea, setTextArea] = useState("");
   const stars = Array(5).fill(0);
 
-  const { pid } = item[0];
+  let pid;
+  if (item.length !== 0) {
+    pid = item[0].pid;
+  }
 
   const dispatch = useDispatch();
 

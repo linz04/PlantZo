@@ -7,6 +7,7 @@ import {
   selectPaymentType,
   selectTransactionId,
 } from "../redux/cart/cart.selectors";
+import { selectDate } from "../redux/shop/shop.selectors";
 import { selectCurrentUser } from "../redux/user/user.selectors";
 
 const InPaidPage = ({ history }) => {
@@ -14,6 +15,8 @@ const InPaidPage = ({ history }) => {
   const currentUser = useSelector((state) => selectCurrentUser(state));
   const totalPayment = useSelector((state) => selectCartItemsTotal(state));
   const transactionId = useSelector((state) => selectTransactionId(state));
+
+  const date = useSelector((state) => selectDate(state));
 
   const dispatch = useDispatch();
 
@@ -76,7 +79,7 @@ const InPaidPage = ({ history }) => {
       <div className="text-3xl space-y-4 mt-4">
         <div className="flex space-x-4">
           <div>Waktu Pembelian :</div>
-          <div>11 Januari bertemu menjalani kisah cinta ini</div>
+          <div>{date}</div>
         </div>
         <div>Penerima :</div>
         <div className="ml-10">

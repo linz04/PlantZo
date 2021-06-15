@@ -6,9 +6,9 @@ import CheckoutItem from "../components/CheckoutItem";
 import LabelContainer from "../components/LabelContainer";
 import PaymentBanner from "../components/PaymentBanner";
 import {
+  addIdTransaction,
   setDeliveryType,
   stateItemsToNext,
-  addIdTransaction,
 } from "../redux/cart/cart.actions";
 import {
   selectCartItemsChecked,
@@ -16,6 +16,7 @@ import {
   selectDeliveryType,
   selectPaymentType,
 } from "../redux/cart/cart.selectors";
+import { setDate } from "../redux/shop/shop.actions";
 import { selectCurrentUser } from "../redux/user/user.selectors";
 
 const CheckoutPage = ({ history }) => {
@@ -53,6 +54,7 @@ const CheckoutPage = ({ history }) => {
     axios
       .post("api/transaction", { uid, pids, checkoutItemsTotal })
       .then((res) => {
+        dispatch(setDate(res.data.date));
         dispatch(addIdTransaction(res.data.transaction_id));
       });
     dispatch(stateItemsToNext());

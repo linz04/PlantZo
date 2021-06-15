@@ -7,6 +7,7 @@ const {
   SET_DEFAULT_SOLD,
   SET_DEFAULT_STATE,
   SET_COMMENTS,
+  SET_DATE,
 } = shopActionTypes;
 
 export const setShopItems = (items) => ({
@@ -33,4 +34,9 @@ export const setDefaultState = () => ({
 export const setComments = (comments) => ({
   type: SET_COMMENTS,
   payload: comments,
+});
+
+export const setDate = (date) => ({
+  type: SET_DATE,
+  payload: date,
 });
