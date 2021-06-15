@@ -120,6 +120,14 @@ const UserPage = ({ history, match }) => {
         </span>
       </LabelContainer>
       <LabelContainer>
+        <span
+          className="cursor-pointer font-light"
+          onClick={() => history.push(`${match.path}/history`)}
+        >
+          History anda
+        </span>
+      </LabelContainer>
+      <LabelContainer>
         <div className="w-full h-full">
           <div className="font-light">Pesanan saya</div>
 

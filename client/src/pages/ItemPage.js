@@ -9,6 +9,7 @@ import { selectCurrentUser } from "../redux/user/user.selectors";
 const ItemPage = ({ history, location }) => {
   const currentUser = useSelector((state) => selectCurrentUser(state));
   const [itemQuantity, setItemQuantity] = useState(1);
+  const [testi, setTesti] = useState(null);
   const [item, setItem] = useState({
     name: "",
     description: "",
@@ -33,7 +34,10 @@ const ItemPage = ({ history, location }) => {
 
   useEffect(() => {
     axios.get(location.pathname).then((res) => {
-      setItem(res.data);
+      console.log("S", res.data);
+      const { comment, rating, first_name, last_name } = res.data.Comment;
+      setTesti({ comment, rating, first_name, last_name });
+      setItem(res.data.Item);
     });
   }, [location.pathname]);
 
