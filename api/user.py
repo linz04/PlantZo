@@ -45,7 +45,7 @@ def edit_profile():
 			print("Success")
 		else:
 			print("missmatch")
-			return jsonify({"msg":,"Password missmatch!"})
+			return "Password missmatch!"
 
 		return "Success"
 
