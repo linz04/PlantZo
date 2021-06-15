@@ -7,6 +7,7 @@ const {
   SET_DEFAULT_SOLD,
   SET_DEFAULT_STATE,
   SET_COMMENTS,
+  SET_DATE,
 } = shopActionTypes;
 
 const INITIAL_STATE = {
@@ -15,6 +16,7 @@ const INITIAL_STATE = {
     comment: "",
     rate: 0,
   },
+  date: "",
 };
 
 const shopReducer = (state = INITIAL_STATE, action) => {
@@ -56,6 +58,11 @@ const shopReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         comments: action.payload,
+      };
+    case SET_DATE:
+      return {
+        ...state,
+        date: action.payload,
       };
     default:
       return state;

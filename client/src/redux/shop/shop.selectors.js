@@ -11,3 +11,5 @@ export const selectComments = createSelector(
   [selectShop],
   (shop) => shop.comments
 );
+
+export const selectDate = createSelector([selectShop], (shop) => shop.date);
