@@ -106,23 +106,27 @@ const ProfilePage = ({ history }) => {
     fd.append("address", address);
     fd.append("uid", currentUser.uid);
 
-    axios.post("/settings/profile", fd);
+    axios.post("/settings/profile", fd).then((res) => {
+      setFormProfile({
+        ...formProfile,
+        firstName: "",
+        lastName: "",
+        oldPassword: "",
+        newPassword: "",
+        confirmPassword: "",
+        address: "",
+        selectedProfileImage: null,
+        selectedBackgroundProfileImage: null,
+      });
 
-    setFormProfile({
-      ...formProfile,
-      firstName: "",
-      lastName: "",
-      oldPassword: "",
-      newPassword: "",
-      confirmPassword: "",
-      address: "",
-      selectedProfileImage: null,
-      selectedBackgroundProfileImage: null,
+      if (res.data === "Password missmatch!") {
+        alert("Password lama berbeda");
+      } else {
+        dispatch(setCurrentUser(user));
+        alert("Data berhasil diubah");
+        history.push("/user");
+      }
     });
-
-    dispatch(setCurrentUser(user));
-    alert("Data berhasil diubah");
-    history.push("/user");
   };
 
   return (

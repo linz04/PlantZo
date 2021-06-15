@@ -7,6 +7,7 @@ import LabelContainer from "../components/LabelContainer";
 import PaymentBanner from "../components/PaymentBanner";
 import {
   addIdTransaction,
+  deleteAllItem,
   setDeliveryType,
   stateItemsToNext,
 } from "../redux/cart/cart.actions";
@@ -58,6 +59,7 @@ const CheckoutPage = ({ history }) => {
         dispatch(addIdTransaction(res.data.transaction_id));
       });
     dispatch(stateItemsToNext());
+    // dispatch(deleteAllItem());
     history.push("/state/inpaid");
   };
 

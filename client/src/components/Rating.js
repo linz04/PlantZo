@@ -11,7 +11,7 @@ const colors = {
   grey: "#a9a9a9",
 };
 
-function Rating({ item = [], history }) {
+function Rating({ item, history }) {
   const currentUser = useSelector((state) => selectCurrentUser(state));
   const { uid } = currentUser;
   const [currentValue, setCurrentValue] = useState(0);
@@ -19,16 +19,13 @@ function Rating({ item = [], history }) {
   const [textArea, setTextArea] = useState("");
   const stars = Array(5).fill(0);
 
-  let pid;
-  if (item.length !== 0) {
-    pid = item[0].pid;
-  }
-
   const dispatch = useDispatch();
 
   const handleClick = (value) => {
     setCurrentValue(value);
   };
+
+  const { pid } = item;
 
   const handleSubmit = (e) => {
     e.preventDefault();
