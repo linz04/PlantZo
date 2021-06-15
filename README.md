@@ -25,8 +25,8 @@ __
 ## Tim Pengembang PlantZo
 | No. |	 Nama                     | NIM       | Role               |
 | --- |	 ------------------------ | --------- | ------------------ |
-| 1.  |	 Linuz Tri Erianto        | G64190027 | Back End Engineer  |
-| 2.  |	 Yuritma Dwi Ardita Putri | G64190048 | Front End Engineer |
+| 1.  |	 Linuz Tri Erianto        | G64190027 | Back End Engineer and Infrastructure Management  |
+| 2.  |	 Yuritma Dwi Ardita Putri | G64190048 | UI/UX |
 | 3.  |	 Muhammad Adjie Bimaditya | G64190062 | Front End Engineer |
 | 4.  |	 Yusuf Pradnya Darpita    | G64190049 | Front End Engineer |
 
