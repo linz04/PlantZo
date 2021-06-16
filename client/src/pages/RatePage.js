@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import UnPaidItem from "../components/UnPaidItem";
+import RateItem from "../components/RateItem";
 import { selectCartItemsInRate } from "../redux/cart/cart.selectors";
 
 const RatePage = () => {
@@ -20,9 +20,7 @@ const RatePage = () => {
         ) : (
           <>
             {inRateItems.map((unPaidItem) => (
-              <div>
-                <UnPaidItem key={unPaidItem.pid} item={unPaidItem} />
-              </div>
+              <RateItem key={unPaidItem.pid} item={unPaidItem} />
             ))}
           </>
         )}

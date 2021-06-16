@@ -9,7 +9,9 @@ import { selectCurrentUser } from "../redux/user/user.selectors";
 const ItemPage = ({ history, location }) => {
   const currentUser = useSelector((state) => selectCurrentUser(state));
   const [itemQuantity, setItemQuantity] = useState(1);
-  const [testi, setTesti] = useState(null);
+
+  const [comments, setComments] = useState(null);
+
   const [item, setItem] = useState({
     name: "",
     description: "",
@@ -35,8 +37,7 @@ const ItemPage = ({ history, location }) => {
   useEffect(() => {
     axios.get(location.pathname).then((res) => {
       console.log("S", res.data);
-      const { comment, rating, first_name, last_name } = res.data.Comment;
-      setTesti({ comment, rating, first_name, last_name });
+      setComments(res.data.Comment);
       setItem(res.data.Item);
     });
   }, [location.pathname]);
@@ -64,7 +65,7 @@ const ItemPage = ({ history, location }) => {
     history.push("/checkout");
   };
 
-  const ratingArray = Array.from(new Array(Math.floor(rating)));
+  const ratingArray = Array.from(new Array(Math.floor(comments.rating)));
 
   return (
     <>
@@ -285,7 +286,7 @@ const ItemPage = ({ history, location }) => {
       </LabelContainer>
 
       <LabelContainer>
-        <div className="flex flex-col justify-between">
+        {/* <div className="flex flex-col justify-between">
           <h3 className="text-4xl">Penilaian Produk</h3>
           <div className="my-4 flex items-center">
             <span className="mr-2">
@@ -342,7 +343,46 @@ const ItemPage = ({ history, location }) => {
               <span className="text-gray-400">4 / 4 / 18</span>
             </div>
           </div>
-        </div>
+        </div> */}
+        {comments === "" ? (
+          <div>Belum ada review</div>
+        ) : (
+          <div className="flex" key={comments.postid}>
+            <div>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-24 w-24"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
+            </div>
+            <div className="flex flex-col text-2xl ml-8 space-y-2">
+              <span>{`${comments.first_name} ${comments.last_name}`}</span>
+              <span className="flex">
+                {ratingArray.map((rate, idx) => (
+                  <svg
+                    key={idx}
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-8 w-8 text-yellow-300"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                  >
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                  </svg>
+                ))}
+              </span>
+              <span>{comments.comment}</span>
+            </div>
+          </div>
+        )}
       </LabelContainer>
     </>
   );

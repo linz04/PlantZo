@@ -3,6 +3,7 @@ import { useState } from "react";
 import { FaStar } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { withRouter } from "react-router";
+import { deleteItem } from "../redux/cart/cart.actions";
 import { setComments } from "../redux/shop/shop.actions";
 import { selectCurrentUser } from "../redux/user/user.selectors";
 
@@ -33,8 +34,7 @@ function Rating({ item, history }) {
     dispatch(setComments({ currentValue, textArea }));
 
     axios.post("/comments", { currentValue, textArea, uid, pid });
-    history.push("/user");
-    window.scrollTo(0, 0);
+    dispatch(deleteItem(item));
   };
 
   const handleMouseOver = (newHoverValue) => {

@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { withRouter } from "react-router";
 import LabelContainer from "../components/LabelContainer";
 import UserFormInput from "../components/UserFormInput";
-import { setCurrentUser } from "../redux/user/user.actions";
+import { setCurrentUser, setUserAddress } from "../redux/user/user.actions";
 import { selectCurrentUser } from "../redux/user/user.selectors";
 
 const ProfilePage = ({ history }) => {
@@ -123,6 +123,7 @@ const ProfilePage = ({ history }) => {
         alert("Password lama berbeda");
       } else {
         dispatch(setCurrentUser(user));
+        dispatch(setUserAddress(address));
         alert("Data berhasil diubah");
         history.push("/user");
       }

@@ -1,18 +1,24 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import Popup from "../components/Popup";
 import SignIn from "../components/SignIn";
 import SignUp from "../components/SignUp";
+import { selectCurrentUser } from "../redux/user/user.selectors";
 
 const Warning = () => {
   const [signUpPopupVisible, setSignUpPopupVisible] = useState(false);
   const [signInPopupVisible, setSignInPopupVisible] = useState(false);
-
+  const currentUser = useSelector((state) => selectCurrentUser(state));
   const handleClickSignup = () => {
-    setSignUpPopupVisible(!signUpPopupVisible);
+    if (!currentUser) {
+      setSignUpPopupVisible(!signUpPopupVisible);
+    }
   };
 
   const handleClickSignin = () => {
-    setSignInPopupVisible(!signInPopupVisible);
+    if (!currentUser) {
+      setSignInPopupVisible(!signInPopupVisible);
+    }
   };
 
   const [showModal, setShowModal] = React.useState(false);
@@ -23,7 +29,7 @@ const Warning = () => {
         <button
           className="flex justify-between items-center h-24 text-white active:bg-pink-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 w-full"
           type="button"
-          onClick={() => setShowModal(true)}
+          onClick={() => setShowModal(!showModal)}
         >
           <div className="flex ml-8 cursor-pointer w-96">
             <img
