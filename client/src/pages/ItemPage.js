@@ -10,7 +10,7 @@ const ItemPage = ({ history, location }) => {
   const currentUser = useSelector((state) => selectCurrentUser(state));
   const [itemQuantity, setItemQuantity] = useState(1);
 
-  const [comments, setComments] = useState(null);
+  const [comments, setComments] = useState("");
 
   const [item, setItem] = useState({
     name: "",
@@ -65,7 +65,7 @@ const ItemPage = ({ history, location }) => {
     history.push("/checkout");
   };
 
-  const ratingArray = Array.from(new Array(Math.floor(comments.rating)));
+  const ratingArray = Array.from(new Array(Math.floor(rating)));
 
   return (
     <>
@@ -367,17 +367,19 @@ const ItemPage = ({ history, location }) => {
             <div className="flex flex-col text-2xl ml-8 space-y-2">
               <span>{`${comments.first_name} ${comments.last_name}`}</span>
               <span className="flex">
-                {ratingArray.map((rate, idx) => (
-                  <svg
-                    key={idx}
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-8 w-8 text-yellow-300"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                  >
-                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                  </svg>
-                ))}
+                {Array.from(new Array(Math.floor(comments.rating))).map(
+                  (rate, idx) => (
+                    <svg
+                      key={idx}
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-8 w-8 text-yellow-300"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                    >
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                    </svg>
+                  )
+                )}
               </span>
               <span>{comments.comment}</span>
             </div>
