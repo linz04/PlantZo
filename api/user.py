@@ -5,6 +5,7 @@ from werkzeug.utils import secure_filename
 from werkzeug.datastructures import ImmutableMultiDict
 import bson.json_util
 from bson import json_util
+import datetime
 import jwt
 import json
 import os
@@ -80,6 +81,10 @@ def comment():
 
 @app.route("/history", methods=['GET'])
 def history_view():
+	def myconverter(o):
+		if isinstance(o, datetime.datetime):
+			return o.isoformat()
+
 	if request.method == 'GET':
 		token = request.headers.get('Authorization').replace("Bearer ","")
 		print(token)
@@ -92,7 +97,9 @@ def history_view():
 		print("rv:",rv)
 		json_data = []
 		for result in rv:
-			json_data.append(dict(zip(row_headers,result)))
-		res = json.loads(json.dumps(json_data,default=json_util.default))
+			asd = list(result)
+			asd[4] = result[4].isoformat()
+			json_data.append(dict(zip(row_headers,asd)))
+		res = json.dumps(json_data,default=myconverter)
 		print(res)
 		return jsonify(res)

@@ -43,7 +43,7 @@ def shop(pid):
 			print("Final:",final)
 			return jsonify(final)
 		else:
-			final = ({"Item":res, "Comment":""})
+			final = ({"Item":res, "Comment":[]})
 			return jsonify(final)
 
 	elif request.method == 'POST':

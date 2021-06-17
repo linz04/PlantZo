@@ -10,13 +10,13 @@ const Warning = () => {
   const [signInPopupVisible, setSignInPopupVisible] = useState(false);
   const currentUser = useSelector((state) => selectCurrentUser(state));
   const handleClickSignup = () => {
-    if (currentUser) {
+    if (!currentUser) {
       setSignUpPopupVisible(!signUpPopupVisible);
     }
   };
 
   const handleClickSignin = () => {
-    if (currentUser) {
+    if (!currentUser) {
       setSignInPopupVisible(!signInPopupVisible);
     }
   };
