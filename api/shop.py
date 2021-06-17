@@ -30,7 +30,7 @@ def shop(pid):
 			json_data.append(dict(zip(row_headers,result)))
 		res = json.loads(json.dumps(json_data))[0]
 
-		cur.execute("SELECT * FROM comment where pid = %s", (pid,))
+		cur.execute("SELECT * FROM comment c, users u where c.pid = %s AND u.uid = c.uid", (pid,))
 		if cur.rowcount >= 1:
 			print("Masuk")
 			com_headers = [x[0] for x in cur.description]
