@@ -3,6 +3,7 @@ from db import mysql
 from flask import Flask, flash, request, redirect, url_for, jsonify
 from werkzeug.utils import secure_filename
 from werkzeug.datastructures import ImmutableMultiDict
+import bson.json_util
 from bson import json_util
 import jwt
 import json
@@ -88,7 +89,7 @@ def history_view():
 		cur.execute("SELECT * FROM history h, product p WHERE h.uid = %s and h.pid = p.pid", (auth['uid'],))
 		row_headers= [x[0] for x in cur.description]
 		rv = cur.fetchall()
-		print(rv)
+		print("rv:",rv)
 		json_data = []
 		for result in rv:
 			json_data.append(dict(zip(row_headers,result)))
