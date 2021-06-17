@@ -100,6 +100,6 @@ def history_view():
 			asd = list(result)
 			asd[4] = result[4].isoformat()
 			json_data.append(dict(zip(row_headers,asd)))
-		res = json.dumps(json_data,default=myconverter)
+		res = json.loads(json.dumps(json_data,default=myconverter))
 		print(res)
 		return jsonify(res)
