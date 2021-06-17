@@ -1,11 +1,20 @@
 import axios from "axios";
 import React, { useEffect } from "react";
+import { useSelector } from "react-redux";
 import { withRouter } from "react-router";
 import LabelContainer from "../components/LabelContainer";
+import { selectCurrentUser } from "../redux/user/user.selectors";
 
 const HistoryPage = ({ history }) => {
+  const currentUser = useSelector((state) => selectCurrentUser(state));
+
+  const { token } = currentUser;
   useEffect(() => {
-    axios.get("/history").then((res) => console.log(res.data));
+    axios
+      .get("/history", {
+        headers: { Authorization: "Bearer " + token },
+      })
+      .then((res) => console.log(res.data));
   }, []);
 
   return (
