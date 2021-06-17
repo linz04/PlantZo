@@ -30,7 +30,7 @@ def shop(pid):
 			json_data.append(dict(zip(row_headers,result)))
 		res = json.loads(json.dumps(json_data))[0]
 
-		cur.execute("SELECT * FROM comment c, users u WHERE c.pid = %s and c.uid = u.uid;", (pid,))
+		cur.execute("SELECT * FROM comment where pid = %s", (pid,))
 		if cur.rowcount >= 1:
 			print("Masuk")
 			com_headers = [x[0] for x in cur.description]
@@ -38,9 +38,9 @@ def shop(pid):
 			json_data = []
 			for result in rv:
 				json_data.append(dict(zip(com_headers,result)))
-			com = json.loads(json.dumps(json_data))[0]
+			com = json.loads(json.dumps(json_data))
 			final = ({"Item":res, "Comment":com})
-			print(final)
+			print("Final:",final)
 			return jsonify(final)
 		else:
 			final = ({"Item":res, "Comment":""})
