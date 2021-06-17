@@ -1,8 +1,11 @@
 from app import app, bcrypt
 from db import mysql
-from flask import Flask, flash, request, redirect, url_for
+from flask import Flask, flash, request, redirect, url_for, jsonify
 from werkzeug.utils import secure_filename
 from werkzeug.datastructures import ImmutableMultiDict
+from bson import json_util
+import jwt
+import json
 import os
 
 
@@ -77,15 +80,18 @@ def comment():
 @app.route("/history", methods=['GET'])
 def history_view():
 	if request.method == 'GET':
-		data = request.get_json()
-		print(data)
+		token = request.headers.get('Authorization').replace("Bearer ","")
+		print(token)
+		payload = jwt.decode(token, app.config.get('JWT_SECRET_KEY'), algorithms=['HS256'])
+		auth = payload['sub']
 		cur = mysql.cursor(buffered=True)
 		cur.execute("SELECT * FROM history h, product p WHERE h.uid = %s and h.pid = p.pid", (auth['uid'],))
 		row_headers= [x[0] for x in cur.description]
 		rv = cur.fetchall()
+		print(rv)
 		json_data = []
 		for result in rv:
 			json_data.append(dict(zip(row_headers,result)))
-		res = json.loads(json.dumps(json_data))
+		res = json.loads(json.dumps(json_data,default=json_util.default))
 		print(res)
 		return jsonify(res)
