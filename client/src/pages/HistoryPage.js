@@ -5,7 +5,7 @@ import LabelContainer from "../components/LabelContainer";
 
 const HistoryPage = ({ history }) => {
   useEffect(() => {
-    axios.get("/comments").then((res) => console.log(res.data));
+    axios.get("/history").then((res) => console.log(res.data));
   }, []);
 
   return (
