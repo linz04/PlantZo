@@ -82,3 +82,10 @@ def history_view():
 		cur = mysql.cursor(buffered=True)
 		cur.execute("SELECT * FROM history h, product p WHERE h.uid = %s and h.pid = p.pid", (auth['uid'],))
 		row_headers= [x[0] for x in cur.description]
+		rv = cur.fetchall()
+		json_data = []
+		for result in rv:
+			json_data.append(dict(zip(row_headers,result)))
+		res = json.loads(json.dumps(json_data))
+		print(res)
+		return jsonify(res)

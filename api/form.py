@@ -13,10 +13,11 @@ def signup():
 	password = bcrypt.generate_password_hash(data['password']).decode('utf-8')
 	cur = mysql.cursor(buffered=True)
 
+	#Memeriksan jika user sudah pernah
 	cur.execute("SELECT 1 FROM users WHERE email=%s", (email,))
 	if cur.rowcount == 1:
 		return "User Already Exist!"
-
+	#Create User
 	cur.execute("INSERT INTO users (first_name, last_name, email, password) VALUES (%s, %s, %s, %s)", (first_name, last_name, email, password))
 
 	mysql.commit()
@@ -45,7 +46,7 @@ def login():
 			if bcrypt.check_password_hash(rv[4], password):
 				access_token = create_access_token(identity = {'uid': rv[0],'email': rv[1],'first_name': rv[2],'last_name': rv[3], 'address': rv[5]})
 				result = access_token
-				print(result)
+				return result
 			else:
 				result = jsonify({"error":"Invalid username and password"})
 
